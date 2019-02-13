@@ -7,5 +7,5 @@ Set-up (non-feature) things to do:
 
 
 Basic Setup commands:
-bundle install
-rails server
+- bundle install
+- rails server
