@@ -6,4 +6,10 @@ Rails.application.routes.draw do
   get 'accounts/new'
   
   root 'home#index'
+
+  resources :home
+  resources :login
+
+  get 'logout', to: 'login#logout'
+
 end

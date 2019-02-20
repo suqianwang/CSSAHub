@@ -1,0 +1,26 @@
+<h1 class="center">Login Page!</h1>
+<%= form_tag login_index_path, :method => :post do %>
+  <br/><h4 class="body-center"/>
+  Username
+  <%= text_field_tag "username" %>
+  <br/>
+  <br/>
+  Password
+  <%= password_field_tag "password" %>
+  <br/>
+  <br/>
+  <%= submit_tag 'Submit' %>
+<% end %>
+
+<!---#%h1 Login Page!-->
+<!---#-->
+<!---#= form_tag login_index_path, :method => :post do-->
+<!---#  Login:-->
+<!---#  %br-->
+<!---#  Username-->
+<!---#  = text_field_tag "username"-->
+<!---#  %br-->
+<!---#  Password-->
+<!---#  = password_field_tag "password"-->
+<!---#  %br-->
+<!---#  = submit_tag 'Submit'-->
