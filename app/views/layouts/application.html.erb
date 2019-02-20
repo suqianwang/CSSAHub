@@ -1,15 +1,45 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
   <head>
     <title>CssaHub</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track'=> 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track'=> 'reload' %>
   </head>
-
   <body>
+    <h1 class="title">
+      <%= link_to 'CssaHub!', '/' %>
+    </h1>
+    <% if session.has_key?('login') and session['login'] %>
+      <p>
+        <%= "Welcome, #{session['login']}" %>
+        <%= link_to "Logout", logout_path %>
+      </p>
+    <% else %>
+      <%= link_to "Login", login_index_path %>
+    <% end %>
+    <hr/>
     <%= yield %>
   </body>
 </html>
+
+
+<!---#!!!-->
+<!---#%html-->
+<!---#  %head-->
+<!---#    %title CssaHub-->
+<!---#    = csrf_meta_tags-->
+<!---#    = csp_meta_tag-->
+<!---#    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'-->
+<!---#    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'-->
+<!---#  %body-->
+<!---#    %h1.title= link_to 'CssaHub!', '/'-->
+<!---#    - if session.has_key?('login') and session['login']-->
+<!---#      %p-->
+<!---#        = "Welcome, #{session['login']}"-->
+<!---#        = link_to "Logout", logout_path-->
+<!---#    - else-->
+<!---#      = link_to "Login", login_index_path-->
+<!---#    %hr-->
+<!---#    = yield-->
