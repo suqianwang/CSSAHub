@@ -20,11 +20,11 @@ ActiveRecord::Schema.define(version: 2019_02_20_152122) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-  
+
   create_table "rides", force: :cascade do |t|
     t.string "role"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-  
+
 end

@@ -11,5 +11,8 @@ Rails.application.routes.draw do
   resources :login
 
   get 'logout', to: 'login#logout'
+  
+  resources :rides	
+  get 'rides/index'
 
 end
