@@ -15,6 +15,6 @@ class LoginController < ApplicationController
 
   def logout
     session['login'] = nil
-    redirect_to home_path(:index)
+    redirect_to login_index_path
   end
 end
