@@ -3,8 +3,13 @@
 <% if session.has_key?('login') and session['login'] %>
   <p class="body-center">
     <%= "Welcome, #{session['login']}" %>
+    <div class="center">
+    <%= link_to "Select Roles", rides_path %>
     </br>
+    </div>
+    <div class="center">
     <%= link_to "Logout", logout_path %>
+    </div>
   </p>
   <% else %>
     <%= link_to "Login", login_index_path %>
