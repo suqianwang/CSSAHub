@@ -1,11 +1,8 @@
 # super-scrum-bros
 
-Team Members:  
-Product Owner:  
-  - Yumei Li
-Scrum Master:  
-  - Alyssa Schaeffer
-Developers:  
+Team Members:
+  - Yumei Li (Product Owner)
+  - Alyssa Schaeffer (Scrum Master)
   - Megan Grahmann
   - David Ratliff
   - Suqian Wang
