@@ -1,15 +1,15 @@
 <div><h1 class="center p-4">Login Page!</h1></div>
-<form>
+<%= form_tag login_index_path, :method => :post do %>
   <div class="row justify-content-center">
     <div class="form-group col-4">
-      <label for="exampleInputEmail1">Email address</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+      <label for="inputUsername">Username</label>
+      <%= text_field_tag "username",nil,class:'form-control',id:'inputUsername',placeholder:'Enter email' %>
     </div>
   </div>
   <div class="row justify-content-center">
     <div class="form-group col-4">
       <label for="exampleInputPassword1">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+      <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
     </div>
   </div>
   <div class="row justify-content-center">
@@ -22,10 +22,8 @@
     <button type="submit" class="row btn btn-primary justify-content-center">Submit</button>
   </div>
 <!--</form>-->
-<%#= form_tag login_index_path, :method => :post do %>
 <!--  <br/><h4 class="body-center"/>-->
 <!--  Username-->
-  <%#= text_field_tag "username" %>
 <!--  <br/>-->
 <!--  <br/>-->
 <!--  Password-->
@@ -33,7 +31,7 @@
 <!--  <br/>-->
 <!--  <br/>-->
   <%#= submit_tag 'Submit' %>
-<%# end %>
+<% end %>
 
 <!---#%h1 Login Page!-->
 <!---#-->
