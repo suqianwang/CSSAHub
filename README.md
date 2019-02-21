@@ -8,3 +8,4 @@ Team Members:
   - Suqian Wang
   
 Ruby Version: 2.5.3
+Rails Version: 5.2.2
