@@ -9,16 +9,17 @@
   <div class="row justify-content-center">
     <div class="form-group col-4">
       <%= label_tag :password %>
-	  <%= password_field_tag :password,nil, class: 'form-control', placeholder="Password" %>
+	  <%= password_field_tag :password, nil, class: 'form-control', placeholder: 'Password' %>
     </div>
   </div>
   <div class="row justify-content-center">
-    <div class="form-group form-check">
+    <!-- <div class="form-group form-check">
       <input type="checkbox" class="form-check-input" id="exampleCheck1">
       <label class="form-check-label" for="exampleCheck1">I understand the terms and policy associate with this service</label>
-    </div>
+    </div> -->
   </div>
-  <div class="actions">
+  <div class="actions row justify-content-center">
 	<%= submit_tag "Login" %>
   </div>
-  <%= link_to "Create an account", "/accounts/new" %>
+<% end %>
+<%= link_to "Create an account", "/accounts/new" %>
