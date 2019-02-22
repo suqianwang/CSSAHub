@@ -1,0 +1,47 @@
+<center>
+<%= form_with(model: account, local: true) do |form| %>
+  <% if account.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(account.errors.count, "error") %> prohibited this account from being saved:</h2>
+
+      <ul>
+      <% account.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p class="field">*
+    <%= form.label :username %> <br />
+    <%= form.text_field :username %>
+  </p>
+
+  <p class="field">*
+    <%= form.label :email %> <br />
+    <%= form.text_field :email %>
+  </p>
+
+  <p class="field">
+    <%= form.label :name %> <br />
+    <%= form.text_field :name %>
+  </p>
+
+  <p class="field">*
+    <%= form.label :password %> <br />
+    <%= form.password_field :password %>
+  </p>
+
+  <p class="field">*
+    <%= form.label :password_confirmation %> <br />
+    <%= form.password_field :password_confirmation %>
+  </p>
+
+  <p class="actions">
+    <%= form.submit "Create Account", class: 'row btn btn-primary justify-content-center' %>
+  </p>
+<% end %>
+
+<p>Note: * field is required</p>
+
+</center>
