@@ -1,14 +1,16 @@
 Rails.application.routes.draw do
+  root 'home#index'
   get 'home/index'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   
   resources :accounts
   get 'accounts/new'
   
-  root 'home#index'
-
   resources :home
   resources :login
+  
+  get 'signup', to: 'accounts#new', as: 'signup'
+  get 'login', to: 'login#new'
+  get 'logout', to: 'login#destroy', as: 'logout'
 
   get 'logout', to: 'login#logout'
   

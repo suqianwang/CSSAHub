@@ -1,27 +1,22 @@
-<h1 class="center">Login Page!</h1>
-<%= form_tag login_index_path, :method => :post do %>
-  <br/><h4 class="body-center"/>
-  Username
-  <%= text_field_tag "username" %>
-  <br/>
-  <br/>
-  Password
-  <%= password_field_tag "password" %>
-  <br/>
-  <br/>
-  <%= submit_tag 'Submit' %>
-  <%= link_to "Create an account", "/accounts/new" %>
-<% end %>
-
-<!---#%h1 Login Page!-->
-<!---#-->
-<!---#= form_tag login_index_path, :method => :post do-->
-<!---#  Login:-->
-<!---#  %br-->
-<!---#  Username-->
-<!---#  = text_field_tag "username"-->
-<!---#  %br-->
-<!---#  Password-->
-<!---#  = password_field_tag "password"-->
-<!---#  %br-->
-<!---#  = submit_tag 'Submit'-->
+<div class="center">
+	<h1>Login Page!</h1>
+	<%= form_tag login_index_path, :method => :post do %>
+	  <br/>
+	  <h4 class="body-center"/>
+	  <div class="field">
+		  <%= label_tag :username %>
+		  <%= text_field_tag :username %>
+	  </div>
+	  <br/>
+	  <div class="field">
+		  <%= label_tag :password %>
+		  <%= password_field_tag :password %>
+	  </div>
+	  <br/>
+	  <div class="actions">
+		<%= submit_tag "Login" %>
+	  </div>
+	<% end %>
+	<br/>
+	<%= link_to "Create an account", signup_path %>
+</div>
