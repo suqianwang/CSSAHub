@@ -1,3 +1,4 @@
+<center>
 <%= form_with(model: account, local: true) do |form| %>
   <% if account.errors.any? %>
     <div id="error_explanation">
@@ -11,32 +12,36 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :username %>
+  <p class="field">*
+    <%= form.label :username %> <br />
     <%= form.text_field :username %>
-  </div>
+  </p>
 
-  <div class="field">
-    <%= form.label :email %>
+  <p class="field">*
+    <%= form.label :email %> <br />
     <%= form.text_field :email %>
-  </div>
+  </p>
 
-  <div class="field">
-    <%= form.label :name %>
+  <p class="field">
+    <%= form.label :name %> <br />
     <%= form.text_field :name %>
-  </div>
+  </p>
 
-  <div class="field">
-    <%= form.label :password %>
+  <p class="field">*
+    <%= form.label :password %> <br />
     <%= form.password_field :password %>
-  </div>
+  </p>
 
-  <div class="field">
-    <%= form.label :password_confirmation %>
+  <p class="field">*
+    <%= form.label :password_confirmation %> <br />
     <%= form.password_field :password_confirmation %>
-  </div>
+  </p>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+  <p class="actions">
+    <%= form.submit "Create Account", class: 'row btn btn-primary justify-content-center' %>
+  </p>
 <% end %>
+
+<p>Note: * field is required</p>
+
+</center>
