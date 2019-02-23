@@ -18,31 +18,11 @@
       <label class="form-check-label" for="exampleCheck1">I understand the terms and policy associate with this service</label>
     </div>
   </div>
+  <div class="actions row justify-content-center" style="color:red;" font-size="8px" ><%= flash[:alert] %></div>
   <div class="row justify-content-center">
-    <button type="submit" class="row btn btn-primary justify-content-center">Submit</button>
+    <%= submit_tag "Login", class: "row btn btn-primary justify-content-center "%>
   </div>
+  <div class="row justify-content-center p-3">
   <%= link_to "Create an account", "/accounts/new" %>
-<!--</form>-->
-<!--  <br/><h4 class="body-center"/>-->
-<!--  Username-->
-<!--  <br/>-->
-<!--  <br/>-->
-<!--  Password-->
-  <%#= password_field_tag "password" %>
-<!--  <br/>-->
-<!--  <br/>-->
-  <%#= submit_tag 'Submit' %>
-<% end %>
-
-<!---#%h1 Login Page!-->
-<!---#-->
-<!---#= form_tag login_index_path, :method => :post do-->
-<!---#  Login:-->
-<!---#  %br-->
-<!---#  Username-->
-<!---#  = text_field_tag "username"-->
-<!---#  %br-->
-<!---#  Password-->
-<!---#  = password_field_tag "password"-->
-<!---#  %br-->
-<!---#  = submit_tag 'Submit'-->
+  <%end %>
+  </div>
