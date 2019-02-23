@@ -4,16 +4,17 @@ class LoginController < ApplicationController
   def show
   end
   def create
-    if not params.has_key?('username') or params['username'].empty?
-      redirect_to login_index_path
-    elsif not params.has_key?('password') or params['password'].empty?
-      redirect_to login_index_path
+    account = Account.find_by_username(params[:username])
+    if account && account.authenticate(params[:password])
+      session[:account_id] = account.id
+      redirect_to root_url, notice: "Logged in!"
     else
-      session['login'] = params['username']
+      flash.now[:alert] = "Email or password is invalid"
+      render "index"
     end
   end
 
-  def logout
+  def destroy
     session['login'] = nil
     redirect_to login_index_path
   end
