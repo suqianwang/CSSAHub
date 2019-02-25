@@ -20,7 +20,7 @@ RSpec.describe AccountsController, :type => :controller do
   describe "POST #create" do
     it "saves new account" do
       assert_difference 'Account.count' do
-        post :create,  params: { account: { email: @account.email, name: @account.name, password: 'secret', password_confirmation: 'secret', username: @account.username } }
+        post :create,  params: { account: { email: 'bob@tamu.edu', name: 'bob', password: 'secret', password_confirmation: 'secret', username: 'bo' } }
       end
   
       assert_redirected_to account_url(Account.last)
