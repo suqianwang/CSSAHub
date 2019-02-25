@@ -18,8 +18,11 @@
       <label class="form-check-label" for="exampleCheck1">I understand the terms and policy associate with this service</label>
     </div> -->
   </div>
-  <div class="actions row justify-content-center">
-	<%= submit_tag "Login", class: 'row btn btn-primary justify-content-center' %>
+  <div class="actions row justify-content-center" style="color:red;" font-size="8px" ><%= flash[:alert] %></div>
+  <div class="row justify-content-center">
+    <%= submit_tag "Login", class: "row btn btn-primary justify-content-center "%>
   </div>
-<% end %>
-<%= link_to "Create an account", "/accounts/new" %>
+  <div class="row justify-content-center p-3">
+  <%= link_to "Create an account",new_account_path %>
+  <%end %>
+  </div>
