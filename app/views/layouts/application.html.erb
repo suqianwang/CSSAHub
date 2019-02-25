@@ -15,7 +15,7 @@
       <%= link_to 'CssaHub!', '/' %>
     </h1>
     <% if session.has_key?('login') and session['login'] %>
-      <p>
+      <p id="welcome-message">
         <%= "Welcome, #{session['login']}" %>
         <%= link_to "Logout", logout_path %>
       </p>

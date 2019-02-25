@@ -3,13 +3,13 @@
   <div class="row justify-content-center">
     <div class="form-group col-4">
       <%= label_tag :username %>
-      <%= text_field_tag :username, nil, class: 'form-control', id: 'inputUsername', placeholder: 'Username' %>
+      <%= text_field_tag :username, nil, class: 'form-control', name: 'username', id: 'inputUsername', placeholder: 'Username' %>
     </div>
   </div>
   <div class="row justify-content-center">
     <div class="form-group col-4">
       <%= label_tag :password %>
-	  <%= password_field_tag :password, nil, class: 'form-control', placeholder: 'Password' %>
+	  <%= password_field_tag :password, nil, class: 'form-control', name: 'password', placeholder: 'Password' %>
     </div>
   </div>
   <div class="row justify-content-center">
