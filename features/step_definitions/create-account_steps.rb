@@ -1,5 +1,5 @@
 Given("I am on the create an account page") do
-  visit "account/new"
+  visit "accounts/new"
 end
 
 When("I fill out the form") do
