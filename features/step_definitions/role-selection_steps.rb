@@ -3,7 +3,7 @@ Given("I want to be a {string}") do |role|
 end
 
 When("I select my role") do
-  visit 'rides/new'
+  visit new_ride_path
   choose @role
   click_button 'Create Ride'
   @actual_role = all('td').last.text

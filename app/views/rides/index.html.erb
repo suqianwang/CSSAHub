@@ -3,10 +3,10 @@
     <th>Ride ID</th>
     <th>Type</th>
   </tr>
-  <% @rides.each do |ride| %>
+  <% @rides.each do |r| %>
     <tr>
-      <td><%= ride.id %></td>
-      <td><%= ride.role %></td>
+      <td><%= r.id %></td>
+      <td><%= r.role %></td>
     </tr>
   <% end %>
 </table>

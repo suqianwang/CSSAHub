@@ -8,9 +8,15 @@ class RidesController < ApplicationController
   end
   
   def create
-    @ride = Ride.new(params[:ride].permit(:role))
+    @ride = Ride.new(ride_params)
     if @ride.save
       redirect_to rides_path
     end
+  end
+  
+  private
+  
+  def ride_params
+    params.require(:ride).permit(:role)
   end
 end
