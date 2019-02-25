@@ -6,7 +6,8 @@ When("I fill out the form") do
   fill_in "Username", :with => "bob"
   fill_in "Email", :with => "bob@tamu.edu"
   fill_in "Name", :with => "bob"
-  fill_in "password", :with => "bobpass"
+  fill_in "Password", :with => "bobpass"
+  fill_in "Password confirmation", :with => "bobpass"
   click_button "Create Account"
 end
 
