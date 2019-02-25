@@ -5,23 +5,28 @@ before do
   
   describe "login with correct information" do
     it "should login" do
-	  post :index,  params: { account: { email: @account.email, name: @account.name, password: @account.password, password_confirmation: @account.password, username: @account.username  } }
-	  account=@account.username
-	  controller.session[:account_id]=@account.id
-	  controller.session['login']=@account.username
-	  expect(session[:account_id]).to eq(@account.id)
-	  expect(session['login']).to eq(@account.username)
+	  post :create,  params: { password: @account.password, username: @account.username  }
+	  expect(controller.session[:account_id]).to eq(@account.id)
+	  expect(controller.session['login']).to eq(@account.username)
 	  expect(response).to redirect_to(rides_path)
     end
   end
   
-  describe "login with incorrect information" do
+  describe "login with incorrect password" do
     it "should not login and return errors" do
-	  post :create,  params: { account: { email: @account.email, name: @account.name, password: @account.password, password_confirmation: @account.password, username: 'wrong' } }
-      controller.session[:account_id] = nil
+	  post :create,  params: { password: @account.password + "aaa", username: @account.username }
+    expect(controller.session[:account_id]).to be_nil
 	  expect(response).to render_template :index
     end
   end
+
+describe "login with incorrect username" do
+  it "should not login and return errors" do
+    post :create,  params: { password: @account.password, username: @account.username + "aaa" }
+    expect(controller.session[:account_id]).to be_nil
+    expect(response).to render_template :index
+  end
+end
   
   describe "logout" do
     it "#DESTROY session" do
