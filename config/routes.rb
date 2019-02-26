@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   
   resources :accounts
   get 'accounts/new'
+  get 'accounts/admin'
   
   resources :home
   resources :login

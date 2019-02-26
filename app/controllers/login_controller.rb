@@ -8,7 +8,11 @@ class LoginController < ApplicationController
     if account && account.authenticate(params[:password])
       session[:account_id] = account.id
       session['login'] = account.username
-      redirect_to rides_path, notice: "Logged in!"
+	  if (params[:username] == "admin")
+		redirect_to accounts_path
+	  else
+        redirect_to rides_path, notice: "Logged in!"
+      end
     else
       flash.now[:alert] = "Email or password is invalid"
       render "index"
