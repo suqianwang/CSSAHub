@@ -71,7 +71,6 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 group :production do
-  gem 'pg' # for Heroku deployment
+  gem 'pg', '~> 0.21' # for Heroku deployment
   gem 'rails_12factor'
-  gem 'sqlite3', git: "https://github.com/larskanis/sqlite3-ruby", branch: "add-gemspec"
 end
