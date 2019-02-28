@@ -7,4 +7,10 @@ class ApplicationController < ActionController::Base
       @current_user = nil
     end
   end
+  
+  def login_required
+	puts "current_user is"
+	puts current_user
+    redirect_to('/login') if current_user.blank?
+  end
 end

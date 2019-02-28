@@ -21,6 +21,7 @@ class LoginController < ApplicationController
 
   def destroy
     session['login'] = nil
+	session[:account_id] = nil
     redirect_to login_index_path
   end
 end
