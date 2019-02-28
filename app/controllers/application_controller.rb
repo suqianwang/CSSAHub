@@ -9,8 +9,6 @@ class ApplicationController < ActionController::Base
   end
   
   def login_required
-	puts "current_user is"
-	puts current_user
     redirect_to('/login') if current_user.blank?
   end
 end

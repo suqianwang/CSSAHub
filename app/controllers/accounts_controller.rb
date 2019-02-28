@@ -1,11 +1,15 @@
 class AccountsController < ApplicationController
-  before_action :login_required, :only => :index
+  before_action :login_required, :only => [:index, :show, :edit]
   before_action :set_account, only: [:show, :edit, :update, :destroy]
 
   # GET /accounts
   # GET /accounts.json
   def index
-    @accounts = Account.all
+    if (session['login'] == "admin")
+		@accounts = Account.all
+	else
+        redirect_to rides_path, notice: "Logged in!"
+    end
   end
 
   # GET /accounts/1

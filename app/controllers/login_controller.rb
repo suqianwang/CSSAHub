@@ -8,7 +8,7 @@ class LoginController < ApplicationController
     if account && account.authenticate(params[:password])
       session[:account_id] = account.id
       session['login'] = account.username
-	  if (params[:username] == "admin")
+	  if (session['login'] == "admin")
 		redirect_to accounts_path
 	  else
         redirect_to rides_path, notice: "Logged in!"
