@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :service do
     type { ['transportation'].sample }
     role { ['offerer', 'receiver'].sample }

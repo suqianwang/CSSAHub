@@ -1,6 +1,6 @@
 RSpec.describe LoginController, :type => :controller do
 before do
-    @account = FactoryGirl.create(:account)
+    @account = FactoryBot.create(:account)
   end
   
   describe "login with correct information" do

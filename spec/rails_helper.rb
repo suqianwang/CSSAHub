@@ -8,7 +8,7 @@ require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'shoulda/matchers'
 require 'simplecov'
-require 'factory_girl_rails'
+require 'factory_bot_rails'
 
 SimpleCov.start
 # Requires supporting ruby files with custom matchers and macros, etc, in
