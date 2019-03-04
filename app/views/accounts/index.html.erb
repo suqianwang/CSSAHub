@@ -92,14 +92,14 @@ textarea {
 			<td style="width:auto"><%= account.username %></td>
 			<td><%= account.name %></td>
 			<td><%= account.email %></td>
-			<td><button class="open-button" id="<%= account.username %>" onclick="openForm(this.id)">Delete User</button></td>
+			<td><button class="open-button" name="<%= account.username %>" onclick="openForm(this.name)">Delete User</button></td>
 			<div class="form-popup" id="deleteForm-<%= account.username %>" style="padding: 5px">
 			  <form class="form-container">
 				<h5>Delete user: <%= account.username %></h5>
 				<p style="margin: 0px">Please enter the reason for deletion:</p>
 				<textarea></textarea>
-				<%= link_to '<button type="button" class="btn btn-danger">Delete</button>'.html_safe, account, method: :delete %>
-				<button class="btn btn-secondary" onclick="closeForm()">Cancel</button>
+				<%= link_to '<button type="submit" class="btn btn-danger">Delete</button>'.html_safe, account, method: :delete %>
+				<button type="button" class="btn btn-secondary" name="<%= account.username %>" onclick="closeForm(this.name)">Cancel</button>
 			  </form>
 			</div>
 		  </tr>
