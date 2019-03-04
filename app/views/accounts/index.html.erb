@@ -65,6 +65,10 @@ body {font-family: Arial, Helvetica, sans-serif;}
 .form-container .btn:hover, .open-button:hover {
   opacity: 1;
 }
+
+textarea {
+  resize: none;
+}
 </style>
 
 <p id="notice"><%= notice %></p>
@@ -88,29 +92,29 @@ body {font-family: Arial, Helvetica, sans-serif;}
 			<td style="width:auto"><%= account.username %></td>
 			<td><%= account.name %></td>
 			<td><%= account.email %></td>
-			<td><button class="open-button" onclick="openForm()">Open Form</button></td>
-			
-
+			<td><button class="open-button" onclick="openForm()">Delete User</button></td>
+			<div class="form-popup" id="deleteForm" style="padding: 5px">
+			  <form class="form-container">
+				<h5>Delete user: <%= account.username %></h5>
+				<p style="margin: 0px">Please enter the reason for deletion:</p>
+				<textarea></textarea>
+				<%= link_to '<button type="button" class="btn btn-danger">Delete</button>'.html_safe, account, method: :delete %>
+				<button class="btn btn-secondary" onclick="closeForm()">Cancel</button>
+			  </form>
+			</div>
 		  </tr>
 		<% end %>
 	  </tbody>
 	</table>
 	</center>
 </div>
-<div class="form-popup" id="myForm">
-  <form class="form-container">
-    <h5>Delete user: X</h5>
-	<p style="margin: 0px">Please enter the reason for deletion:</p>
-	<textarea></textarea>
-    <button type="submit" class="btn cancel" onclick="closeForm()">Close</button>
-  </form>
-</div>
+
 <script>
 function openForm() {
-  document.getElementById("myForm").style.display = "block";
+  document.getElementById("deleteForm").style.display = "block";
 }
 
 function closeForm() {
-  document.getElementById("myForm").style.display = "none";
+  document.getElementById("deleteForm").style.display = "none";
 }
 </script>
