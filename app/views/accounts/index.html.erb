@@ -92,8 +92,8 @@ textarea {
 			<td style="width:auto"><%= account.username %></td>
 			<td><%= account.name %></td>
 			<td><%= account.email %></td>
-			<td><button class="open-button" onclick="openForm()">Delete User</button></td>
-			<div class="form-popup" id="deleteForm" style="padding: 5px">
+			<td><button class="open-button" id="<%= account.username %>" onclick="openForm(this.id)">Delete User</button></td>
+			<div class="form-popup" id="deleteForm-<%= account.username %>" style="padding: 5px">
 			  <form class="form-container">
 				<h5>Delete user: <%= account.username %></h5>
 				<p style="margin: 0px">Please enter the reason for deletion:</p>
@@ -110,11 +110,11 @@ textarea {
 </div>
 
 <script>
-function openForm() {
-  document.getElementById("deleteForm").style.display = "block";
+function openForm(username) {
+  document.getElementById("deleteForm-" + username).style.display = "block";
 }
 
-function closeForm() {
-  document.getElementById("deleteForm").style.display = "none";
+function closeForm(username) {
+  document.getElementById("deleteForm-" + username).style.display = "none";
 }
 </script>
