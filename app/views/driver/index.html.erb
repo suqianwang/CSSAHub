@@ -1,0 +1,28 @@
+<div><h1 class="center p-4">Driver Page!</h1></div>
+<%= form_tag login_index_path, :method => :post do %>
+  <div class="row justify-content-center">
+    <div class="form-group col-4">
+      <%= label_tag :username %>
+      <%= text_field_tag :username, nil, class: 'form-control', name: 'username', id: 'inputUsername', placeholder: 'Username' %>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="form-group col-4">
+      <%= label_tag :password %>
+      <%= password_field_tag :password, nil, class: 'form-control', name: 'password', placeholder: 'Password' %>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <!-- <div class="form-group form-check">
+      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+      <label class="form-check-label" for="exampleCheck1">I understand the terms and policy associate with this service</label>
+    </div> -->
+  </div>
+  <div class="actions row justify-content-center" style="color:red;" font-size="8px" ><%= flash[:alert] %></div>
+  <div class="row justify-content-center">
+    <%= submit_tag "Login", class: "row btn btn-primary justify-content-center "%>
+  </div>
+  <div class="row justify-content-center p-3">
+    <%= link_to "Create an account",new_account_path %>
+<%end %>
+</div>

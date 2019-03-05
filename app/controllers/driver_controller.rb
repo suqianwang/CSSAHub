@@ -1,4 +1,4 @@
-class PassengerController < ApplicationController
+class DriverController < ApplicationController
   def index
   end
   def show

@@ -14,7 +14,8 @@ Rails.application.routes.draw do
 
   get 'logout', to: 'login#logout'
   get 'passenger', to: 'passenger#create'
-  
+  get 'driver', to: 'driver#create'
+
   resources :rides	
 
 end
