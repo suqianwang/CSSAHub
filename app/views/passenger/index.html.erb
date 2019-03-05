@@ -1,15 +1,39 @@
-<div><h1 class="center p-4">Passenger Page!</h1></div>
-<%= form_tag login_index_path, :method => :post do %>
+<div><h1 class="center p-4">Passenger Form</h1></div>
+<%= form_tag passenger_path, :method => :post do %>
   <div class="row justify-content-center">
     <div class="form-group col-4">
-      <%= label_tag :username %>
-      <%= text_field_tag :username, nil, class: 'form-control', name: 'username', id: 'inputUsername', placeholder: 'Username' %>
+      <%= label_tag(:q, "Depart from") %>
+      <%= select_tag :depart_from, options_for_select([['Zachry', 1], ['HEB', 2], ['IAH', 3], ['Walmart', 4], ['DPS', 5], ['REC', 6]]) %>
     </div>
   </div>
+
   <div class="row justify-content-center">
     <div class="form-group col-4">
-      <%= label_tag :password %>
-      <%= password_field_tag :password, nil, class: 'form-control', name: 'password', placeholder: 'Password' %>
+      <%= label_tag(:q, "Destination") %>
+      <%= select_tag :destination, options_for_select([['Zachry', 1], ['HEB', 2], ['IAH', 3], ['Walmart', 4], ['DPS', 5], ['REC', 6]]) %>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="form-group col-4">
+      <%= label_tag(:q, "Departure Date") %>
+      <%= select_date Date.today, prefix: :start_date %>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="form-group col-4">
+      <%= label_tag(:q, "Departure Time") %>
+      <%= select_hour(nil, prompt: 'Choose hour', ampm:true) %>
+      <%= label_tag(:q, "All-day ") %>
+      <%= check_box_tag("All-day", value = "1", checked = true) %>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="form-group col-4">
+      <%= label_tag(:q, "How many passengers want to ride? ") %>
+      <%= text_field_tag(:q) %>
     </div>
   </div>
   <div class="row justify-content-center">
@@ -20,9 +44,6 @@
   </div>
   <div class="actions row justify-content-center" style="color:red;" font-size="8px" ><%= flash[:alert] %></div>
   <div class="row justify-content-center">
-    <%= submit_tag "Login", class: "row btn btn-primary justify-content-center "%>
+    <%= submit_tag "Submit Request", class: "row btn btn-primary justify-content-center "%>
   </div>
-  <div class="row justify-content-center p-3">
-    <%= link_to "Create an account",new_account_path %>
 <%end %>
-</div>
