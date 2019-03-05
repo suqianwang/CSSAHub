@@ -1,5 +1,5 @@
 Given("I am in the log in page") do
-  require 'factory_girl_rails'
+  require 'factory_bot_rails'
   @account = FactoryBot.create(:account)
   visit login_index_path
 end

@@ -13,8 +13,8 @@ Feature: Navigate services
   Scenario Outline: I'm selecting a service
     Given I want to go to the "<service>" page
     When I select the service
-    Then the site should navigate to the "<service>" page
+    Then the site should navigate to the "<corresponding>" page
     
   Examples:
-    | service |
-    | Transportation |
+    | service | corresponding |
+    | Transportation | rides |

@@ -5,9 +5,9 @@ RSpec.describe ServicesController, type: :controller do
       expect(response).to render_template :index
     end
     
-    it "should assign all valid service types to @service_types" do
-      get :index
-      expect(assigns[:service_types]).to eq(Service.subclasses)
-    end
+    # it "should assign all valid service types to @service_types" do
+    #   get :index
+    #   expect(assigns[:service_types]).to eq(Service.subclasses)
+    # end
   end
 end
