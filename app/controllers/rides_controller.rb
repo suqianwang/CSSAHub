@@ -10,7 +10,7 @@ class RidesController < ApplicationController
   def create
     @ride = Ride.new(ride_params)
     if @ride.save
-      redirect_to rides_path
+      redirect_to passenger_path
     end
   end
   

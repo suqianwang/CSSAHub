@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get 'logout', to: 'login#destroy', as: 'logout'
 
   get 'logout', to: 'login#logout'
+  get 'passenger', to: 'passenger#create'
   
   resources :rides	
 
