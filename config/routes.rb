@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   get 'logout', to: 'login#logout'
   
-  resources :rides	
-
+  resources :services
+  resources :rides
+  
 end

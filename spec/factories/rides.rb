@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :ride do
     role { ['driver', 'passenger'].sample }
   end
