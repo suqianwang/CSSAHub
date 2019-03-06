@@ -1,6 +1,6 @@
 RSpec.describe LoginController, :type => :controller do
 before do
-    @account = FactoryGirl.create(:account)
+    @account = FactoryBot.create(:account)
   end
   
   describe "login with correct information" do
@@ -8,7 +8,7 @@ before do
 	  post :create,  params: { password: @account.password, username: @account.username  }
 	  expect(controller.session[:account_id]).to eq(@account.id)
 	  expect(controller.session['login']).to eq(@account.username)
-	  expect(response).to redirect_to(rides_path)
+	  expect(response).to redirect_to(services_path)
     end
   end
   

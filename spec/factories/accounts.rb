@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :account do
     username { Faker::Internet.username }
     email { Faker::Internet.email }

@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get 'logout', to: 'login#destroy', as: 'logout'
 
   get 'logout', to: 'login#logout'
+
   get 'passenger', to: 'passenger#create'
   get 'driver', to: 'driver#create'
 
@@ -20,5 +21,5 @@ Rails.application.routes.draw do
   match 'driver', to: 'driver#create2', via: [:post]
 
   resources :rides	
-
+  resources :services
 end
