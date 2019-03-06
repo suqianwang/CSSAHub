@@ -15,10 +15,8 @@ RSpec.describe AdminController, :type => :controller do
   describe "GET index" do
     it "allow admin to navigate to admin page" do
 	  login(@admin)
-	  #puts @admin.username
-	  puts session['login']
       get :index
-	  expect(response).to redirect_to(admin_index_path)
+	  expect(response).to render_template :index
     end
   end
  end
