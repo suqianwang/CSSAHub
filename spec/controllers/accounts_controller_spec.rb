@@ -54,13 +54,13 @@ RSpec.describe AccountsController, :type => :controller do
 
   #
 
-  # describe "delete #destroy" do
-    # it "should destroy account" do
-      # assert_difference('account.count', -1) do
-        # delete account_url(@account)
-      # end
-  
-      # assert_redirected_to accounts_url
-  # end
-# end
+  describe "delete #destroy" do
+     it "should destroy account" do
+	  login(@admin)
+       assert_difference('account.count', -1) do
+         delete account_url(@account)
+       end
+       assert_redirected_to accounts_url
+   end
+ end
 end
