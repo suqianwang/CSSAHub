@@ -11,7 +11,7 @@ class LoginController < ApplicationController
 	  if (session['login'] == "admin")
 		redirect_to admin_index_path
 	  else
-        redirect_to rides_path, notice: "Logged in!"
+        redirect_to services_path, notice: "Logged in!"
       end
     else
       flash.now[:alert] = "Email or password is invalid"
