@@ -15,7 +15,8 @@ class ApplicationController < ActionController::Base
   
   def check_admin
 	if session['login'] == "admin"
-	  return true
+	  #return true
+	  redirect_to admin_index_path
 	else
 	  redirect_to rides_path
 	end
