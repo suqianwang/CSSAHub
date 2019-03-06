@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   get 'passenger', to: 'passenger#create'
   get 'driver', to: 'driver#create'
 
+  match 'passenger', to: 'passenger#create2', via: [:post]
+  match 'driver', to: 'driver#create2', via: [:post]
+
   resources :rides	
 
 end

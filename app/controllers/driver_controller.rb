@@ -6,5 +6,8 @@ class DriverController < ApplicationController
   def create
       render "index"
   end
+  def create2
+    redirect_to rides_path
+  end
 end
 
