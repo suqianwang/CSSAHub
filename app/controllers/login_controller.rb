@@ -9,7 +9,7 @@ class LoginController < ApplicationController
       session[:account_id] = account.id
       session['login'] = account.username
 	  if (session['login'] == "admin")
-		redirect_to accounts_path
+		redirect_to admin_index_path
 	  else
         redirect_to rides_path, notice: "Logged in!"
       end

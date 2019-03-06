@@ -97,8 +97,9 @@ textarea {
 			  <form class="form-container">
 				<h5>Delete user: <%= account.username %></h5>
 				<p style="margin: 0px">Please enter the reason for deletion:</p>
-				<textarea></textarea>
-				<%= link_to '<button type="submit" class="btn btn-danger">Delete</button>'.html_safe, account, method: :delete %>
+				<%= text_area_tag :reason %>
+				<br>
+				<%= link_to '<button type="submit" class="btn btn-danger">Delete</button>'.html_safe, account, method: :delete, :reason=>:reason %>
 				<button type="button" class="btn btn-secondary" name="<%= account.username %>" onclick="closeForm(this.name)">Cancel</button>
 			  </form>
 			</div>

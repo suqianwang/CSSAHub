@@ -59,6 +59,9 @@ class AccountsController < ApplicationController
   # DELETE /accounts/1
   # DELETE /accounts/1.json
   def destroy
+	puts "this is what i need to see"
+	@reason = params[:reason]
+	puts(@reason)
     @account.destroy
     respond_to do |format|
       format.html { redirect_to accounts_url, notice: 'Account was successfully destroyed.' }
