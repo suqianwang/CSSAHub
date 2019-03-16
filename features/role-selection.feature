@@ -8,5 +8,5 @@ Feature: Select role
     
   Examples:
     | role |
-    | driver |
-    | passenger |
+    | Driver |
+    | Passenger |

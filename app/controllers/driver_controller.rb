@@ -7,6 +7,7 @@ class DriverController < ApplicationController
       render "index"
   end
   def create2
+    flash[:notice] = "Ride Create Success!"
     redirect_to rides_path
   end
 end

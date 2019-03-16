@@ -1,37 +1,39 @@
 <div><h1 class="center p-4">Driver Form</h1></div>
-<%= form_tag driver_path, :method => :post do %>
+<%= form_tag passenger_path, :method => :post do %>
   <div class="row justify-content-center">
-    <div class="form-group col-4">
+    <div class="form-group col-8">
       <%= label_tag(:q, "Depart from") %>
       <%= select_tag :depart_from, options_for_select([['Zachry', 1], ['HEB', 2], ['IAH', 3], ['Walmart', 4], ['DPS', 5], ['REC', 6]]) %>
     </div>
   </div>
 
   <div class="row justify-content-center">
-    <div class="form-group col-4">
+    <div class="form-group col-8">
       <%= label_tag(:q, "Destination") %>
       <%= select_tag :destination, options_for_select([['Zachry', 1], ['HEB', 2], ['IAH', 3], ['Walmart', 4], ['DPS', 5], ['REC', 6]]) %>
     </div>
   </div>
 
   <div class="row justify-content-center">
-    <div class="form-group col-4">
+    <div class="form-group col-8">
       <%= label_tag(:q, "Departure Date") %>
       <%= select_date Date.today, prefix: :start_date %>
     </div>
   </div>
 
   <div class="row justify-content-center">
-    <div class="form-group col-4">
-      <%= label_tag(:q, "Departure Time") %>
-      <%= select_hour(nil, prompt: 'Choose hour', ampm:true) %>
+    <div class="form-group col-8">
+      <%= label_tag(:q, "Departure Time From ") %>
+      <%= select_hour(nil, {prompt: 'Choose hour', ampm: true}, id: "start-departure-time") %>
+      <%= label_tag(:q, "  To ") %>
+      <%= select_hour(nil, {prompt: 'Choose hour', ampm: true}, id: "end-departure-time") %>
       <%= label_tag(:q, "All-day ") %>
-      <%= check_box_tag("All-day", value = "1", checked = true) %>
+      <%= check_box_tag("All-day", value = "1", checked = false) %>
     </div>
   </div>
 
   <div class="row justify-content-center">
-    <div class="form-group col-4">
+    <div class="form-group col-8">
       <%= label_tag(:q, "How many seats are available? ") %>
       <%= text_field_tag(:q) %>
     </div>
@@ -47,3 +49,13 @@
     <%= submit_tag "Submit Ride", class: "row btn btn-primary justify-content-center "%>
   </div>
 <%end %>
+
+
+<script>
+    window.onload = function (){
+        $("#All-day").change(function(){
+            $("#start-departure-time").prop("disabled", this.checked);
+            $("#end-departure-time").prop("disabled", this.checked);
+        });
+    };
+</script>
