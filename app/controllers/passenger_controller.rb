@@ -1,12 +1,10 @@
 class PassengerController < ApplicationController
   def index
+    render "index"
   end
   def show
   end
   def create
-      render "index"
-  end
-  def create2
     flash[:notice] = "Ride Request Success!"
     redirect_to rides_path
   end

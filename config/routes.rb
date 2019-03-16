@@ -14,11 +14,11 @@ Rails.application.routes.draw do
 
   get 'logout', to: 'login#logout'
 
-  get 'passenger', to: 'passenger#create'
-  get 'driver', to: 'driver#create'
+  get 'passenger', to: 'passenger#index'
+  get 'driver', to: 'driver#index'
 
-  match 'passenger', to: 'passenger#create2', via: [:post]
-  match 'driver', to: 'driver#create2', via: [:post]
+  match 'passenger', to: 'passenger#create', via: [:post]
+  match 'driver', to: 'driver#create', via: [:post]
 
   resources :rides	
   resources :services

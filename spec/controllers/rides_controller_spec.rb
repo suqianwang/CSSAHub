@@ -25,7 +25,7 @@ RSpec.describe RidesController, :type => :controller do
     
     it "redirects to the index" do
       post :create, :params => { :ride => { :role => 'driver' } }
-      expect(response).to redirect_to(rides_path)
+      expect(response).to redirect_to(driver_path)
     end
     
     context "with valid attributes" do
