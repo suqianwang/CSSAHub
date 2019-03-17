@@ -1,10 +1,15 @@
 class AccountsController < ApplicationController
+  before_action :login_required, :only => [:index, :show, :edit]
   before_action :set_account, only: [:show, :edit, :update, :destroy]
 
   # GET /accounts
   # GET /accounts.json
   def index
-    @accounts = Account.all
+    if (session['login'] == "admin")
+		@accounts = Account.all
+	else
+        redirect_to rides_path, notice: "Logged in!"
+    end
   end
 
   # GET /accounts/1
@@ -53,13 +58,16 @@ class AccountsController < ApplicationController
 
   # DELETE /accounts/1
   # DELETE /accounts/1.json
-  # def destroy
-    # @account.destroy
-    # respond_to do |format|
-      # format.html { redirect_to accounts_url, notice: 'account was successfully destroyed.' }
-      # format.json { head :no_content }
-    # end
-  # end
+  def destroy
+	#puts "this is what i need to see"
+	@reason = params[:reason]
+	#puts(@reason)
+    @account.destroy
+    respond_to do |format|
+      format.html { redirect_to accounts_url, notice: 'Account was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

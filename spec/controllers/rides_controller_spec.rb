@@ -1,6 +1,11 @@
 RSpec.describe RidesController, :type => :controller do
+before do
+    @account = FactoryBot.create :account, :user
+  end
+
   describe "GET index" do
     it "assigns @rides as all rides" do
+	  login(@account)
       ride = Ride.create!(role: "passenger")
       get :index
       expect(assigns(:rides)).to eq([ride])
@@ -25,7 +30,7 @@ RSpec.describe RidesController, :type => :controller do
     
     it "redirects to the index" do
       post :create, :params => { :ride => { :role => 'driver' } }
-      expect(response).to redirect_to(rides_path)
+      expect(response).to redirect_to(driver_path)
     end
     
     context "with valid attributes" do

@@ -1,12 +1,22 @@
 RSpec.describe AccountsController, :type => :controller do
   before do
-    @account = FactoryBot.create(:account)
+    @account = FactoryBot.create :account, :user
+	@admin = FactoryBot.create :account, :admin
   end
 
   describe "GET #index" do
-    it "should get index" do
+    it "should get index for admin" do
+	  login(@admin)
       get :index
       expect(response).to render_template :index
+    end
+  end
+  
+  describe "GET #index" do
+    it "should redirect to rides" do
+	  login(@account)
+      get :index
+      expect(response).to redirect_to rides_path
     end
   end
 
@@ -52,13 +62,19 @@ RSpec.describe AccountsController, :type => :controller do
 
   #
 
-  # describe "delete #destroy" do
-    # it "should destroy account" do
-      # assert_difference('account.count', -1) do
-        # delete account_url(@account)
-      # end
-  
-      # assert_redirected_to accounts_url
-  # end
-# end
+  describe "delete #destroy" do
+     it "should destroy account" do
+	 new_account = FactoryBot.create :account, :user
+	  login(@admin)
+       #assert_difference('Account.count', -1) do
+         #delete :destroy, id: @account
+		 #delete account_url(@account.id)
+       #end
+       #assert_redirected_to accounts_url
+	   
+      expect {
+	   delete :destroy, params: {id: new_account.to_param}
+      }.to change(Account, :count).by(-1)
+	  end
+ end
 end

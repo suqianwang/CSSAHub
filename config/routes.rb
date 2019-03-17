@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   resources :accounts
   get 'accounts/new'
   
+  resources :admin
+  get 'admin', to: 'admin#index'
+  
   resources :home
   resources :login
   
