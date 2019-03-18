@@ -1,4 +1,5 @@
 class RidesController < ApplicationController
+  before_action :login_required, :only => :index
   def index
     @rides = Ride.all
   end

@@ -1,6 +1,6 @@
 RSpec.describe ApplicationController, :type => :controller do
 before do
-    @account = FactoryBot.create(:account)
+    @account = FactoryBot.create :account, :user
   end
   
   describe "session exists" do

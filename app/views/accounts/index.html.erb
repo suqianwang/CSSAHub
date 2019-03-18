@@ -1,29 +1,121 @@
-<h1>Accounts</h1>
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+* {box-sizing: border-box;}
 
-<table>
-  <thead>
-    <tr>
-      <th>Username</th>
-      <th>Email</th>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+/* Button used to open the contact form - fixed at the bottom of the page */
+.open-button {
+  background-color: #555;
+  color: white;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  width: auto;
+  
+}
 
-  <tbody>
-    <% @accounts.each do |account| %>
-      <tr>
-        <td><%= account.username %></td>
-        <td><%= account.email %></td>
-        <td><%= account.name %></td>
-        <td><%= link_to 'Show', account %></td>
-        <td><%= link_to 'Edit', edit_account_path(account) %></td>
-        <td><%= link_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+/* The popup form - hidden by default */
+.form-popup {
+  display: none;
+  position: fixed;
+  bottom: 100px;
+  right: 150px;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+}
 
-<br>
+/* Add styles to the form container */
+.form-container {
+  max-width: 300px;
+  padding: 10px;
+  background-color: white;
+}
 
-<%= link_to 'New Account', new_account_path %>
+/* Full-width input fields */
+.form-container input[type=text], .form-container input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom:10px;
+  opacity: 0.8;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: red;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
+}
+
+textarea {
+  resize: none;
+}
+</style>
+
+<p id="notice"><%= notice %></p>
+<div class="center">
+	<h1>Accounts</h1>
+
+	<center>
+	<table>
+	  <thead>
+		<tr>
+		  <th>Username</th>
+		  <th>Name</th>
+		  <th>Email</th>
+		  <th colspan="3"></th>
+		</tr>
+	  </thead>
+
+	  <tbody>
+		<% @accounts.each do |account| %>
+		  <tr>
+			<td style="width:auto"><%= account.username %></td>
+			<td><%= account.name %></td>
+			<td><%= account.email %></td>
+			<td><button class="open-button" id="<%= account.username %>" onclick="openForm(this.id)">Delete User</button></td>
+			<div class="form-popup" id="deleteForm-<%= account.username %>" style="padding: 5px">
+			  <form class="form-container">
+				<h5>Delete user: <%= account.username %></h5>
+				<p style="margin: 0px">Please enter the reason for deletion:</p>
+				<%= text_area_tag :reason %>
+				<br>
+				<%= link_to '<button type="submit" class="btn btn-danger" id="confirmDeletion-' + account.username + '">Delete</button>'.html_safe, account, method: :delete, :reason=>:reason %>
+				<button type="button" class="btn btn-secondary" name="<%= account.username %>" onclick="closeForm(this.name)">Cancel</button>
+			  </form>
+			</div>
+		  </tr>
+		<% end %>
+	  </tbody>
+	</table>
+	</center>
+</div>
+
+<script>
+function openForm(username) {
+  document.getElementById("deleteForm-" + username).style.display = "block";
+}
+
+function closeForm(username) {
+  document.getElementById("deleteForm-" + username).style.display = "none";
+}
+</script>

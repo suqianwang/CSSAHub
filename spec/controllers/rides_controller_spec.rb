@@ -1,6 +1,11 @@
 RSpec.describe RidesController, :type => :controller do
+before do
+    @account = FactoryBot.create :account, :user
+  end
+
   describe "GET index" do
     it "assigns @rides as all rides" do
+	  login(@account)
       ride = Ride.create!(role: "passenger")
       get :index
       expect(assigns(:rides)).to eq([ride])

@@ -2,7 +2,7 @@ Given("I am on the create an account page") do
   visit "accounts/new"
 end
 
-When("I fill out the form") do
+When("I fill out the create account form") do
   fill_in "Username", :with => "bob"
   fill_in "Email", :with => "bob@tamu.edu"
   fill_in "Name", :with => "bob"
@@ -12,5 +12,5 @@ When("I fill out the form") do
 end
 
 Then("a new account should be created") do
-  expect(page).to have_content("Account was successfully created.")
+  expect(page).to have_content("Login Page!")
 end

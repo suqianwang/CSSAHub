@@ -1,6 +1,9 @@
 class PassengerController < ApplicationController
   def index
-    render "index"
+    if !session.has_key?('login') or session[:login].empty?
+      flash[:notice] = "Please log in before creating passenger form"
+      redirect_to login_index_path
+    end
   end
   def show
   end
