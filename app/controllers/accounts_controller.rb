@@ -6,8 +6,8 @@ class AccountsController < ApplicationController
   # GET /accounts.json
   def index
     if (session['login'] == "admin")
-		@accounts = Account.all
-	else
+	  	@accounts = Account.all
+	  else
         redirect_to rides_path, notice: "Logged in!"
     end
   end
