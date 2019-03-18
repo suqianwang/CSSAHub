@@ -32,3 +32,20 @@ end
 Then("the site should navigate to the {string} page from the admin page") do |string|
   expect(page).to have_content('Accounts')
 end
+
+Given("I am not an admin") do
+  require 'factory_bot_rails'
+  @account = FactoryBot.create :account, :user
+  visit login_index_path
+  fill_in "Username", :with => @account.username
+  fill_in "Password", :with => @account.password
+  click_button 'Login'
+end
+
+When("I visit admin page") do
+  visit admin_index_path
+end
+
+Then("I will be redirected to rides") do
+  expect(page).to have_content("Ride")
+end

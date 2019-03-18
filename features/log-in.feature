@@ -5,3 +5,14 @@ Feature: Log in
     Given I am in the log in page
     When I fill in my username, password and press Login button
     Then I should see a welcome message
+
+  Scenario: I'm logging in with wrong information
+    Given I am in the log in page
+    When I fill in my username, wrong password and press Login button
+    Then I should see Email or password is invalid
+
+  Scenario: I'm logging out
+    Given I am in the log in page
+    When I fill in my username, password and press Login button
+    And press log out
+    Then I should be redirected to log in page

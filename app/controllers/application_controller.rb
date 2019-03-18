@@ -14,11 +14,11 @@ class ApplicationController < ActionController::Base
   end
   
   def check_admin
-	if session['login'] == "admin"
-	  return true
-	else
-	  redirect_to rides_path
-	end
+    if session['login'] == "admin"
+      return true
+    else
+      redirect_to rides_path
+    end
   end
   
 end
