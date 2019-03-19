@@ -8,7 +8,7 @@ class AccountsController < ApplicationController
     if (session['login'] == "admin")
 	  	@accounts = Account.all
 	  else
-        redirect_to rides_path, notice: "Logged in!"
+        redirect_to services_path, notice: "Logged in!"
     end
   end
 
@@ -33,7 +33,7 @@ class AccountsController < ApplicationController
 
     respond_to do |format|
       if @account.save
-        format.html { redirect_to @account, notice: 'Account was successfully created.' }
+        format.html rides{ redirect_to @account, notice: 'Account was successfully created.' }
         format.json { render :show, status: :created, location: @account }
       else
         format.html { render :new }
