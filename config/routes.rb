@@ -25,4 +25,6 @@ Rails.application.routes.draw do
 
   resources :rides	
   resources :services
+  
+  resources :profile
 end

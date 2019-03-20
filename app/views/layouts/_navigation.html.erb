@@ -1,0 +1,20 @@
+
+<div class="navbar navbar-fixed-top container">
+
+<ul class="nav navbar-nav">
+  <li style='font-size:48px;'><%= link_to 'CssaHub!', '/' %></li>
+</ul>
+
+<ul class="nav justify-content-end">
+  <% if session.has_key?('login') and session['login'] %>
+      <span class="navbar-item" id="welcome-message">
+        <%= "Welcome, #{session['login']}" %>&nbsp;</span>
+		<li class="nav-item"><%= link_to "Profile", profile_index_path %></li>
+        <li class="nav-item"><%= link_to "Logout", logout_path %></li>
+      
+    <% else %>
+      <li><%= link_to "Login", login_index_path %></li>
+    <% end %>
+</ul>
+</div>
+<hr/>
