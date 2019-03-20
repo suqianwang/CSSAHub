@@ -15,27 +15,27 @@
 
   <div class="field required">
     <%= form.label :username %><br />
-    <%= form.text_field :username %>
+    <%= form.text_field :username, :maxlength => 50, :minlength => 5, :size => 20 %>
   </div>
 	<br />
   <div class="field required">
     <%= form.label :email %><br />
-    <%= form.text_field :email %>
+    <%= form.text_field :email, :maxlength => 50, :minlength => 5, :size => 20 %>
   </div>
 <br />
   <div class="field">
     <%= form.label :name %> <br />
-    <%= form.text_field :name %>
+    <%= form.text_field :name, :maxlength => 50, :minlength => 3, :size => 20  %>
   </div>
 <br />
   <div class="field required">
     <%= form.label :password %> <br />
-    <%= form.password_field :password %>
+    <%= form.password_field :password, :maxlength => 50, :minlength => 5, :size => 20  %>
   </div>
 <br />
   <div class="field required">
     <%= form.label :password_confirmation %> <br />
-    <%= form.password_field :password_confirmation %>
+    <%= form.password_field :password_confirmation, :maxlength => 50, :minlength => 5, :size => 20  %>
   </div>
   </br>
   <div class="actions">
