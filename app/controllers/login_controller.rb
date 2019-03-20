@@ -14,7 +14,7 @@ class LoginController < ApplicationController
         redirect_to services_path, notice: "Logged in!"
       end
     else
-      flash.now[:alert] = "Email or password is invalid"
+      flash.now[:alert] = "Username or password is invalid"
       render "index"
     end
   end
