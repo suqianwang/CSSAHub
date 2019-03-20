@@ -37,6 +37,11 @@
     <%= form.label :password_confirmation %> <br />
     <%= form.password_field :password_confirmation, :maxlength => 50, :minlength => 5, :size => 20  %>
   </div>
+   </br>
+  <div style='width:45%'>
+	<%=form.check_box :terms_and_conditions %> As a student of Texas A&M University, I agree to follow all of the rules and regulations in the student code of conduct.<br />
+  </div>
+	
   </br>
   <div class="actions">
     <%= form.submit "Create Account", class: 'row btn btn-primary justify-content-center' %>
