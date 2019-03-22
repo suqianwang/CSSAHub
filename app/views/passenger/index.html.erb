@@ -1,3 +1,9 @@
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.datepicker').datepicker();
+  });
+</script>
+
 <div><h1 class="center p-4">Passenger Form</h1></div>
 <%= form_tag passenger_path, :method => :post do %>
   <div class="row justify-content-center">
@@ -17,7 +23,7 @@
   <div class="row justify-content-center">
     <div class="form-group col-8">
       <%= label_tag(:q, "Departure Date") %>
-      <%= select_date Date.today, prefix: :start_date %>
+      <%= text_field_tag :start_date, nil, :class => 'datepicker' %>
     </div>
   </div>
 
