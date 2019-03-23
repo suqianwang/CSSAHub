@@ -1,13 +1,13 @@
 FactoryBot.define do
   factory :ride do
-    :account
+    association :account, :user
     role { ['driver', 'passenger'].sample }
     departure { ['Zachry', 'HEB', 'IAH', 'Walmart', 'DPS', 'Rec'].sample }
     destination { ['Zachry', 'HEB', 'IAH', 'Walmart', 'DPS', 'Rec'].sample }
-    start_date { Faker::Date.between(1.days.from_now, 10.days.from_now) }
-    end_date { Faker::Date.between(start_date, 10.days.from_now) }
-    start_time { '07:03:30' }
-    end_time { '06:12:09' }
+    start_date { Date.today+1 }
+    end_date { Date.today+2 }
+    start_time { Time.current }
+    end_time { Time.current+60 }
     seats { Faker::Number.between(1, 8) }
   end
 end

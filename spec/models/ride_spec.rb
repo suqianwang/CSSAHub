@@ -1,10 +1,12 @@
 RSpec.describe Ride, :type => :model do
   before do 
-    @ride = FactoryBot.create :ride
+    @account = FactoryBot.build_stubbed(:account, :user)
+    @ride = FactoryBot.build_stubbed(:ride, account: @account)
+    # @ride.account = @account
   end
   
   describe '#account' do
-    it { is_expected.to validate_associated :account }
+    it { is_expected.to belong_to :account }
   end
   
   describe '#role' do
@@ -13,24 +15,33 @@ RSpec.describe Ride, :type => :model do
     it { is_expected.to_not allow_value("invalid role").for(:role) }
   end
   
-  describe '#locations' do
-    it { is_expected.to validate_presence_of(:departure, :destination) }
-    it { is_expected.to allow_value("Zachry").for(:departure, :destination) }
-    it { is_expected.to_not allow_value("invalid location").for(:departure, :destination) }
+  describe '#departure' do
+    it { is_expected.to validate_presence_of :departure }
+    it { is_expected.to allow_value("Zachry").for(:departure) }
+    it { is_expected.to_not allow_value("invalid location").for(:departure) }
+  end
+  
+  describe '#destination' do
+    it { is_expected.to validate_presence_of :destination }
+    it { is_expected.to allow_value("Zachry").for(:destination) }
+    it { is_expected.to_not allow_value("invalid location").for(:destination) }
   end
   
   describe '#dates' do
-    it { is_expected.to validate_presence_of(:start_date, :end_date) }
+    it { is_expected.to validate_presence_of :start_date }
+    it { is_expected.to validate_presence_of :end_date }
   end
   
   describe '#date_order' do
-    it 'validates end date is after begin date' do
-      context 'with valid attributes' do
+    context 'with valid attributes' do
+      it 'validates end date is on or after begin date' do
         @ride.start_date = Date.today+1
         @ride.end_date = Date.today+2
         expect(@ride).to be_valid
       end
-      context 'with invalid attributes' do
+    end
+    context 'with invalid attributes' do
+      it 'validates end date is on or after begin date' do
         @ride.start_date = Date.today+2
         @ride.end_date = Date.today+1
       end
@@ -42,17 +53,20 @@ RSpec.describe Ride, :type => :model do
   end
   
   describe '#time' do
-    it { is_expected.to validate_presence_of(:start_time, :end_time) }
+    it { is_expected.to validate_presence_of :start_time }
+    it { is_expected.to validate_presence_of :end_time }
   end
   
   describe '#time_order' do
-    it 'validates end time is after begin time' do
-      context 'with valid attributes' do
+    context 'with valid attributes' do
+      it 'validates end time is after begin time' do
         @ride.start_time = Time.current
         @ride.end_time = Time.current+2
         expect(@ride).to be_valid
       end
-      context 'with invalid attributes' do
+    end
+    context 'with invalid attributes' do
+      it 'validates end time is after begin time' do
         @ride.start_time = Time.current+2
         @ride.end_time = Time.current+1
       end
@@ -61,6 +75,6 @@ RSpec.describe Ride, :type => :model do
   
   describe '#seats' do
     it { is_expected.to validate_presence_of(:seats) }
-    it { is_expected.to validate_inclusion_of :seats, in: 1..8 }
+    it { is_expected.to validate_inclusion_of(:seats).in_range(1..8)}
   end
 end

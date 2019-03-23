@@ -1,3 +1,5 @@
+require 'pry'
+
 class RidesController < ApplicationController
   before_action :login_required, :only => :index
   def index
@@ -9,19 +11,19 @@ class RidesController < ApplicationController
   end
   
   def create
-    @ride = Ride.new(ride_params)
+    @ride = current_user.rides.new(ride_params)
     if @ride.save
-      if@ride.role == 'passenger'
-        redirect_to passenger_path
-      elsif@ride.role == 'driver'
-        redirect_to driver_path
-      end
+      redirect_to rides_url(@ride), notice: 'Ride successfully created'
     end
+  end
+  
+  def show
+    @ride = current_user.rides.find(params[:id])
   end
   
   private
   
   def ride_params
-    params.require(:ride).permit(:role)
+    params.require(:ride).permit(:role, :departure, :destination, :start_date, :end_date, :start_time, :end_time, :seats)
   end
 end

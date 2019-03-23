@@ -9,6 +9,7 @@ require 'rspec/rails'
 require 'shoulda/matchers'
 require 'simplecov'
 require 'factory_bot_rails'
+require 'database_cleaner'
 
 SimpleCov.start
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -45,10 +46,6 @@ RSpec.configure do |config|
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)
-  end
-
-  config.before(:each) do
-    DatabaseCleaner.start
   end
 
   config.around(:each) do |cleaner|
