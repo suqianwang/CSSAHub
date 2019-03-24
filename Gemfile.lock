@@ -74,6 +74,9 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (~> 1.2)
       xpath (~> 3.2)
+    capybara-webkit (1.15.1)
+      capybara (>= 2.3, < 4.0)
+      json
     childprocess (0.9.0)
       ffi (~> 1.0, >= 1.0.11)
     chromedriver-helper (1.2.0)
@@ -151,6 +154,7 @@ GEM
     haml (5.0.4)
       temple (>= 0.8.0)
       tilt
+    headless (2.3.1)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
     io-like (0.3.0)
@@ -329,6 +333,7 @@ DEPENDENCIES
   bootstrap-datepicker-rails
   byebug
   capybara (>= 2.15)
+  capybara-webkit
   chromedriver-helper (= 1.2.0)
   coffee-rails (~> 4.2)
   cucumber-rails
@@ -340,6 +345,7 @@ DEPENDENCIES
   guard-cucumber
   guard-rspec
   haml
+  headless
   jbuilder (~> 2.5)
   jquery-rails
   pry-byebug
