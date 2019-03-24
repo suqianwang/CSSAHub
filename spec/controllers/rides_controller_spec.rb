@@ -1,5 +1,3 @@
-require 'pry'
-
 RSpec.describe RidesController, :type => :controller do
   before do
     @account = FactoryBot.create(:account, :user)
