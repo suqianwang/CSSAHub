@@ -13,12 +13,9 @@
 });
 </script>
 <script>
-  window.onload = function (){
-      $("#All-day").change(function(){
-          $("#start-departure-time").prop("disabled", this.checked);
-          $("#end-departure-time").prop("disabled", this.checked);
-      });
-  };
+  $(document).on("focus", "[data-behaviour~='datepicker']", function(e){
+    $(this).datepicker();
+  });
 </script>
 <center>
   <h1>Are you a Driver or Passenger?</h1>
@@ -50,10 +47,11 @@
 
     <div class="row justify-content-center">
       <div class="form-group col-8">
-        <%= f.label :start_date, "Departure Date (YYYY-MM-DD)" %>
-        <%= f.text_field :start_date %>
-        <label> to </label>
-        <%= f.text_field :end_date %>
+        <div class="input-daterange" data-provide='datepicker' id="datepicker">
+          <%= f.text_field :start_date %>
+          <span class="add-on">to</span>
+          <%= f.text_field :end_date %>
+        </div>
       </div>
     </div>
 
