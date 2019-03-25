@@ -15,6 +15,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'duktape'
 # HAML as templating engine
 gem 'haml'
+gem 'coffee-rails', '~> 4.2'
+# Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 # Use CoffeeScript for .coffee assets and views
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
