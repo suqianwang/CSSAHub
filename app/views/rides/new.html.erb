@@ -9,12 +9,11 @@
             $("." + fieldToShow + "_form").css("display", "block");
         });
     });
-</script>
-<script>
 
-    $(document).on("focus", "[data-behaviour~='datepicker']", function (e) {
+    $(document).on("focus", ".input-datepicker", function (e) {
         $(this).datepicker();
     });
+
 </script>
 
 
@@ -60,14 +59,16 @@
               </div>
             </div>
 
-            <div class="row">
-              <div class="form-group col-6">
-                <%= f.label :start_date, "Departure Date (YYYY-MM-DD)" %>
-                <%= f.text_field :start_date, :class => "form-control" %>
-              </div>
-              <div class="form-group col-6">
-                <%= f.label :end_date, "to" %>
-                <%= f.text_field :end_date, :class => "form-control" %>
+            <div class="input-daterange" data-provide="date-picker">
+              <div class="row">
+                <div class="form-group col-6">
+                  <%= f.label :start_date, "Departure Date (YYYY-MM-DD)" %>
+                  <%= f.text_field :start_date, :class => "form-control" %>
+                </div>
+                <div class="form-group col-6">
+                  <%= f.label :end_date, "to" %>
+                  <%= f.text_field :end_date, :class => "form-control" %>
+                </div>
               </div>
             </div>
 
