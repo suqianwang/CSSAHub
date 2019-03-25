@@ -1,24 +1,32 @@
-<table id="rides-table">
-  <tr>
-    <th>Ride ID</th>
-    <th>Type</th>
-    <th>Departure</th>
-    <th>Destination</th>
-    <th>Departure Date</th>
-    <th>Departure Time</th>
-    <th>Seats</th>
-  </tr>
-  <% @rides.each do |r| %>
-    <tr>
-      <td><%= "Ride " + String(r.id) %></td>
-      <td><%= r.role %></td>
-      <td><%= r.departure %></td>
-      <td><%= r.destination %></td>
-      <td><%= String(r.start_date) + " to " + String(r.end_date) %></td>
-      <td><%= String(r.start_time) + " to " + String(r.end_time) %></td>
-      <td><%= r.seats %></td>
-    </tr>
-  <% end %>
-</table>
-<br>
-<%= link_to 'Create Ride', new_ride_url %>
+  <table id="rides-table" class="table table-striped">
+    <thead>
+      <tr>
+        <th>Ride ID</th>
+        <th>Type</th>
+        <th>Departure</th>
+        <th>Destination</th>
+        <th>Departure Date</th>
+        <th>Departure Time</th>
+        <th>Seats</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @rides.each do |r| %>
+        <tr>
+          <td><%= link_to "Ride " + String(r.id), r %></td>
+          <td><%= r.role %></td>
+          <td><%= r.departure %></td>
+          <td><%= r.destination %></td>
+          <td><%= String(r.start_date) + " to " + String(r.end_date) %></td>
+          <td><%= String(r.start_time) + " to " + String(r.end_time) %></td>
+          <td><%= r.seats %></td>
+          <td><%= link_to "Show", r, class: 'badge-pill badge-info'%>
+              <%= link_to "Edit", edit_ride_path(r), class: 'badge-pill badge-success'%>
+              <%= link_to "Delete", @post, method: :destroy, data: { confirm: "Are you sure?" }, class: 'badge-pill badge-danger' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <br>
+  <%= link_to 'Create Ride', new_ride_url %>

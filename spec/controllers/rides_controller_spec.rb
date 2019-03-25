@@ -32,7 +32,7 @@ RSpec.describe RidesController, :type => :controller do
     
     it "redirects to the index" do
       post :create, :params => { :ride => @ride_params }
-      expect(response).to redirect_to(rides_url(Ride.last))
+      expect(response).to redirect_to(rides_path)
     end
     
     context "with valid attributes" do
@@ -48,6 +48,12 @@ RSpec.describe RidesController, :type => :controller do
         post :create, :params => { :ride => @invalid_params }
         Ride.any_instance.stub(:save).and_return(false)
         expect(assigns(:ride)).to be_a(Ride)
+      end
+      
+      it "stays on form page" do
+        request { post :create, :params => { :ride => @invalid_params } }
+        Ride.any_instance.stub(:save).and_return(false)
+        expect(request).to render_template(:new)
       end
     end
   end
