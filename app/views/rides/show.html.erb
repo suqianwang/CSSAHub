@@ -1,30 +1,35 @@
-<p>
-  <strong>ID</strong>
-  <%= "Ride " + String(@ride.id) %>
-</p> 
-<p>
-  <strong>Role</strong>
-  <%= @ride.role %>
-</p>
-<p>
-  <strong>Departure Location</strong>
-  <%= @ride.departure %>
-</p>  
-<p>
-  <strong>Destination</strong>
-  <%= @ride.destination %>
-</p>
-<p>
-  <strong>Departure Date</strong>
-  <%= @ride.start_date + " to " + @ride.end_date %>
-</p>
-<p>
-  <strong>Departure Time</strong>
-  <%= @ride.start_time + " to " + @ride.end_time %>
-</p>
-<p>
-  <strong>seats</strong>
-  <%= @ride.seats %>
-</p>
-
-<%= link_to 'Rides', rides_path %>
+<center>
+  <table class="table">
+    <tbody>
+    <tr>
+      <th>ID</th>
+      <td><%= @ride.role %></td>
+    </tr>
+    <tr>
+      <th>Role</th>
+      <td><%= "Ride " + String(@ride.id) %></td>
+    </tr>
+    <tr>
+      <th>Departure Location</th>
+      <td><%= @ride.departure %></td>
+    </tr>
+    <tr>
+      <th>Destination</th>
+      <td><%= @ride.destination %></td>
+    </tr>
+    <tr>
+      <th>Departure Date</th>
+      <td><%= @ride.start_date + " to " + @ride.end_date %></td>
+    </tr>
+    <tr>
+      <th>Departure Time</th>
+      <td><%= @ride.start_time + " to " + @ride.end_time %></td>
+    </tr>
+    <tr>
+      <th>seats</th>
+      <td><%= @ride.seats %></td>
+    </tr>
+    </tbody>
+  </table>
+  <%= link_to 'back', rides_path %>
+</center>
