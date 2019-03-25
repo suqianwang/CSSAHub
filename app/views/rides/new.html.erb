@@ -1,12 +1,12 @@
 <script>
     $(document).ready(function () {
         $('input.form_type[type=radio]').change(function () {
-            $('.driver_form').css("display", "none");
-            $('.passenger_form').css("display", "none");
+            $('.driver_form, .passenger_form').addClass('d-none');
+
             var fieldToShow = $(this).val();
-            console.log($(this).val());
-            $(".ride_form").css("display", "block");
-            $("." + fieldToShow + "_form").css("display", "block");
+
+            $(".ride_form").removeClass('d-none');
+            $("." + fieldToShow + "_form").removeClass('d-none');
         });
     });
 
@@ -39,10 +39,11 @@
       </div>
       <div>
         <div>
-          <div class="ride_form">
+          <div class="ride_form d-none">
             <div class="driver_form">
               <h1 class="center p-4">Driver Form</h1>
             </div>
+
             <div class="passenger_form">
               <h1 class="center p-4">Passenger Form</h1>
             </div>
@@ -93,7 +94,6 @@
             <div class="center">
               <%= f.submit :class => "btn btn-primary" %>
               <%= button_tag("Reset", type: "button", class: "btn btn-secondary") %>
-
             </div>
           </div>
         </div>

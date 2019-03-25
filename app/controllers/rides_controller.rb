@@ -20,12 +20,26 @@ class RidesController < ApplicationController
   end
   
   def show
-    @ride = current_user.rides.find(params[:id])
+    # @ride = current_user.rides.find(params[:id])
+    @ride = Ride.find(params[:id])
   end
-  
+
+  def destroy
+
+  end
+
+  def edit
+    # Check if user owns the ride. If not, throw 401 Unauthorized
+    @ride = Ride.find(params[:id])
+    if not current_user.id == @ride.id
+      render '401', :status => 401
+    end
+  end
+
   private
   
   def ride_params
     params.require(:ride).permit(:role, :departure, :destination, :start_date, :end_date, :start_time, :end_time, :seats)
   end
+
 end
