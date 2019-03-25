@@ -16,8 +16,6 @@ gem 'duktape'
 # HAML as templating engine
 gem 'haml'
 # Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails', '~> 4.2'
-# Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
@@ -62,7 +60,6 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper', '1.2.0'
-  gem 'capybara-webkit'
   gem 'headless'
   gem 'cucumber-rails', require: false
   gem 'rspec-rails'

@@ -74,22 +74,12 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (~> 1.2)
       xpath (~> 3.2)
-    capybara-webkit (1.15.1)
-      capybara (>= 2.3, < 4.0)
-      json
     childprocess (0.9.0)
       ffi (~> 1.0, >= 1.0.11)
     chromedriver-helper (1.2.0)
       archive-zip (~> 0.10)
       nokogiri (~> 1.8)
     coderay (1.1.2)
-    coffee-rails (4.2.2)
-      coffee-script (>= 2.2.0)
-      railties (>= 4.0.0)
-    coffee-script (2.4.1)
-      coffee-script-source
-      execjs
-    coffee-script-source (1.12.2)
     concurrent-ruby (1.1.5)
     crass (1.0.4)
     cucumber (3.1.2)
@@ -333,9 +323,7 @@ DEPENDENCIES
   bootstrap-datepicker-rails
   byebug
   capybara (>= 2.15)
-  capybara-webkit
   chromedriver-helper (= 1.2.0)
-  coffee-rails (~> 4.2)
   cucumber-rails
   database_cleaner
   duktape

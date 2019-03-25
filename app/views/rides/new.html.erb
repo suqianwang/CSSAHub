@@ -87,11 +87,13 @@
           <div class="form-group col-6">
             <%= f.label :seats, "How many seats are available?", class: 'driver_form' %>
             <%= f.label :seats, "How many seats do you need?", class: 'passenger_form' %>
-            <%= f.text_field :seats, :class => "form-control" %>
+            <%= f.number_field :seats, :class => "form-control", :min => "1", :value => "1" %>
           </div>
         </div>
         <div class="center">
           <%= f.submit :class => "btn btn-primary" %>
+          <%= button_tag("Reset", type: "button", class: "btn btn-secondary") %>
+
         </div>
       </div>
 
