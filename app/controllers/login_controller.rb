@@ -8,11 +8,13 @@ class LoginController < ApplicationController
     if account && account.authenticate(params[:password])
       session[:account_id] = account.id
       session['login'] = account.username
-	  if (session['login'] == "admin")
-		redirect_to admin_index_path
-	  else
+      
+  	  if (session['login'] == "admin")
+  		  redirect_to admin_index_path
+  	  else
         redirect_to services_path, notice: "Logged in!"
       end
+      
     else
       flash.now[:alert] = "Username or password is invalid"
       render "index"
@@ -21,7 +23,7 @@ class LoginController < ApplicationController
 
   def destroy
     session['login'] = nil
-	session[:account_id] = nil
+	  session[:account_id] = nil
     redirect_to login_index_path
   end
 end

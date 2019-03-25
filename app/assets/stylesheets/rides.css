@@ -1,0 +1,6 @@
+.passenger_form,
+.driver_form,
+.ride_form
+{
+  display: none;
+}

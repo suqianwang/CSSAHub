@@ -1,4 +1,5 @@
 class Account < ApplicationRecord
+  has_many :rides
   has_secure_password
   
   validates :email, presence: true, uniqueness: true
