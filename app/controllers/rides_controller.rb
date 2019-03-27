@@ -25,7 +25,11 @@ class RidesController < ApplicationController
   end
 
   def destroy
-
+	Ride.destroy(params[:id])
+	respond_to do |format|
+      format.html { redirect_to rides_path, notice: 'Ride was successfully destroyed.' }
+      format.json { head :no_content }
+    end
   end
 
   def edit
