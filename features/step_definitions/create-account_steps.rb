@@ -12,5 +12,5 @@ When("I fill out the create account form") do
 end
 
 Then("a new account should be created") do
-  expect(page).to have_content("Login Page!")
+  expect(page).to have_content("Login")
 end

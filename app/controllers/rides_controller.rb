@@ -33,11 +33,11 @@ class RidesController < ApplicationController
   end
 
   def edit
-    # Check if user owns the ride. If not, throw 401 Unauthorized
-    @ride = Ride.find(params[:id])
-    if not current_user.id == @ride.id
-      render '401', :status => 401
-    end
+    # # Check if user owns the ride. If not, throw 401 Unauthorized
+    # @ride = Ride.find(params[:id])
+    # if not current_user.id == @ride.id
+      # render '401', :status => 401
+    # end
   end
 
   private
