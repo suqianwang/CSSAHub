@@ -9,7 +9,7 @@ end
 
 When("I delete a user") do
   expect(page).to have_content(@account.username)
-  click_on(@account.username)
+  click_on("delete-" + @account.username)
   click_on("confirmDeletion-" + @account.username)
 end
 

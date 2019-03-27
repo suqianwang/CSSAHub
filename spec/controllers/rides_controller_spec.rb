@@ -65,4 +65,13 @@ RSpec.describe RidesController, :type => :controller do
       expect(assigns(:ride)).to eq ride
     end
   end
+  
+  describe "GET destroy" do
+    it "should delete ride" do
+	  ride = Ride.create(@ride_params.merge(:account => @account))
+	  expect {
+	    delete :destroy, params: { id: ride.id }
+	  }.to change(Ride, :count).by(-1)
+	end
+  end
 end

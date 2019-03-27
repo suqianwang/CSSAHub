@@ -46,6 +46,6 @@ When("I visit admin page") do
   visit admin_index_path
 end
 
-Then("I will be redirected to rides") do
-  expect(page).to have_content("Ride")
+Then("I will be redirected to the main hub") do
+  expect(page).to have_content("Services")
 end
