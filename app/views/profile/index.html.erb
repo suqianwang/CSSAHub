@@ -1,67 +1,85 @@
-<h1 class="center">Profile</h1>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
 
-<div class="card">
-  <button class="card-header" data-toggle="collapse" data-target="#my-information">My Information</button>
-  <div id="my-information" class="collapse">
-    <div class="card-body">
-      <p>To be implemented...</p>
-    </div>
-  </div>
+<div class="container">
+	<div class="row">
+		<div class="col-md-3 ">
+		     <div class="list-group" id="list-tab" role="tablist">
+              <a href="#list-profile" id="list-profile-list" data-toggle="list" role="tab" class="list-group-item list-group-item-action active" aria-controls="profile">My Profile</a>
+              <a href="#list-requests" id="list-requests-list" data-toggle="list" role="tab" class="list-group-item list-group-item-action" aria-controls="requests">My Requested Rides</a>
+              <a href="#list-posts" id="list-posts-list" data-toggle="list" role="tab" class="list-group-item list-group-item-action" aria-controls="posts">My Posted Rides</a>
+              <a href="#list-frequents" id="list-frequents-list" data-toggle="list" role="tab" class="list-group-item list-group-item-action" aria-controls="frequents">My Frequent Drivers</a>
+              <a href="#list-favorites" id="list-favorites-list" data-toggle="list" role="tab" class="list-group-item list-group-item-action" aria-controls="favorites">My Favorite Drivers</a>
+            </div> 
+		</div>
+		
+		<div class="col-md-9 tab-content" id="nav-tabContent">
+		    <div class="card tab-pane active" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
+		        <div class="card-body" >
+		            <div class="row">
+		                <div class="col-md-12">
+		                    <h4>Your Profile</h4>
+		                    <hr>
+		                </div>
+		            </div>
+		            <div class="row">
+		                <div class="col-md-12">
+		                    <form>
+                              <div class="form-group row">
+                                <label for="username" class="col-4 col-form-label">User Name</label> 
+                                <div class="col-8">
+                                  <input id="username" name="username" placeholder="Username" class="form-control here" required="required" type="text">
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label for="name" class="col-4 col-form-label">Name</label> 
+                                <div class="col-8">
+                                  <input id="name" name="name" placeholder="Name" class="form-control here" type="text">
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label for="email" class="col-4 col-form-label">Email</label> 
+                                <div class="col-8">
+                                  <input id="email" name="email" placeholder="Email" class="form-control here" required="required" type="text">
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label for="newpass" class="col-4 col-form-label">New Password</label> 
+                                <div class="col-8">
+                                  <input id="newpass" name="newpass" placeholder="New Password" class="form-control here" type="text">
+                                </div>
+                              </div> 
+							  <div class="form-group row">
+                                <label for="newpass" class="col-4 col-form-label">Confirm New Password</label> 
+                                <div class="col-8">
+                                  <input id="newpass" name="newpass" placeholder="Confirm New Password" class="form-control here" type="text">
+                                </div>
+                              </div> 
+                              <div class="form-group row">
+                                <div class="offset-4 col-8">
+                                  <button name="submit" type="submit" class="btn btn-primary">Update My Profile</button>
+                                </div>
+                              </div>
+                            </form>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+		<div class="card tab-pane" id="list-requests" role="tabpanel" aria-labelledby="list-requests-list">
+		<p>blah</p>
+		</div>
+		<div class="card tab-pane" id="list-posts" role="tabpanel" aria-labelledby="list-posts-list">
+		<p>blah</p>
+		</div>
+		<div class="card tab-pane" id="list-frequents" role="tabpanel" aria-labelledby="list-frequents-list">
+		<p>blah</p>
+		</div>
+		<div class="card tab-pane" id="list-favorites" role="tabpanel" aria-labelledby="list-favorites-list">
+		<p>blah</p>
+		</div>
+		
+		</div>
+	</div>
 </div>
-
-<div class="card">
-  <button class="card-header" data-toggle="collapse" data-target="#my-requested-rides">My Requested Rides</button>
-  <div id="my-requested-rides" class="collapse">
-    <div class="card-body">
-      <p>To be implemented...</p>
-    </div>
-  </div>
-</div>
-
-<div class="card">
-  <button class="card-header" data-toggle="collapse" data-target="#my-posted-rides">My Posted Rides</button>
-  <div id="my-posted-rides" class="collapse">
-    <div class="card-body">
-      <p>To be implemented...</p>
-    </div>
-  </div>
-</div>
-
-<div class="card">
-  <button class="card-header" data-toggle="collapse" data-target="#my-frequent-drivers">My Frequent Drivers</button>
-  <div id="my-frequent-drivers" class="collapse">
-    <div class="card-body">
-      <p>To be implemented...</p>
-    </div>
-  </div>
-</div>
-
-<div class="card">
-  <button class="card-header" data-toggle="collapse" data-target="#my-favorite-drivers">My Favorite Drivers</button>
-  <div id="my-favorite-drivers" class="collapse">
-    <div class="card-body">
-      <p>To be implemented...</p>
-    </div>
-  </div>
-</div>
-
-
-<script>
-    // var acc = document.getElementsByClassName("accordion");
-    // var i;
-    // for (i = 0; i < acc.length; i++) {
-    //     acc[i].addEventListener("click", function () {
-    //         /* Toggle between adding and removing the "active" class,
-    //         to highlight the button that controls the panel */
-    //         this.classList.toggle("active");
-    //
-    //         /* Toggle between hiding and showing the active panel */
-    //         var panel = this.nextElementSibling;
-    //         if (panel.style.display === "block") {
-    //             panel.style.display = "none";
-    //         } else {
-    //             panel.style.display = "block";
-    //         }
-    //     });
-    // }
-</script>
