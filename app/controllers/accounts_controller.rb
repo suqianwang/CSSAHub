@@ -77,6 +77,6 @@ class AccountsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def account_params
-      params.require(:account).permit(:username, :email, :name, :password, :password_confirmation)
+      params.require(:account).permit(:username, :email, :name, :password, :password_confirmation, :terms_and_conditions)
     end
 end

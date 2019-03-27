@@ -1,5 +1,6 @@
 <center>
 <%= form_with(model: account, local: true) do |form| %>
+  
   <% if account.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(account.errors.count, "error") %> prohibited this account from being saved:</h2>
@@ -11,37 +12,44 @@
       </ul>
     </div>
   <% end %>
+  <div class="container col-3">
+      <div class="field required form-group">
+        <%= form.label :username %><br />
+        <%= form.text_field :username, :maxlength => 50, :minlength => 5, :size => 20,class: "form-control" %>
+      </div>
+      <br />
+      <div class="field required form-group">
+        <%= form.label :email %><br />
+        <%= form.text_field :email, :maxlength => 50, :minlength => 5, :size => 20, class:"form-control" %>
+      </div>
+    <br />
+      <div class="field form-group">
+        <%= form.label :name %> <br />
+        <%= form.text_field :name, :maxlength => 50, :minlength => 3, :size => 20, class:"form-control" %>
+      </div>
+    <br />
+      <div class="field required form-group">
+        <%= form.label :password %> <br />
+        <%= form.password_field :password, :maxlength => 50, :minlength => 5, :size => 20, class:"form-control" %>
+      </div>
+    <br />
+      <div class="field required form-group">
+        <%= form.label :password_confirmation %> <br />
+        <%= form.password_field :password_confirmation, :maxlength => 50, :minlength => 5, :size => 20, class:"form-control"   %>
+      </div>
+       </br>
+  </div>
+    <div style='width:45%'>
+    <%=form.check_box :terms_and_conditions %> As a student of Texas A&M University, I agree to follow all of the rules and regulations in the student code of conduct.<br />
+    </div>
 
-  <p class="field">*
-    <%= form.label :username %> <br />
-    <%= form.text_field :username %>
-  </p>
+    </br>
+    <div class="actions">
+      <%= form.submit "Create Account", class: 'row btn btn-primary justify-content-center' %>
+    </div>
 
-  <p class="field">*
-    <%= form.label :email %> <br />
-    <%= form.text_field :email %>
-  </p>
-
-  <p class="field">
-    <%= form.label :name %> <br />
-    <%= form.text_field :name %>
-  </p>
-
-  <p class="field">*
-    <%= form.label :password %> <br />
-    <%= form.password_field :password %>
-  </p>
-
-  <p class="field">*
-    <%= form.label :password_confirmation %> <br />
-    <%= form.password_field :password_confirmation %>
-  </p>
-
-  <p class="actions">
-    <%= form.submit "Create Account", class: 'row btn btn-primary justify-content-center' %>
-  </p>
 <% end %>
-
+<br />
 <p>Note: * field is required</p>
 
 </center>

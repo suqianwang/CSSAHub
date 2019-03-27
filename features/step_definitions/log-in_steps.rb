@@ -13,7 +13,7 @@ When("I fill in my username, password and press Login button") do
 end
 
 Then("I should see a welcome message") do
-  expect(page).to have_selector(:css,"p#welcome-message")
+  expect(page).to have_selector(:css,"span#welcome-message")
 end
 
 When("I fill in my username, wrong password and press Login button") do
@@ -22,8 +22,8 @@ When("I fill in my username, wrong password and press Login button") do
   click_button 'Login'
 end
 
-Then("I should see Email or password is invalid") do
-  expect(page).to have_content("Email or password is invalid")
+Then("I should see Username or password is invalid") do
+  expect(page).to have_content("Username or password is invalid")
 end
 
 When("press log out") do

@@ -1,0 +1,35 @@
+<center>
+  <table class="table">
+    <tbody>
+    <tr>
+      <th>ID</th>
+      <td><%= @ride.role %></td>
+    </tr>
+    <tr>
+      <th>Role</th>
+      <td><%= "Ride " + String(@ride.id) %></td>
+    </tr>
+    <tr>
+      <th>Departure Location</th>
+      <td><%= @ride.departure %></td>
+    </tr>
+    <tr>
+      <th>Destination</th>
+      <td><%= @ride.destination %></td>
+    </tr>
+    <tr>
+      <th>Departure Date</th>
+      <td><%= @ride.start_date + " to " + @ride.end_date %></td>
+    </tr>
+    <tr>
+      <th>Departure Time</th>
+      <td><%= @ride.start_time + " to " + @ride.end_time %></td>
+    </tr>
+    <tr>
+      <th>seats</th>
+      <td><%= @ride.seats %></td>
+    </tr>
+    </tbody>
+  </table>
+  <%= link_to 'back', rides_path %>
+</center>

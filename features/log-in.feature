@@ -9,7 +9,7 @@ Feature: Log in
   Scenario: I'm logging in with wrong information
     Given I am in the log in page
     When I fill in my username, wrong password and press Login button
-    Then I should see Email or password is invalid
+    Then I should see Username or password is invalid
 
   Scenario: I'm logging out
     Given I am in the log in page

@@ -1,15 +1,104 @@
-<center>
-  <h1>Driver or Passenger?</h1>
-    
-  <%= form_with model: @ride do |form| %>
-    
-  <p>
-      <%= form.radio_button :role, 'driver', :id => 'Driver' %> Driver <br>
-      <%= form.radio_button :role, 'passenger', :id => 'Passenger' %> Passenger <br>
-  </p>
-    
-  <p>
-      <%= form.submit %>
-  </p>
-  <% end %>
-</center>
+<script>
+    $(document).ready(function () {
+        $('input.form_type[type=radio]').change(function () {
+            $('.driver_form, .passenger_form').addClass('d-none');
+
+            var fieldToShow = $(this).val();
+
+            $(".ride_form").removeClass('d-none');
+            $("." + fieldToShow + "_form").removeClass('d-none');
+        });
+    });
+
+    $(document).on("focus", ".input-datepicker", function (e) {
+        $(this).datepicker();
+    });
+
+</script>
+
+
+<h1 class="center">Are you a Driver or Passenger?</h1>
+
+<%= form_with model: @ride do |f| %>
+
+  <div class="row">
+    <div class="offset-2 col-8">
+      <div class="p-2 center">
+        <div class="form-check-inline">
+          <%= f.label :role, "", :for => "Driver", :class => "btn btn-outline-primary" do %>
+            <%= f.radio_button :role, 'driver', class: 'form_type form-check-input', id: 'Driver', value: 'driver' %>
+            Driver
+          <% end %>
+        </div>
+        <div class="form-check-inline">
+          <%= f.label :role, "", :for => "Passenger", :class => "btn btn-outline-primary" do %>
+            <%= f.radio_button :role, 'passenger', class: 'form_type form-check-input', id: 'Passenger', value: 'passenger' %>
+            Passenger
+          <% end %>
+        </div>
+      </div>
+      <div>
+        <div>
+          <div class="ride_form d-none">
+            <div class="driver_form">
+              <h1 class="center p-4">Driver Form</h1>
+            </div>
+
+            <div class="passenger_form">
+              <h1 class="center p-4">Passenger Form</h1>
+            </div>
+
+            <div class="row">
+              <div class="form-group col-6">
+                <%= f.label :departure, "Depart From:" %>
+                <%= f.select :departure, ['Zachry', 'HEB', 'IAH', 'Walmart', 'DPS', 'Rec'], {}, class: 'form-control' %>
+              </div>
+
+              <div class="form-group col-6">
+                <%= f.label :destination, "Destination:" %>
+                <%= f.select :destination, ['Zachry', 'HEB', 'IAH', 'Walmart', 'DPS', 'Rec'], {}, class: "form-control" %>
+              </div>
+            </div>
+
+            <div class="input-daterange" data-provide="date-picker">
+              <div class="row">
+                <div class="form-group col-6">
+                  <%= f.label :start_date, "Departure Date (YYYY-MM-DD)" %>
+                  <%= f.text_field :start_date, :class => "form-control" %>
+                </div>
+                <div class="form-group col-6">
+                  <%= f.label :end_date, "to" %>
+                  <%= f.text_field :end_date, :class => "form-control" %>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group col-6">
+                <%= f.label :start_time, "Departure Time (hh:mm:ss)" %>
+                <%= f.text_field :start_time, :class => "form-control" %>
+              </div>
+              <div class="form-group col-6">
+                <%= f.label :end_date, "to" %>
+                <%= f.text_field :end_time, :class => "form-control" %>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group col-6">
+                <%= f.label :seats, "How many seats are available?", class: 'driver_form' %>
+                <%= f.label :seats, "How many seats do you need?", class: 'passenger_form' %>
+                <%= f.number_field :seats, :class => "form-control", :min => "1", :value => "1" %>
+              </div>
+            </div>
+            <div class="center">
+              <%= f.submit :class => "btn btn-primary" %>
+              <%= button_tag("Reset", type: "button", class: "btn btn-secondary") %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
