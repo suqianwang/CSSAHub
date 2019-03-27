@@ -4,7 +4,7 @@ Feature: Navigate between Admin option pages
   Scenario: I want to see what options I can manage
     Given I am not an admin
     When I visit admin page
-    Then I will be redirected to rides
+    Then I will be redirected to the main hub
   
   Scenario Outline: I want to see what options I can manage
     Given I am an admin

@@ -5,10 +5,10 @@ RSpec.describe AdminController, :type => :controller do
   end
   
   describe "GET index" do
-    it "does not user to navigate to admin page" do
+    it "does not allow user to navigate to admin page" do
 	  login(@account)
       get :index
-	  expect(response).to redirect_to(rides_path)
+	  expect(response).to redirect_to(services_path)
     end
   end
   
