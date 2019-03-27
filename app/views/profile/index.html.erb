@@ -20,17 +20,18 @@
 		        <div class="card-body" >
 		            <div class="row">
 		                <div class="col-md-12">
-		                    <h4>Your Profile</h4>
+		                    <h4>My Profile</h4>
 		                    <hr>
 		                </div>
 		            </div>
 		            <div class="row">
 		                <div class="col-md-12">
-		                    <form>
+		                    <%= form_for @profile do |f| %>
                               <div class="form-group row">
                                 <label for="username" class="col-4 col-form-label">User Name</label> 
                                 <div class="col-8">
-                                  <input id="username" name="username" placeholder="Username" class="form-control here" required="required" type="text">
+                                  <!--<input id="username" name="username" placeholder="Username" class="form-control here" required="required" type="text">-->
+								  <%= f.text_field :username, :id => "username", :name => "username", :class => "form-control here", :required => true, :placeholder => @profile.username %>
                                 </div>
                               </div>
                               <div class="form-group row">
@@ -59,27 +60,76 @@
                               </div> 
                               <div class="form-group row">
                                 <div class="offset-4 col-8">
-                                  <button name="submit" type="submit" class="btn btn-primary">Update My Profile</button>
+                                  <!--<button name="submit" type="submit" class="btn btn-primary">Update My Profile</button>-->
+								  <%= f.submit "Update My Profile", class: "row btn btn-primary" %>
+
                                 </div>
                               </div>
-                            </form>
+                            <% end %>
 		                </div>
 		            </div>
 		        </div>
 		    </div>
 		<div class="card tab-pane" id="list-requests" role="tabpanel" aria-labelledby="list-requests-list">
-		<p>blah</p>
+			<div class="card-body" >
+		            <div class="row">
+		                <div class="col-md-12">
+		                    <h4>My Requested Rides</h4>
+		                    <hr>
+		                </div>
+		            </div>
+		            <div class="row">
+		                <div class="col-md-12">
+		                    To be implemented
+		                </div>
+		            </div>
+		        </div>
 		</div>
 		<div class="card tab-pane" id="list-posts" role="tabpanel" aria-labelledby="list-posts-list">
-		<p>blah</p>
+				<div class="card-body" >
+					<div class="row">
+		                <div class="col-md-12">
+		                    <h4>My Posted Rides</h4>
+		                    <hr>
+		                </div>
+		            </div>
+		            <div class="row">
+		                <div class="col-md-12">
+		                    To be implemented
+		                </div>
+		            </div>
+		        </div>
 		</div>
 		<div class="card tab-pane" id="list-frequents" role="tabpanel" aria-labelledby="list-frequents-list">
-		<p>blah</p>
+				<div class="card-body" >
+					<div class="row">
+		                <div class="col-md-12">
+		                    <h4>My Frequent Drivers</h4>
+		                    <hr>
+		                </div>
+		            </div>
+		            <div class="row">
+		                <div class="col-md-12">
+		                    To be implemented
+		                </div>
+		            </div>
+		        </div>
 		</div>
 		<div class="card tab-pane" id="list-favorites" role="tabpanel" aria-labelledby="list-favorites-list">
-		<p>blah</p>
-		</div>
-		
+			<div class="card-body" >
+				<div class="row">
+		                <div class="col-md-12">
+		                    <h4>My Favorite Drivers</h4>
+		                    <hr>
+		                </div>
+		            </div>
+		            <div class="row">
+		                <div class="col-md-12">
+		                    To be implemented
+		                </div>
+		            </div>
+		        </div>
+			</div>
 		</div>
 	</div>
 </div>
