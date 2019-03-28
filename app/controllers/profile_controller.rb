@@ -14,13 +14,4 @@ before_action :login_required, :only => :index
   end
 	
 	
-  private
-    def profile_params
-      params.require(:account).permit(:username, :email, :name, :password, :password_confirmation, :terms_and_conditions)
-    end
-
-
-    def set_profile
-      @profile = Account.find(params[:id])
-	end
 end
