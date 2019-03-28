@@ -35,43 +35,45 @@ RSpec.describe Ride, :type => :model do
   describe '#date_order' do
     context 'with valid attributes' do
       it 'validates end date is on or after begin date' do
-        @ride.start_date = Date.today+1
-        @ride.end_date = Date.today+2
+        @ride.start_date = (Date.today+1).to_s
+        @ride.end_date = (Date.today+2).to_s
         expect(@ride).to be_valid
       end
     end
     context 'with invalid attributes' do
       it 'validates end date is on or after begin date' do
-        @ride.start_date = Date.today+2
-        @ride.end_date = Date.today+1
+        @ride.start_date = (Date.today+2).to_s
+        @ride.end_date = (Date.today+1).to_s
+        expect(@ride).to_not be_valid
       end
     end
     it 'validates that start_date is not today' do
-      @ride.start_date = Date.today
-      @ride.end_date = Date.today+1
+      @ride.start_date = (Date.today).to_s
+      @ride.end_date = (Date.today+1).to_s
+      expect(@ride).to_not be_valid
     end
   end
   
-  describe '#time' do
-    it { is_expected.to validate_presence_of :start_time }
-    it { is_expected.to validate_presence_of :end_time }
-  end
+  # describe '#time' do
+  #   it { is_expected.to validate_presence_of :start_time }
+  #   it { is_expected.to validate_presence_of :end_time }
+  # end
   
-  describe '#time_order' do
-    context 'with valid attributes' do
-      it 'validates end time is after begin time' do
-        @ride.start_time = Time.current
-        @ride.end_time = Time.current+2
-        expect(@ride).to be_valid
-      end
-    end
-    context 'with invalid attributes' do
-      it 'validates end time is after begin time' do
-        @ride.start_time = Time.current+2
-        @ride.end_time = Time.current+1
-      end
-    end
-  end
+  # describe '#time_order' do
+  #   context 'with valid attributes' do
+  #     it 'validates end time is after begin time' do
+  #       @ride.start_time = (Time.current).to_s
+  #       @ride.end_time = (Time.current+2).to_s
+  #       expect(@ride).to be_valid
+  #     end
+  #   end
+  #   context 'with invalid attributes' do
+  #     it 'validates end time is after begin time' do
+  #       @ride.start_time = (Time.current+2).to_s
+  #       @ride.end_time = (Time.current+1).to_s
+  #     end
+  #   end
+  # end
   
   describe '#seats' do
     it { is_expected.to validate_presence_of(:seats) }
