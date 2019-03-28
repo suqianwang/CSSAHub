@@ -35,6 +35,8 @@ gem 'bcrypt', '~> 3.1.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
+gem 'pry'
+
 # gem 'validates_timeliness', '~> 5.0.0.alpha4'
 gem 'validates_timeliness', '~> 3.0'
 
@@ -42,7 +44,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Use sqlite3 as the database for Active Record
-  gem 'sqlite3', git: "https://github.com/larskanis/sqlite3-ruby", branch: "add-gemspec"
+  gem 'sqlite3'
   gem 'pry-byebug'
 end
 
@@ -75,7 +77,6 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-# group :production do
-#   gem 'pg', '~> 0.21' # for Heroku deployment
-#   gem 'rails_12factor'
-# end
+group :production do
+  gem 'pg', '~> 1.1' # for Heroku deployment
+end

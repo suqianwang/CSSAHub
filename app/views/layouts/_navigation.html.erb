@@ -1,25 +1,81 @@
+<style>
+  .navbar-brand {
+    font-size: 2em;
+  }
+</style>
 
-<div class="navbar navbar-fixed-top container">
+<nav class="navbar navbar-light bg-light">
 
-<ul class="nav navbar-nav">
-  <% if session.has_key?('login') and session['login'] == "admin" %>
-    <li style='font-size:48px;'><%= link_to 'CssaHub!', admin_index_path %></li>
-  <% else %>
-    <li style='font-size:48px;'><%= link_to 'CssaHub!', services_path %></li>
-  <% end %>
-</ul>
+  <div class="container">
+    <div>
+      <% if session.has_key?('login') and session['login'] == "admin" %>
+        <%= link_to admin_index_path, class: 'navbar-brand' do %>
+          <%= image_tag "cssa.png", :width => "60", :height => "60", :id => "site-logo" %>
+          CssaHub!
+        <% end %>
+      <% else %>
+        <%= link_to services_path, class: 'navbar-brand' do %>
+          <%= image_tag "cssa.png", :width => "60", :height => "60", :id => "site-logo" %>
+          CssaHub!
+        <% end %>
+      <% end %>
+    </div>
 
-<ul class="nav justify-content-end">
-  <% if session.has_key?('login') and session['login'] %>
-      <span class="navbar-item" id="welcome-message">
-        <%= "Welcome, #{session['login']}" %>&nbsp;</span>
-		<% if session['login'] != "admin" %>
-		  <li class="nav-item"><%= link_to "Profile", profile_index_path %></li>
-		<% end %>
-        <li class="nav-item"><%= link_to "Logout", logout_path %></li>
-      
-    <% else %>
-      <li><%= link_to "Login", login_index_path %></li>
-    <% end %>
-</ul>
-</div>
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <% if session.has_key?('login') and session['login'] %>
+          <%= "Welcome, #{session['login']}" %>
+        <% else %>
+          Login
+        <% end %>
+      </button>
+
+      <div class="dropdown-menu my-2" aria-labelledby="dropdownMenuButton">
+        <% if session.has_key?('login') and session['login'] %>
+          <div class="dropdown-header"><%= "#{session['login']}" %></div>
+          <% if session['login'] != "admin" %>
+            <%= link_to "Profile", profile_index_path, :class => "dropdown-item" %>
+          <% end %>
+          <%= link_to "Logout", logout_path, :class => "dropdown-item" %>
+        <% else %>
+          <%= link_to "Login", login_index_path, :class => "dropdown-item" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+</nav>
+
+
+
+
+
+
+
+
+
+<!--<div class="navbar navbar-fixed-top container">-->
+<!--  <ul class="nav navbar-nav">-->
+<%# if session.has_key?('login') and session['login'] == "admin" %>
+<!--      <li style='font-size:48px;'><%#= link_to 'CssaHub!', admin_index_path %></li>-->
+<%# else %>
+<!--      <li style='font-size:48px;'><%#= link_to 'CssaHub!', services_path %></li>-->
+<%# end %>
+<!--  </ul>-->
+
+<!--  <ul class="nav justify-content-end">-->
+<%# if session.has_key?('login') and session['login'] %>
+<!--      <span class="navbar-item" id="welcome-message">-->
+<!--        <%= "Welcome, #{session['login']}" %>&nbsp;</span>-->
+<%# if session['login'] != "admin" %>
+<!--        <li class="nav-item"><%#= link_to "Profile", profile_index_path %></li>-->
+<%# end %>
+<!--      <li class="nav-item"><%#= link_to "Logout", logout_path %></li>-->
+
+<%# else %>
+<!--      <li><%#= link_to "Login", login_index_path %></li>-->
+<%# end %>
+<!--  </ul>-->
+<!--</div>-->
+
+

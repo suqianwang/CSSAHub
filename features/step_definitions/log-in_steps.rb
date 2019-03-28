@@ -8,18 +8,24 @@ When("I fill in my username, password and press Login button") do
 
   fill_in "Username", :with => @account.username
   fill_in "Password", :with => @account.password
-  click_button 'Login'
+  within '#login-form' do
+    click_button 'Login'
+  end
 
 end
 
 Then("I should see a welcome message") do
-  expect(page).to have_selector(:css,"span#welcome-message")
+  within ('.dropdown button.dropdown-toggle') do
+    expect(page).to have_content 'Welcome'
+  end
 end
 
 When("I fill in my username, wrong password and press Login button") do
   fill_in "Username", :with => @account.username
   fill_in "Password", :with => @account.password + "1"
-  click_button 'Login'
+  within '#login-form' do
+    click_button 'Login'
+  end
 end
 
 Then("I should see Username or password is invalid") do

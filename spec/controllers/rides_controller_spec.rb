@@ -2,8 +2,8 @@ RSpec.describe RidesController, :type => :controller do
   before do
     @account = FactoryBot.create(:account, :user)
     login(@account)
-    @ride_params = {role: 'driver', departure: 'Zachry', destination: 'HEB',
-                    start_date: '2019-04-19', end_date: '2019-04-25', start_time: '12:05:08', end_time: '16:00:00', seats: 5}
+    @ride_params = { role: 'driver', departure: 'Zachry', destination: 'HEB',
+                     start_date: (Date.today+1).to_s, end_date: (Date.today+2).to_s, start_time: '8:00', end_time:'12:00', seats: 5 }
     @invalid_params = @ride_params.dup
     @invalid_params[:role] = 'invalid role'
   end
