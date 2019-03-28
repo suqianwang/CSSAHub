@@ -1,8 +1,10 @@
+require 'pry'
+
 class Ride < ApplicationRecord
   belongs_to :account
   validates :role, presence: true, inclusion: { in: ['driver', 'passenger'] }
-  validates :departure, presence: true, inclusion: { in: ['Zachry', 'HEB', 'IAH', 'DPS', 'Rec', 'Walmart'] }
-  validates :destination, presence: true, inclusion: { in: ['Zachry', 'HEB', 'IAH', 'DPS', 'Rec', 'Walmart'] }
+  validates :departure, presence: true
+  validates :destination, presence: true
   validates :start_date, presence: true, :timeliness => { :on_or_after => :today, :type => :date }
   validates :end_date, presence: true, :timeliness => { :on_or_after => :start_date, :type => :date }
   validates :start_time, presence: true, :timeliness => { :type => :time }
