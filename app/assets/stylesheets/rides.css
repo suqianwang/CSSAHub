@@ -23,8 +23,8 @@ html, body {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
-#origin-input,
-#destination-input {
+#ride_departure,
+#ride_destination {
   background-color: #fff;
   font-family: Roboto;
   font-size: 15px;
@@ -32,10 +32,10 @@ html, body {
   margin-left: 12px;
   padding: 0 11px 0 13px;
   text-overflow: ellipsis;
-  width: 200px;
+  width: 250px;
 }
 
-#origin-input:focus,
-#destination-input:focus {
+#ride_departure:focus,
+#ride_destination:focus {
   border-color: #4d90fe;
 }

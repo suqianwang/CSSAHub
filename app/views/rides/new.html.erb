@@ -21,16 +21,6 @@
   </script>
 <% end %>
 
-<div style="display: none">
-  <input id="origin-input" class="controls" type="text"
-      placeholder="Enter an origin location">
-
-  <input id="destination-input" class="controls" type="text"
-      placeholder="Enter a destination location">
-</div>
-
-<div id="map"></div>
-
 <h1 class="center">Are you a Driver or Passenger?</h1>
 <%= form_with model: @ride, html: {:autocomplete => 'off'} do |f| %>
   <div class="row">
@@ -58,17 +48,15 @@
               <h1 class="center p-4">Passenger Form</h1>
             </div>
 
-            <div class="row">
-              <div class="form-group col-6">
-                <%= f.label :departure, "Depart From:" %>
-                <%= f.select :departure, ['Zachry', 'HEB', 'IAH', 'Walmart', 'DPS', 'Rec'], {}, class: 'form-control' %>
-              </div>
-
-              <div class="form-group col-6">
-                <%= f.label :destination, "Destination:" %>
-                <%= f.select :destination, ['Zachry', 'HEB', 'IAH', 'Walmart', 'DPS', 'Rec'], {}, class: "form-control" %>
-              </div>
+            <div class="d-none">
+              <input id="ride_departure" class="controls" type="text" name="ride[departure]"
+                  placeholder="Enter an origin location">
+              
+              <input id="ride_destination" class="controls" type="text" name="ride[destination]"
+                  placeholder="Enter a destination location">
             </div>
+                
+            <div id="map"></div>
 
             <div class="input-daterange row">
               <div class="form-group col-6">

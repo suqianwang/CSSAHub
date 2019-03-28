@@ -19,14 +19,14 @@ RSpec.describe Ride, :type => :model do
   
   describe '#departure' do
     it { is_expected.to validate_presence_of :departure }
-    it { is_expected.to allow_value("Zachry").for(:departure) }
-    it { is_expected.to_not allow_value("invalid location").for(:departure) }
+    # it { is_expected.to allow_value("Zachry").for(:departure) }
+    # it { is_expected.to_not allow_value("invalid location").for(:departure) }
   end
   
   describe '#destination' do
     it { is_expected.to validate_presence_of :destination }
-    it { is_expected.to allow_value("Zachry").for(:destination) }
-    it { is_expected.to_not allow_value("invalid location").for(:destination) }
+    # it { is_expected.to allow_value("Zachry").for(:destination) }
+    # it { is_expected.to_not allow_value("invalid location").for(:destination) }
   end
   
   describe '#dates' do

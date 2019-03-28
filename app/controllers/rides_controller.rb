@@ -12,7 +12,7 @@ class RidesController < ApplicationController
   
   def create
     @ride = current_user.rides.new(ride_params)
-
+    binding.pry
     if @ride.save
       redirect_to rides_path, notice: 'Ride successfully created'
     else

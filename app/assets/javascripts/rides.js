@@ -17,9 +17,6 @@ function initMap() {
   new AutocompleteDirectionsHandler(map);
 }
 
-/**
- * @constructor
- */
 function AutocompleteDirectionsHandler(map) {
   this.map = map;
   this.originPlaceId = null;
@@ -28,8 +25,8 @@ function AutocompleteDirectionsHandler(map) {
 //   this.directionsDisplay = new google.maps.DirectionsRenderer;
 //   this.directionsDisplay.setMap(map);
 
-  var originInput = document.getElementById('origin-input');
-  var destinationInput = document.getElementById('destination-input');
+  var originInput = document.getElementById('ride_departure');
+  var destinationInput = document.getElementById('ride_destination');
 
   var originAutocomplete = new google.maps.places.Autocomplete(originInput);
   // Specify just the place data fields that you need.
