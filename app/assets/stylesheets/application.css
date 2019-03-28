@@ -71,4 +71,9 @@ header {
   }
 }
 
-div.required:before{content:"*"}
+.form-group.required label:after {
+    color: #d00;
+    content: "*";
+    margin-left: 6px;
+}
+
