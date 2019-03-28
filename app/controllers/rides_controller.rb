@@ -12,11 +12,13 @@ class RidesController < ApplicationController
   
   def create
     @ride = current_user.rides.new(ride_params)
+
     if @ride.save
       redirect_to rides_path, notice: 'Ride successfully created'
     else
-      render new_ride_path
+      redirect_to new_ride_path, notice: 'Invalid ride!'
     end
+
   end
   
   def show
