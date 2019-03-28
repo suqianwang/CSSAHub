@@ -6,8 +6,8 @@ Given("a ride exists") do
   select(@ride.destination, from: 'Destination:')
   fill_in('ride_start_date', with: @ride.start_date)
   fill_in('ride_end_date', with: @ride.end_date)
-  fill_in('ride_start_time', with: @ride.start_time)
-  fill_in('ride_end_time', with: @ride.end_time)
+  fill_in('ride_start_time', with: '8:00')
+  fill_in('ride_end_time', with: '9:00')
   fill_in('ride_seats', with: @ride.seats)
   click_button "Create Ride"
   expect(page).to have_current_path(rides_path)

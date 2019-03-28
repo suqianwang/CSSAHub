@@ -4,7 +4,9 @@ Given("I am an admin") do
   visit login_index_path
   fill_in "Username", :with => @account.username
   fill_in "Password", :with => @account.password
-  click_button 'Login'
+  within '#login-form' do
+    click_button 'Login'
+  end
 end
 
 Given("{string} exists on the admin page") do |string|
@@ -39,7 +41,9 @@ Given("I am not an admin") do
   visit login_index_path
   fill_in "Username", :with => @account.username
   fill_in "Password", :with => @account.password
-  click_button 'Login'
+  within '#login-form' do
+    click_button 'Login'
+  end
 end
 
 When("I visit admin page") do

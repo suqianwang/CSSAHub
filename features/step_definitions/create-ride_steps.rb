@@ -5,7 +5,9 @@ Given("I am logged in") do
   visit login_index_path
   fill_in "Username", :with => @account.username
   fill_in "Password", :with => @account.password
-  click_button "Login"
+  within '#login-form' do
+    click_button "Login"
+  end
 end
 
 Given("I am on the new ride page") do
@@ -23,8 +25,8 @@ When("I fill in the form") do
   select(@ride.destination, from: 'Destination:')
   fill_in('ride_start_date', with: @ride.start_date)
   fill_in('ride_end_date', with: @ride.end_date)
-  fill_in('ride_start_time', with: @ride.start_time)
-  fill_in('ride_end_time', with: @ride.end_time)
+  fill_in('ride_start_time', with: '8:00')
+  fill_in('ride_end_time', with: '12:00')
   fill_in('ride_seats', with: @ride.seats)
 end
 
