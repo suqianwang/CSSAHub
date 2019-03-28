@@ -25,15 +25,19 @@ class RidesController < ApplicationController
   end
 
   def destroy
-
+	Ride.destroy(params[:id])
+	respond_to do |format|
+      format.html { redirect_to rides_path, notice: 'Ride was successfully destroyed.' }
+      format.json { head :no_content }
+    end
   end
 
   def edit
-    # Check if user owns the ride. If not, throw 401 Unauthorized
-    @ride = Ride.find(params[:id])
-    if not current_user.id == @ride.id
-      render '401', :status => 401
-    end
+    # # Check if user owns the ride. If not, throw 401 Unauthorized
+    # @ride = Ride.find(params[:id])
+    # if not current_user.id == @ride.id
+      # render '401', :status => 401
+    # end
   end
 
   private

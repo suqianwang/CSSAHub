@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
     if session['login'] == "admin"
       return true
     else
-      redirect_to rides_path
+      redirect_to services_path
     end
   end
   

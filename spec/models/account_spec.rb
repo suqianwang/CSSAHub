@@ -19,7 +19,7 @@ RSpec.describe Account, :type => :model do
 		it "is invalid without a password" do
 		  user=Account.new(password: nil, name: 'bob', username: 'bob', email: 'bob@tamu.edu')
 		  user.valid?
-		  expect(user.errors[:password].size).to eq(2)
+		  expect(user.errors[:password].size).to eq(1)
 		end
 	end
 

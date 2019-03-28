@@ -8,7 +8,7 @@ class AccountsController < ApplicationController
     if (session['login'] == "admin")
 	  	@accounts = Account.all
 	  else
-        redirect_to rides_path, notice: "Logged in!"
+        redirect_to services_path, notice: "Logged in!"
     end
   end
 

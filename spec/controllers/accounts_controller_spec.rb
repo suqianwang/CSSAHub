@@ -16,7 +16,7 @@ RSpec.describe AccountsController, :type => :controller do
     it "should redirect to rides" do
 	  login(@account)
       get :index
-      expect(response).to redirect_to rides_path
+      expect(response).to redirect_to services_path
     end
   end
 

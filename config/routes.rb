@@ -23,7 +23,8 @@ Rails.application.routes.draw do
   match 'passenger', to: 'passenger#create', via: [:post]
   match 'driver', to: 'driver#create', via: [:post]
 
-  resources :rides	
+  resources :rides
+  delete 'rides/:ride_id' => 'rides#destroy'
   resources :services
   
   resources :profile
