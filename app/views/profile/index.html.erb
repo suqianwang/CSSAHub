@@ -30,20 +30,19 @@
                               <div class="form-group row">
                                 <label for="username" class="col-4 col-form-label">User Name</label> 
                                 <div class="col-8">
-                                  <!--<input id="username" name="username" placeholder="Username" class="form-control here" required="required" type="text">-->
 								  <%= f.text_field :username, :id => "username", :name => "username", :class => "form-control here", :required => true, :placeholder => @profile.username %>
                                 </div>
                               </div>
                               <div class="form-group row">
                                 <label for="name" class="col-4 col-form-label">Name</label> 
                                 <div class="col-8">
-                                  <input id="name" name="name" placeholder="Name" class="form-control here" type="text">
+									<%= f.text_field :name, :id => "name", :name => "name", :class => "form-control here", :required => true, :placeholder => @profile.name %>
                                 </div>
                               </div>
                               <div class="form-group row">
                                 <label for="email" class="col-4 col-form-label">Email</label> 
                                 <div class="col-8">
-                                  <input id="email" name="email" placeholder="Email" class="form-control here" required="required" type="text">
+								  <%= f.text_field :email, :id => "email", :name => "email", :class => "form-control here", :required => true, :placeholder => @profile.email %>
                                 </div>
                               </div>
                               <div class="form-group row">
@@ -60,7 +59,6 @@
                               </div> 
                               <div class="form-group row">
                                 <div class="offset-4 col-8">
-                                  <!--<button name="submit" type="submit" class="btn btn-primary">Update My Profile</button>-->
 								  <%= f.submit "Update My Profile", class: "row btn btn-primary" %>
 
                                 </div>
@@ -75,12 +73,40 @@
 		            <div class="row">
 		                <div class="col-md-12">
 		                    <h4>My Requested Rides</h4>
-		                    <hr>
 		                </div>
 		            </div>
 		            <div class="row">
 		                <div class="col-md-12">
-		                    To be implemented
+						<table id="rides-table" class="table table-striped">
+								<thead>
+								  <tr>
+									<th>Ride ID</th>
+									<th>Type</th>
+									<th>Departure</th>
+									<th>Destination</th>
+									<th>Departure Date</th>
+									<th>Departure Time</th>
+									<th>Seats</th>
+									<th>Actions</th>
+								  </tr>
+								</thead>
+								<tbody>
+								  <% @requests.each do |r| %>
+									<tr>
+									  <td><%= link_to "Ride " + String(r.id), r %></td>
+									  <td><%= r.role %></td>
+									  <td><%= r.departure %></td>
+									  <td><%= r.destination %></td>
+									  <td><%= String(r.start_date) + " to " + String(r.end_date) %></td>
+									  <td><%= String(r.start_time) + " to " + String(r.end_time) %></td>
+									  <td><%= r.seats %></td>
+									  <td><%= link_to "Show", r, class: 'badge-pill badge-info'%>									  
+									      <%= link_to "Edit", edit_ride_path(r), class: 'badge-pill badge-success'%>
+										  <%= link_to "Delete", ride_path(r), method: :delete, data: { confirm: "Are you sure?" }, class: 'badge-pill badge-danger' %></td>
+									</tr>
+								  <% end %>
+								</tbody>
+							  </table>
 		                </div>
 		            </div>
 		        </div>
@@ -90,12 +116,40 @@
 					<div class="row">
 		                <div class="col-md-12">
 		                    <h4>My Posted Rides</h4>
-		                    <hr>
 		                </div>
 		            </div>
 		            <div class="row">
 		                <div class="col-md-12">
-		                    To be implemented
+							<table id="rides-table" class="table table-striped">
+								<thead>
+								  <tr>
+									<th>Ride ID</th>
+									<th>Type</th>
+									<th>Departure</th>
+									<th>Destination</th>
+									<th>Departure Date</th>
+									<th>Departure Time</th>
+									<th>Seats</th>
+									<th>Actions</th>
+								  </tr>
+								</thead>
+								<tbody>
+								  <% @posts.each do |p| %>
+									<tr>
+									  <td><%= link_to "Ride " + String(p.id), p %></td>
+									  <td><%= p.role %></td>
+									  <td><%= p.departure %></td>
+									  <td><%= p.destination %></td>
+									  <td><%= String(p.start_date) + " to " + String(p.end_date) %></td>
+									  <td><%= String(p.start_time) + " to " + String(p.end_time) %></td>
+									  <td><%= p.seats %></td>
+									  <td><%= link_to "Show", p, class: 'badge-pill badge-info'%>
+									  <%= link_to "Edit", edit_ride_path(p), class: 'badge-pill badge-success'%>
+										  <%= link_to "Delete", ride_path(p), method: :delete, data: { confirm: "Are you sure?" }, class: 'badge-pill badge-danger' %></td>
+									</tr>
+								  <% end %>
+								</tbody>
+							  </table>
 		                </div>
 		            </div>
 		        </div>

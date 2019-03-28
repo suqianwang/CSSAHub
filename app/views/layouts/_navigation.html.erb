@@ -14,7 +14,9 @@
       <span class="navbar-item" id="welcome-message">
         <%= "Welcome, #{session['login']}" %>&nbsp;</span>
 		<% if session['login'] != "admin" %>
+		  <li class="nav-item"><%= link_to "Services", services_path %></li>
 		  <li class="nav-item"><%= link_to "Profile", profile_index_path %></li>
+
 		<% end %>
         <li class="nav-item"><%= link_to "Logout", logout_path %></li>
       
