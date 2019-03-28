@@ -1,3 +1,5 @@
+require 'pry'
+
 class Ride < ApplicationRecord
   belongs_to :account
   validates :role, presence: true, inclusion: { in: ['driver', 'passenger'] }

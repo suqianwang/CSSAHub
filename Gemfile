@@ -44,6 +44,7 @@ group :development, :test do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3', git: "https://github.com/larskanis/sqlite3-ruby", branch: "add-gemspec"
   gem 'pry-byebug'
+  gem 'dotenv-rails'
 end
 
 group :development do

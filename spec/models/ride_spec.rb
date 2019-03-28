@@ -1,3 +1,5 @@
+require 'pry'
+
 RSpec.describe Ride, :type => :model do
   before do 
     @account = FactoryBot.build_stubbed(:account, :user)
