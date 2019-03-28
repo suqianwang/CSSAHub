@@ -27,7 +27,6 @@ ActiveRecord::Schema.define(version: 2019_03_23_183713) do
     t.string "role"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "depart_from"
     t.integer "account_id"
     t.string "departure"
     t.string "destination"
@@ -36,6 +35,7 @@ ActiveRecord::Schema.define(version: 2019_03_23_183713) do
     t.string "start_time"
     t.string "end_time"
     t.integer "seats"
+    t.string "depart_from"
     t.index ["account_id"], name: "index_rides_on_account_id"
   end
 
