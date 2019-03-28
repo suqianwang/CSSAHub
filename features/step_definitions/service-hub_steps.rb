@@ -4,7 +4,9 @@ Given("{string} is available to me") do |string|
   visit login_index_path
   fill_in "Username", :with => @account.username
   fill_in "Password", :with => @account.password
-  click_button 'Login'
+  within '#login-form' do
+    click_button 'Login'
+  end
   @service = string
 end
 
@@ -22,7 +24,9 @@ Given("I want to go to the {string} page") do |string|
   visit login_index_path
   fill_in "Username", :with => @account.username
   fill_in "Password", :with => @account.password
-  click_button 'Login'
+  within '#login-form' do
+    click_button 'Login'
+  end
   @service = string
 end
 

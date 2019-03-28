@@ -1,55 +1,56 @@
-<center>
-<%= form_with(model: account, local: true) do |form| %>
-  
-  <% if account.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(account.errors.count, "error") %> prohibited this account from being saved:</h2>
-
-      <ul>
+<% if account.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(account.errors.count, "error") %> prohibited this account from being saved:</h2>
+    <ul>
       <% account.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <div class="container col-3">
-      <div class="field required form-group">
-        <%= form.label :username %><br />
-        <%= form.text_field :username, :maxlength => 50, :minlength => 5, :size => 20,class: "form-control" %>
-      </div>
-      <br />
-      <div class="field required form-group">
-        <%= form.label :email %><br />
-        <%= form.text_field :email, :maxlength => 50, :minlength => 5, :size => 20, class:"form-control" %>
-      </div>
-    <br />
-      <div class="field form-group">
-        <%= form.label :name %> <br />
-        <%= form.text_field :name, :maxlength => 50, :minlength => 3, :size => 20, class:"form-control" %>
-      </div>
-    <br />
-      <div class="field required form-group">
-        <%= form.label :password %> <br />
-        <%= form.password_field :password, :maxlength => 50, :minlength => 5, :size => 20, class:"form-control" %>
-      </div>
-    <br />
-      <div class="field required form-group">
-        <%= form.label :password_confirmation %> <br />
-        <%= form.password_field :password_confirmation, :maxlength => 50, :minlength => 5, :size => 20, class:"form-control"   %>
-      </div>
-       </br>
+    </ul>
   </div>
-    <div style='width:45%'>
-    <%=form.check_box :terms_and_conditions %> As a student of Texas A&M University, I agree to follow all of the rules and regulations in the student code of conduct.<br />
-    </div>
+<% end %>
 
-    </br>
-    <div class="actions">
-      <%= form.submit "Create Account", class: 'row btn btn-primary justify-content-center' %>
+
+<%= form_with(model: account, local: true) do |form| %>
+
+  <div class="row justify-content-center">
+    <div class="col-4">
+      <div class="row form-group required">
+        <%= form.label :username %><br/>
+        <%= form.text_field :username, :maxlength => 50, :minlength => 5, :size => 20, class: "form-control" %>
+      </div>
+
+      <div class="row form-group required">
+        <%= form.label :email %><br/>
+        <%= form.text_field :email, :maxlength => 50, :minlength => 5, :size => 20, class: "form-control" %>
+      </div>
+      <div class="row form-group">
+        <%= form.label :name %> <br/>
+        <%= form.text_field :name, :maxlength => 50, :minlength => 3, :size => 20, class: "form-control" %>
+      </div>
+      <div class="row form-group required">
+        <%= form.label :password %> <br/>
+        <%= form.password_field :password, :maxlength => 50, :minlength => 5, :size => 20, class: "form-control" %>
+      </div>
+      <div class="row form-group required">
+        <%= form.label :password_confirmation %> <br/>
+        <%= form.password_field :password_confirmation, :maxlength => 50, :minlength => 5, :size => 20, class: "form-control" %>
+      </div>
+      <div class="row form-check required">
+        <%= form.check_box :terms_and_conditions, :class => "form-check-input" %>
+        <%= form.label :terms_and_conditions, :class => "form-check-label" do %>
+          As a student of Texas A&M University, I agree to follow all of the rules
+          and regulations in the student code of conduct.
+        <% end %>
+      </div>
+
+      <div class="row justify-content-center p-4">
+        <%= form.submit "Create Account", class: 'btn btn-primary' %>
+      </div>
+      <div class="row justify-content-center">
+        <%= link_to "Login to an existing account", login_index_path %>
+      </div>
     </div>
+  </div>
 
 <% end %>
-<br />
-<p>Note: * field is required</p>
 
-</center>

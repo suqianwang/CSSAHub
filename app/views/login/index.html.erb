@@ -1,5 +1,5 @@
 <div><h1 class="center p-4">Login Page!</h1></div>
-<%= form_tag login_index_path, :method => :post do %>
+<%= form_tag login_index_path, :method => :post, :id => "login-form" do %>
   <div class="row justify-content-center">
     <div class="form-group col-4">
       <%= label_tag :username %>
@@ -9,7 +9,7 @@
   <div class="row justify-content-center">
     <div class="form-group col-4">
       <%= label_tag :password %>
-	  <%= password_field_tag :password, nil, class: 'form-control', name: 'password', placeholder: 'Password' %>
+      <%= password_field_tag :password, nil, class: 'form-control', name: 'password', placeholder: 'Password' %>
     </div>
   </div>
   <div class="row justify-content-center">
@@ -17,9 +17,10 @@
   </div>
 
   <div class="row justify-content-center">
-    <%= submit_tag "Login", class: "row btn btn-primary justify-content-center "%>
+    <%= submit_tag "Login", class: "row btn btn-primary justify-content-center " %>
   </div>
   <div class="row justify-content-center p-3">
-  <%= link_to "Create an account",new_account_path %>
-  <%end %>
+    <%= link_to "Create an account", new_account_path %>
   </div>
+<% end %>
+</div>

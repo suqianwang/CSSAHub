@@ -5,7 +5,9 @@ Given("I am logged in") do
   visit login_index_path
   fill_in "Username", :with => @account.username
   fill_in "Password", :with => @account.password
-  click_button "Login"
+  within '#login-form' do
+    click_button "Login"
+  end
 end
 
 Given("I am on the new ride page") do
@@ -19,8 +21,8 @@ end
 
 When("I fill in the form") do
   @ride = FactoryBot.build_stubbed(:ride)
-  select(@ride.departure, from: 'Depart From:')
-  select(@ride.destination, from: 'Destination:')
+  fill_in('ride_departure', with: @ride.departure)
+  fill_in('ride_destination', with: @ride.destination)
   fill_in('ride_start_date', with: @ride.start_date)
   fill_in('ride_end_date', with: @ride.end_date)
   fill_in('ride_start_time', with: @ride.start_time)
