@@ -28,6 +28,7 @@ ValidatesTimeliness.setup do |config|
   #
   # Add one or more formats making them valid. e.g. add_formats(:date, 'd(st|rd|th) of mmm, yyyy')
   config.parser.add_formats(:date, 'mm/dd/yyyy')
+  config.parser.add_formats(:time, 'hh:mm:ss')
   #
   # Remove one or more formats making them invalid. e.g. remove_formats(:date, 'dd/mm/yyy')
   # config.parser.remove_formats()

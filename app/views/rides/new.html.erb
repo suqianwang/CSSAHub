@@ -8,29 +8,28 @@
             $(".ride_form").removeClass('d-none');
             $("." + fieldToShow + "_form").removeClass('d-none');
         });
+
+        $('.input-daterange').datepicker({
+            format: 'mm/dd/yyyy'
+        });
     });
 
-    $(document).on("focus", ".input-datepicker", function (e) {
-        $(this).datepicker();
-    });
 
 </script>
 
 
 <h1 class="center">Are you a Driver or Passenger?</h1>
 
-<%= form_with model: @ride do |f| %>
+<%= form_with model: @ride, html: {:autocomplete => 'off'} do |f| %>
 
   <div class="row">
     <div class="offset-2 col-8">
       <div class="p-2 center">
-        <div class="form-check-inline">
+        <div class="btn-group-toggle" data-toggle="buttons">
           <%= f.label :role, "", :for => "Driver", :class => "btn btn-outline-primary" do %>
             <%= f.radio_button :role, 'driver', class: 'form_type form-check-input', id: 'Driver', value: 'driver' %>
             Driver
           <% end %>
-        </div>
-        <div class="form-check-inline">
           <%= f.label :role, "", :for => "Passenger", :class => "btn btn-outline-primary" do %>
             <%= f.radio_button :role, 'passenger', class: 'form_type form-check-input', id: 'Passenger', value: 'passenger' %>
             Passenger
@@ -60,16 +59,14 @@
               </div>
             </div>
 
-            <div class="input-daterange" data-provide="date-picker">
-              <div class="row">
-                <div class="form-group col-6">
-                  <%= f.label :start_date, "Departure Date (YYYY-MM-DD)" %>
-                  <%= f.text_field :start_date, :class => "form-control" %>
-                </div>
-                <div class="form-group col-6">
-                  <%= f.label :end_date, "to" %>
-                  <%= f.text_field :end_date, :class => "form-control" %>
-                </div>
+            <div class="input-daterange row">
+              <div class="form-group col-6">
+                <%= f.label :start_date, "Departure Date (YYYY-MM-DD)" %>
+                <%= f.text_field :start_date, :class => "form-control" %>
+              </div>
+              <div class="form-group col-6">
+                <%= f.label :end_date, "to" %>
+                <%= f.text_field :end_date, :class => "form-control" %>
               </div>
             </div>
 
