@@ -5,3 +5,8 @@ Feature: Create an account
     Given I am on the create an account page
     When I fill out the create account form
     Then a new account should be created
+    
+  Scenario: I am already logged in
+    Given I am logged in
+    When I visit the login page
+    Then I should be redirected to the service hub page

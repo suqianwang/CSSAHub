@@ -1,7 +1,26 @@
 RSpec.describe LoginController, :type => :controller do
-before do
+  before do
     @account = FactoryBot.create :account, :user
-	@admin = FactoryBot.create :account, :admin
+	  @admin = FactoryBot.create :account, :admin
+  end
+  
+  describe "GET #index" do
+    context "user is not logged in" do
+      it "should render the login form" do
+        session[:account_id] = nil
+        get :index
+        expect(response).to render_template(:index)
+      end
+    end
+    
+    context "user is logged in" do
+      it "should redirect to service hub page" do
+        session[:account_id] = @account.id
+        session['login'] = @account.username
+        get :index
+        expect(response).to redirect_to(services_path)
+      end
+    end
   end
   
   describe "login with correct information" do
@@ -37,6 +56,8 @@ describe "login with incorrect username" do
     expect(response).to render_template :index
   end
 end
+
+
   
   describe "logout" do
     it "#DESTROY session" do

@@ -8,7 +8,7 @@ class AccountsController < ApplicationController
     if (session['login'] == "admin")
 	  	@accounts = Account.all
 	  else
-        redirect_to services_path, notice: "Logged in!"
+      redirect_to services_path, notice: "Logged in!"
     end
   end
 
@@ -19,7 +19,11 @@ class AccountsController < ApplicationController
 
   # GET /accounts/new
   def new
-    @account = Account.new
+    if current_user.blank?
+      @account = Account.new
+    else
+      redirect_to services_path
+    end
   end
 
   # GET /accounts/1/edit
