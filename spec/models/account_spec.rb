@@ -1,9 +1,17 @@
 RSpec.describe Account, :type => :model do
-	 describe "create_an_account1 form" do
+	
+	describe "#email" do
+		it { is_expected.to validate_presence_of :email }
+		it { is_expected.to allow_value("bob@tamu.edu").for(:email) }
+		it { is_expected.to_not allow_value("bob@gmail.com").for(:email) }
+		it { is_expected.to_not allow_value("bob@tamu.edu.com").for(:email) }
+	end
+	
+	describe "create_an_account1 form" do
 		it "is invalid without an email" do
 			user=Account.new(email: nil, name: 'bob', username: 'bob', password: 'bob')
 			user.valid?
-			expect(user.errors[:email].size).to eq(1)
+			expect(user.errors[:email].size).to eq(2)
 		end
 	end
 
@@ -24,20 +32,20 @@ RSpec.describe Account, :type => :model do
 	end
 
 	describe "create_an_account4 form" do
-		it "duplicate usernames are invalid" do
+		it "duplicate emails are invalid" do
 		  Account.create(username: 'bob', name: 'bob', password: 'bob', email: 'bob@tamu.edu')
-		  user = Account.new(username: 'bob', name: 'bob', password: 'bob', email: 'bob@tamu.edu')
+		  user = Account.new(username: 'bob1', name: 'bob', password: 'bob', email: 'bob@tamu.edu')
 		  user.valid?
-		  expect(user.errors[:username].size).to eq(1)
+		  expect(user.errors[:email].size).to eq(1)
 		end
 	end
 	
 	describe "create_an_account5 form" do
 		it "duplicate usernames are invalid" do
 		  Account.create(username: 'bob', name: 'bob', password: 'bob', email: 'bob@tamu.edu')
-		  user = Account.new(username: 'bob', name: 'bob', password: 'bob', email: 'bob@tamu.edu')
+		  user = Account.new(username: 'bob', name: 'bob', password: 'bob', email: 'bob1@tamu.edu')
 		  user.valid?
-		  expect(user.errors[:email].size).to eq(1)
+		  expect(user.errors[:username].size).to eq(1)
 		end
 	end
 

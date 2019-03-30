@@ -2,13 +2,13 @@ FactoryBot.define do
   factory :account do
     trait :user do
   	  username { Faker::Internet.username }
-  	  email { Faker::Internet.email }
+  	  sequence(:email) { |n| "bob#{n}@tamu.edu" }
       name { Faker::Name.name }
       password { Faker::Internet.password }
     end
     trait :admin do
     	username { "admin" }
-    	email { "admin" }
+    	email { "admin@tamu.edu" }
     	name { "admin" }
     	password { "admin" }
     end

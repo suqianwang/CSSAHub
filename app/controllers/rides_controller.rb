@@ -17,19 +17,17 @@ class RidesController < ApplicationController
     else
       redirect_to new_ride_path, notice: 'Invalid ride!'
     end
-
   end
   
   def show
-    # @ride = current_user.rides.find(params[:id])
     @ride = Ride.find(params[:id])
   end
 
   def destroy
-	Ride.destroy(params[:id])
-	respond_to do |format|
-      format.html { redirect_to rides_path, notice: 'Ride was successfully destroyed.' }
-      format.json { head :no_content }
+  	Ride.destroy(params[:id])
+  	respond_to do |format|
+        format.html { redirect_to rides_path, notice: 'Ride was successfully destroyed.' }
+        format.json { head :no_content }
     end
   end
 
