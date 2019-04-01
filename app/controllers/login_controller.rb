@@ -1,5 +1,8 @@
 class LoginController < ApplicationController
   def index
+    if not current_user.blank?
+      redirect_to services_path
+    end
   end
   def show
   end

@@ -1,7 +1,7 @@
 RSpec.describe AccountsController, :type => :controller do
   before do
     @account = FactoryBot.create :account, :user
-	@admin = FactoryBot.create :account, :admin
+	  @admin = FactoryBot.create :account, :admin
   end
 
   describe "GET #index" do
@@ -21,9 +21,20 @@ RSpec.describe AccountsController, :type => :controller do
   end
 
   describe "GET #new" do
-    it "should create new account" do
-      get :new
-      expect(response).to render_template :new
+    context "user is not logged in" do
+      it "should render the new account form" do
+        session[:account_id] = nil
+        get :new
+        expect(response).to render_template :new
+      end
+    end
+    context "user is logged in" do
+      it "should redirect to the service hub page" do
+        session[:account_id] = @account.id
+        session['login'] = @account.username
+        get :new
+        expect(response).to redirect_to(services_path)
+      end
     end
   end
 

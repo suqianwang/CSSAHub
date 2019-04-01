@@ -5,13 +5,11 @@ Given("I am in the log in page") do
 end
 
 When("I fill in my username, password and press Login button") do
-
   fill_in "Username", :with => @account.username
   fill_in "Password", :with => @account.password
   within '#login-form' do
     click_button 'Login'
   end
-
 end
 
 Then("I should see a welcome message") do
@@ -38,4 +36,12 @@ end
 
 Then("I should be redirected to log in page") do
   expect(page).to have_content("Login")
+end
+
+When("I visit the login page") do
+  visit login_index_path
+end
+
+Then("I should be redirected to the service hub page") do
+  expect(page).to have_current_path(services_path)
 end

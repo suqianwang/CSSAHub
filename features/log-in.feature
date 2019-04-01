@@ -16,3 +16,8 @@ Feature: Log in
     When I fill in my username, password and press Login button
     And press log out
     Then I should be redirected to log in page
+    
+  Scenario: I am already logged in
+    Given I am logged in
+    When I visit the login page
+    Then I should be redirected to the service hub page
