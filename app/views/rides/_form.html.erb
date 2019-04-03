@@ -1,10 +1,5 @@
-<%= link_to 'Back', profile_index_path %>
-<center><h1>Editing Ride</h1></center>
-
 <script>
     $(document).ready(function () {
-	    
-
         $('input.form_type[type=radio]').change(function () {
             $('.driver_form, .passenger_form').addClass('d-none');
 
@@ -17,8 +12,6 @@
         $('.input-daterange').datepicker({
             format: 'mm/dd/yyyy'
         });
-		
-		
     });
 </script>
 <% provide :head_tags do %>
@@ -28,7 +21,8 @@
   </script>
 <% end %>
 
-<%= form_with model: @ride, html: {:autocomplete => 'off'} do |f| %>
+<h1 class="center">Are you a Driver or Passenger?</h1>
+<%= form_with model: ride, html: {:autocomplete => 'off'} do |f| %>
   <div class="row">
     <div class="offset-2 col-8">
       <div class="p-2 center">
@@ -54,13 +48,12 @@
               <h1 class="center p-4">Passenger Form</h1>
             </div>
 
-            <div>
+            <div class="d-none">
               <input id="ride_departure" class="controls" type="text" name="ride[departure]"
                   placeholder="Enter an origin location">
-
+              
               <input id="ride_destination" class="controls" type="text" name="ride[destination]"
                   placeholder="Enter a destination location">
-
             </div>
                 
             <div id="map"></div>
@@ -106,4 +99,3 @@
 <% end %>
 
 <br>
-
