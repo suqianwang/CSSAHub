@@ -1,3 +1,15 @@
+<% if session.has_key?('login') and session['login'] == "admin" %>
+<%= link_to 'Back to Admin Page', admin_index_path %>
+<% elsif session.has_key?('login') %>
+<div>
+<div class="column">
+<%= link_to 'Back to Services Page', services_path %>
+</div>
+<div class="column" align="right">
+<%= link_to 'Create Ride', new_ride_url %>
+</div></div>
+<% end %>  
+  
   <div class="center">
     <h1>Rides</h1>
   </div>
@@ -33,4 +45,3 @@
     </tbody>
   </table>
   <br>
-  <%= link_to 'Create Ride', new_ride_url %>

@@ -1,13 +1,15 @@
+<%= link_to 'back', rides_path %>
+<br><br>
 <center>
   <table class="table">
     <tbody>
     <tr>
       <th>ID</th>
-      <td><%= @ride.role %></td>
+      <td><%= "Ride " + String(@ride.id) %></td>
     </tr>
     <tr>
       <th>Role</th>
-      <td><%= "Ride " + String(@ride.id) %></td>
+      <td><%= @ride.role %></td>
     </tr>
     <tr>
       <th>Departure Location</th>
@@ -31,5 +33,4 @@
     </tr>
     </tbody>
   </table>
-  <%= link_to 'back', rides_path %>
 </center>
