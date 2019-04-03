@@ -6,7 +6,7 @@ class AccountsController < ApplicationController
   # GET /accounts.json
   def index
     if (session['login'] == "admin")
-      @accounts = Account.where(:archived => false)
+      @accounts = Account.where(:archived => false).where.not(username: "admin")
 	else
       redirect_to services_path, notice: "Logged in!"
     end
@@ -71,9 +71,9 @@ class AccountsController < ApplicationController
   # DELETE /accounts/1.json
   def destroy
 	@account.reason = params[:reason]
+	puts params
 	puts "Raw reason"
 	puts params[:reason]
-    # @account.destroy
 	@account.toggle!(:archived)
     respond_to do |format|
       format.html { redirect_to accounts_url, notice: 'Account was successfully destroyed.' }
