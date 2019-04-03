@@ -71,7 +71,6 @@ header {
   }
 }
 
-div.required:before{content:"*"}
 
 .sidebar {
   height: 100%; /* 100% Full-height */
@@ -141,4 +140,14 @@ div.required:before{content:"*"}
     content: "*";
     margin-left: 6px;
 }
+.column {
+  float: left;
+  width: 50%;
+}
 
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}

@@ -11,12 +11,12 @@
       <% if session.has_key?('login') and session['login'] == "admin" %>
         <%= link_to admin_index_path, class: 'navbar-brand' do %>
           <%= image_tag "cssa.png", :width => "60", :height => "60", :id => "site-logo" %>
-          CssaHub!
+          CSSA Hub!
         <% end %>
       <% else %>
-        <%= link_to services_path, class: 'navbar-brand' do %>
+        <%= link_to home_index_path, class: 'navbar-brand' do %>
           <%= image_tag "cssa.png", :width => "60", :height => "60", :id => "site-logo" %>
-          CssaHub!
+          CSSA Hub!
         <% end %>
       <% end %>
     </div>
@@ -26,7 +26,7 @@
         <% if session.has_key?('login') and session['login'] %>
           <%= "Welcome, #{session['login']}" %>
         <% else %>
-          Login
+          Menu
         <% end %>
       </button>
 
