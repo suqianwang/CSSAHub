@@ -10,8 +10,7 @@ Feature: Restore and delete user
 	
   Scenario: I want to restore an account
     Given I am an admin
-	And a user exists
-	And the user is archived
+	And an archived user exists
 	And I am on the Archive page
 	When I restore a user
 	Then the user should not be shown on the page
