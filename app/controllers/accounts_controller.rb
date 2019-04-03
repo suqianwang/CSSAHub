@@ -6,7 +6,7 @@ class AccountsController < ApplicationController
   # GET /accounts.json
   def index
     if (session['login'] == "admin")
-	  	@accounts = Account.all
+		@accounts = Account.where(:archived => false)
 	  else
       redirect_to services_path, notice: "Logged in!"
     end
@@ -34,7 +34,6 @@ class AccountsController < ApplicationController
   # POST /accounts.json
   def create
     @account = Account.new(account_params)
-
     respond_to do |format|
       if @account.save
         format.html { redirect_to @account, notice: 'Account was successfully created.' }
@@ -63,10 +62,9 @@ class AccountsController < ApplicationController
   # DELETE /accounts/1
   # DELETE /accounts/1.json
   def destroy
-	#puts "this is what i need to see"
 	@reason = params[:reason]
-	#puts(@reason)
-    @account.destroy
+    # @account.destroy
+	@account.toggle!(:archived)
     respond_to do |format|
       format.html { redirect_to accounts_url, notice: 'Account was successfully destroyed.' }
       format.json { head :no_content }
