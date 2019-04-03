@@ -26,17 +26,26 @@ class RidesController < ApplicationController
   def destroy
   	Ride.destroy(params[:id])
   	respond_to do |format|
-        format.html { redirect_to rides_path, notice: 'Ride was successfully destroyed.' }
+        format.html { redirect_to request.referrer, notice: 'Ride was successfully destroyed.' }
         format.json { head :no_content }
     end
   end
 
   def edit
-    # # Check if user owns the ride. If not, throw 401 Unauthorized
-    # @ride = Ride.find(params[:id])
-    # if not current_user.id == @ride.id
-      # render '401', :status => 401
-    # end
+    # Check if user owns the ride. If not, throw 401 Unauthorized
+     @ride = Ride.find(params[:id])
+     if not current_user.id == @ride.account_id
+       render '401', :status => 401
+     end
+  end
+  
+  def update
+    @ride = Ride.find(params[:id])
+    if @ride.update_attributes(ride_params)
+	    @ride.save
+        flash[:notice] = "#Ride {@ride.id} was successfully updated."
+        redirect_to profile_index_path
+	end
   end
 
   private

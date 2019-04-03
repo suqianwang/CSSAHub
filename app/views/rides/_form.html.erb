@@ -1,19 +1,17 @@
-<%= link_to 'Back', profile_index_path %>
-<center><h1>Editing Ride</h1></center>
- <script>
+<script>
     $(document).ready(function () {
-	    
-         $('input.form_type[type=radio]').change(function () {
+        $('input.form_type[type=radio]').change(function () {
             $('.driver_form, .passenger_form').addClass('d-none');
-             var fieldToShow = $(this).val();
-             $(".ride_form").removeClass('d-none');
+
+            var fieldToShow = $(this).val();
+
+            $(".ride_form").removeClass('d-none');
             $("." + fieldToShow + "_form").removeClass('d-none');
         });
-         $('.input-daterange').datepicker({
+
+        $('.input-daterange').datepicker({
             format: 'mm/dd/yyyy'
         });
-		
-		
     });
 </script>
 <% provide :head_tags do %>
@@ -22,7 +20,9 @@
     document.addEventListener("DOMContentLoaded", initMap);
   </script>
 <% end %>
- <%= form_with model: @ride, html: {:autocomplete => 'off'} do |f| %>
+
+<h1 class="center">Are you a Driver or Passenger?</h1>
+<%= form_with model: ride, html: {:autocomplete => 'off'} do |f| %>
   <div class="row">
     <div class="offset-2 col-8">
       <div class="p-2 center">
@@ -43,18 +43,22 @@
             <div class="driver_form">
               <h1 class="center p-4">Driver Form</h1>
             </div>
-             <div class="passenger_form">
+
+            <div class="passenger_form">
               <h1 class="center p-4">Passenger Form</h1>
             </div>
-             <div>
+
+            <div class="d-none">
               <input id="ride_departure" class="controls" type="text" name="ride[departure]"
                   placeholder="Enter an origin location">
-               <input id="ride_destination" class="controls" type="text" name="ride[destination]"
+              
+              <input id="ride_destination" class="controls" type="text" name="ride[destination]"
                   placeholder="Enter a destination location">
-             </div>
+            </div>
                 
             <div id="map"></div>
-             <div class="input-daterange row">
+
+            <div class="input-daterange row">
               <div class="form-group col-6">
                 <%= f.label :start_date, "Departure Date (YYYY-MM-DD)" %>
                 <%= f.text_field :start_date, :class => "form-control" %>
@@ -64,7 +68,8 @@
                 <%= f.text_field :end_date, :class => "form-control" %>
               </div>
             </div>
-             <div class="row">
+
+            <div class="row">
               <div class="form-group col-6">
                 <%= f.label :start_time, "Departure Time (hh:mm)" %>
                 <%= f.text_field :start_time, :class => "form-control" %>
@@ -74,7 +79,8 @@
                 <%= f.text_field :end_time, :class => "form-control" %>
               </div>
             </div>
-             <div class="row">
+
+            <div class="row">
               <div class="form-group col-6">
                 <%= f.label :seats, "How many seats are available?", class: 'driver_form' %>
                 <%= f.label :seats, "How many seats do you need?", class: 'passenger_form' %>
@@ -91,4 +97,5 @@
     </div>
   </div>
 <% end %>
- <br>
+
+<br>
