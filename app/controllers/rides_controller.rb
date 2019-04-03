@@ -1,13 +1,22 @@
 require 'pry'
 
 class RidesController < ApplicationController
-  before_action :login_required, :only => :index
+  before_action :login_required, :only => [:index, :new, :show, :create, :destroy, :update]
+  
   def index
-    @rides = Ride.all
+    if session['login']=="admin"
+      @rides = Ride.all.order('start_date DESC')
+    else
+      @rides = Ride.where('end_date < ?', DateTime.now)
+	end
   end
   
   def new
-    @ride = Ride.new
+    if session['login']=="admin"
+	  redirect_to admin_index_path
+	else
+      @ride = Ride.new
+	end
   end
   
   def create

@@ -48,17 +48,16 @@ class AccountsController < ApplicationController
 
   # PATCH/PUT /accounts/1
   # PATCH/PUT /accounts/1.json
-  # def update
-    # respond_to do |format|
-      # if @account.update(account_params)
-        # format.html { redirect_to @account, notice: 'account was successfully updated.' }
-        # format.json { render :show, status: :ok, location: @account }
-      # else
-        # format.html { render :edit }
-        # format.json { render json: @account.errors, status: :unprocessable_entity }
-      # end
-    # end
-  # end
+   def update
+       @profile = Account.find(params[:id])
+       if @profile.update_attributes!(update_params)
+	     @profile.save
+         redirect_to profile_index_path, notice: "Account was successfully saved"
+       else
+	     redirect_to profile_index_path
+       end
+   end
+  
 
   # DELETE /accounts/1
   # DELETE /accounts/1.json
@@ -82,5 +81,9 @@ class AccountsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def account_params
       params.require(:account).permit(:username, :email, :name, :password, :password_confirmation, :terms_and_conditions)
+    end
+	
+	def update_params
+      params.permit(:name, :password, :password_confirmation)
     end
 end
