@@ -6,8 +6,16 @@ class AccountsController < ApplicationController
   # GET /accounts.json
   def index
     if (session['login'] == "admin")
-		@accounts = Account.where(:archived => false)
-	  else
+      @accounts = Account.where(:archived => false)
+	else
+      redirect_to services_path, notice: "Logged in!"
+    end
+  end
+  
+  def archive
+    if (session['login'] == "admin")
+      @accounts = Account.where(:archived => true)
+	else
       redirect_to services_path, notice: "Logged in!"
     end
   end
@@ -62,11 +70,24 @@ class AccountsController < ApplicationController
   # DELETE /accounts/1
   # DELETE /accounts/1.json
   def destroy
-	@reason = params[:reason]
+	@account.reason = params[:reason]
+	puts "Raw reason"
+	puts params[:reason]
     # @account.destroy
 	@account.toggle!(:archived)
     respond_to do |format|
       format.html { redirect_to accounts_url, notice: 'Account was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+	puts "Reason:"
+	puts (@account.reason)
+  end
+  
+  def restore
+	@account = Account.find(params[:id])
+    @account.toggle!(:archived)
+    respond_to do |format|
+      format.html { redirect_to archive_accounts_url, notice: 'Account was successfully restored.' }
       format.json { head :no_content }
     end
   end
