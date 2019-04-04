@@ -1,0 +1,47 @@
+<% if session.has_key?('login') and session['login'] == "admin" %>
+<%= link_to 'Back to Admin Page', admin_index_path %>
+<% elsif session.has_key?('login') %>
+<div>
+<div class="column">
+<%= link_to 'Back to Services Page', services_path %>
+</div>
+<div class="column" align="right">
+<%= link_to 'Create Ride', new_ride_url %>
+</div></div>
+<% end %>  
+  
+  <div class="center">
+    <h1>Rides</h1>
+  </div>
+  <table id="rides-table" class="table table-striped">
+    <thead>
+      <tr>
+        <th>Ride ID</th>
+        <th>Type</th>
+        <th>Departure</th>
+        <th>Destination</th>
+        <th>Departure Date</th>
+        <th>Departure Time</th>
+        <th>Seats</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @rides.each do |r| %>
+        <tr>
+          <td><%= link_to "Ride " + String(r.id), r %></td>
+          <td><%= r.role %></td>
+          <td><%= r.departure %></td>
+          <td><%= r.destination %></td>
+          <td><%= String(r.start_date) + " to " + String(r.end_date) %></td>
+          <td><%= String(r.start_time) + " to " + String(r.end_time) %></td>
+          <td><%= r.seats %></td>
+          <td><%= link_to "Show", r, class: 'badge-pill badge-info'%>
+		      <% if session.has_key?('login') and session['login'] == "admin" %>
+              <%= link_to "Delete", ride_path(r), method: :delete, data: { confirm: "Are you sure?" }, class: 'badge-pill badge-danger' %></td>
+			  <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <br>

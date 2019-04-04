@@ -1,3 +1,28 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+div,ul,li{margin: 0;padding: 0}
+.notice {
+  height: 35px;
+  padding: 0 30px;
+  margin-bottom: 15px;
+  overflow: hidden;
+  background-color: #f8f9fa;
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: 5px;
+}
+.notice ul li {
+  list-style: none;
+  line-height: 35px;
+  display: block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.cssa_link:hover{
+    background-color: transparent;
+    color: #ea612a;
+    text-decoration: none;
+}
+

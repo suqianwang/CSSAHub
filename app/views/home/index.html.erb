@@ -1,4 +1,72 @@
-<h1 class="center"/>Home</h1>
-<br/>
-<p class="center">Find me in app/views/home/show.html.haml</p>
-<hr/>
+<div class="notice" role="alert">
+  <ul>
+    <li>Announcement:</li>
+    <li>Notice:</li>
+  </ul>
+</div>
+<div class="row p-4">
+  <div class="col">
+    <%= image_tag "home.jpg", :id => "home-photo", :class => "rounded float-left", :width => "90%" %>
+  </div>
+  <div class="col center">
+    <h1>Welcome to CSSA Hub</h1>
+    <h5>A place for international student to seek help from their friends in CSSA(Chinese Students and Scholars
+      Association), including transportation services</h5>
+    <div class="row justify-content-center">
+      <div class="col-4 p-3">
+        <%= button_to "Register", signup_path, method: :get, :class => "btn btn-outline-primary" %>
+      </div>
+      <div class="col-4 p-3">
+        <%= button_to "Sign-in", login_index_path, method: :get, :class => "btn btn-outline-primary" %>
+      </div>
+    </div>
+  </div>
+</div>
+<hr class="my-2">
+<div class="row">
+  <div class="col">
+    <%= link_to("Latest Updates", "https://www.cssatamu.com/", method: :get, :class => "cssa_link h5") %>
+    <hr class="my-1">
+    <div class="members">
+      <li>Scrum Master: Alyssa Schaeffer</li>
+      <li>Product Owner: Yumei Li</li>
+      <li>Programmer: Megan Grahmann</li>
+      <li> David Ratliff</li>
+      <li> Suqian Wang</li>
+    </div>
+  </div>
+  <div class="col center">
+    <h5 class="center">Follow our WeChat Channel</h5>
+    <%= image_tag "wechat_channel.jpg", :id => "wechat-channel", :class => "rounded", :width => "60%" %>
+  </div>
+  <div class="col">
+    <h5 class="center">Useful Links</h5>
+    <hr class="my-2">
+    <div class="col-7 center">
+      <div class="row center">
+        <button onClick="window.open('https://www.cssatamu.com/'); " class="btn btn-default">
+          <img src="https://static.wixstatic.com/media/15f720_9e1df56cd864446287c55f29df78de97~mv2.png/v1/fill/w_74,h_65,al_c,q_80,usm_0.66_1.00_0.01/15f720_9e1df56cd864446287c55f29df78de97~mv2.webp" , width="20"/>
+          TAMU CSSA website
+        </button>
+      </div>
+      <div class="row center">
+        <button onClick="window.open('https://bbs.cssatamu.com/forum.php'); " class="btn btn-default">
+          <img src="https://static.wixstatic.com/media/15f720_9e1df56cd864446287c55f29df78de97~mv2.png/v1/fill/w_74,h_65,al_c,q_80,usm_0.66_1.00_0.01/15f720_9e1df56cd864446287c55f29df78de97~mv2.webp" , width="20"/>
+          TAMU CSSA forum
+        </button>
+      </div>
+      <div class="row center">
+        <button onClick="window.open('https://zh-cn.facebook.com/tamucssa/'); " class="btn btn-default">
+          <img src="http://i.stack.imgur.com/e2S63.png" width="20"/> Find us on Facebook
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="noticeUp.js"></script>
+<script>
+    $(function () {
+        setInterval("noticeUp('.notice ul','-35px')", 3500);
+    });
+</script>
