@@ -52,7 +52,7 @@ class RidesController < ApplicationController
     @ride = Ride.find(params[:id])
     if @ride.update_attributes(ride_params)
 	    @ride.save
-        flash[:notice] = "#Ride {@ride.id} was successfully updated."
+        flash[:notice] = "Ride was successfully updated."
         redirect_to profile_index_path
 	end
   end

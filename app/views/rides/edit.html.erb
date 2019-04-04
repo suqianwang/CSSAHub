@@ -1,5 +1,4 @@
 <%= link_to 'Back', profile_index_path %>
-<center><h1>Editing Ride</h1></center>
  <script>
     $(document).ready(function () {
 	    
@@ -25,32 +24,33 @@
  <%= form_with model: @ride, html: {:autocomplete => 'off'} do |f| %>
   <div class="row">
     <div class="offset-2 col-8">
-      <div class="p-2 center">
-        <div class="btn-group-toggle" data-toggle="buttons">
-          <%= f.label :role, "", :for => "Driver", :class => "btn btn-outline-primary" do %>
-            <%= f.radio_button :role, 'driver', class: 'form_type form-check-input', id: 'Driver', value: 'driver' %>
-            Driver
-          <% end %>
-          <%= f.label :role, "", :for => "Passenger", :class => "btn btn-outline-primary" do %>
-            <%= f.radio_button :role, 'passenger', class: 'form_type form-check-input', id: 'Passenger', value: 'passenger' %>
-            Passenger
-          <% end %>
-        </div>
-      </div>
       <div>
         <div>
-          <div class="ride_form d-none">
+          <div class="ride_form">
+		    <% if @ride.role == "driver" %>
             <div class="driver_form">
-              <h1 class="center p-4">Driver Form</h1>
+              <h1 class="center">Edit Driver Form</h1>
             </div>
+			<% elsif @ride.role == "passenger" %>
              <div class="passenger_form">
-              <h1 class="center p-4">Passenger Form</h1>
+              <h1 class="center">Edit Passenger Form</h1>
             </div>
+			<% end %>
+			<div class="row">
+	    <div class="column col-6">
+            <%= f.label :id, "Ride ID" %>
+            <%= f.text_field :id, class: 'form-control', id: 'id', :readonly => "readonly" %>
+		</div>
+		<div class="column col-6">
+            <%= f.label :role, "Role" %>
+            <%= f.text_field :role, class: 'form-control', id: 'role', :readonly => "readonly" %>
+			</div>
+		</div>
+		<br>
              <div>
-              <input id="ride_departure" class="controls" type="text" name="ride[departure]"
-                  placeholder="Enter an origin location">
-               <input id="ride_destination" class="controls" type="text" name="ride[destination]"
-                  placeholder="Enter a destination location">
+              <input id="ride_departure" class="controls" type="text" name="ride[departure]" value="<%= @ride.departure %>">
+
+               <input id="ride_destination" class="controls" type="text" name="ride[destination]" value="<%= @ride.destination %>">
              </div>
                 
             <div id="map"></div>
@@ -76,8 +76,11 @@
             </div>
              <div class="row">
               <div class="form-group col-6">
+			    <% if @ride.role == "driver" %>
                 <%= f.label :seats, "How many seats are available?", class: 'driver_form' %>
+				<% elsif @ride.role == "passenger" %>
                 <%= f.label :seats, "How many seats do you need?", class: 'passenger_form' %>
+				<% end %>
                 <%= f.number_field :seats, :class => "form-control", :min => "1", :value => "1" %>
               </div>
             </div>
