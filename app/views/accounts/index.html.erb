@@ -2,10 +2,8 @@
 <%= link_to 'Back to Dashboard', admin_index_path %>
 <% end %>
 
-<p id="notice"><%= notice %></p>
-
 <div class="center">
-  <h1>Accounts</h1>
+  <h1>Active Accounts</h1>
 
   <table class="table table-striped">
     <thead>
@@ -29,7 +27,7 @@
           </button>
         </td>
 
-
+		<td>
         <div class="modal fade" id="deleteForm-<%= account.username %>">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -39,23 +37,6 @@
                   <span>&times;</span>
                 </button>
               </div>
-
-              <!-- <form>
-                <div class="modal-body">
-
-                  <h5>Delete user: <%= account.username %></h5>
-                  <p>Please enter the reason for deletion:</p>
-                  <div class="form-group">
-                    <%= text_area_tag :reason, "", class: "form-control" %>
-                  </div>
-                </div>
-
-                <div class="modal-footer">
-                  <%= link_to account, method: :delete, :id => "confirmDeletion-" + account.username do %>
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                  <% end %>
-                </div>
-              </form> -->
 			  
 			  <%= form_for account, url: {method: :destroy} do |f| %>
 			    <div class="modal-body">
@@ -72,6 +53,7 @@
             </div>
           </div>
         </div>
+		</td>
       </tr>
     <% end %>
     </tbody>
