@@ -21,3 +21,15 @@ Feature: Log in
     Given I am logged in
     When I visit the login page
     Then I should be redirected to the service hub page
+	
+  Scenario: I am an admin loggin in
+    Given I am an admin user
+	And I am on the login page
+	When I fill in my username, password and press Login button
+	Then I should be redirected to the admin page
+	
+  Scenario: I am an archived user logging in
+    Given I am an archived user
+	And I am on the login page
+	When I fill in my username, password and press Login button
+	Then I should see an archive notification

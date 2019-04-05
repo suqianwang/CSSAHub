@@ -21,10 +21,18 @@ When("I restore a user") do
   click_on("confirmRestore-" + @account.username)
 end
 
-When("I delete a user") do
+When("I archive a user") do
   expect(page).to have_content(@account.username)
-  click_on("delete-" + @account.username)
-  click_on("confirmDeletion-" + @account.username)
+  click_on("archive-" + @account.username)
+  click_on("confirmArchive-" + @account.username)
+end
+
+When ("I visit the accounts page") do
+  visit accounts_path
+end
+
+When ("I visit the archive page") do
+  visit archive_accounts_path
 end
 
 Then ("the user should not be shown on the page") do
