@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 	  get :restore
 	end
   end
+  patch 'accounts' => 'accounts#destroy'
   get 'accounts/new'
   
   resources :admin

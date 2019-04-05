@@ -18,7 +18,7 @@ When("I view the admin page") do
 end
 
 Then("I should see {string} on the admin page") do |string|
-  expect(page).to have_content('Admin Page')
+  expect(page).to have_content('Dashboard')
 end
 
 Given("I want to go to the {string} page from the admin page") do |string|
@@ -26,13 +26,12 @@ Given("I want to go to the {string} page from the admin page") do |string|
   visit admin_index_path
 end
 
-When("I select the option on the admin page") do
+When("I select the {string} on the admin page") do |string|
   click_link @option
-  visit accounts_path
 end
 
 Then("the site should navigate to the {string} page from the admin page") do |string|
-  expect(page).to have_content('Accounts')
+  expect(page).to have_content(string)
 end
 
 Given("I am not an admin") do

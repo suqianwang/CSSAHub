@@ -70,17 +70,12 @@ class AccountsController < ApplicationController
   # DELETE /accounts/1
   # DELETE /accounts/1.json
   def destroy
-	@account.reason = params[:reason]
-	puts params
-	puts "Raw reason"
-	puts params[:reason]
+	@account.reason = params[:account][:reason]
 	@account.toggle!(:archived)
     respond_to do |format|
-      format.html { redirect_to accounts_url, notice: 'Account was successfully destroyed.' }
+      format.html { redirect_to accounts_url, notice: 'Account was successfully archived.' }
       format.json { head :no_content }
     end
-	puts "Reason:"
-	puts (@account.reason)
   end
   
   def restore
@@ -95,7 +90,8 @@ class AccountsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_account
-      @account = Account.find(params[:id])
+	  # I made changes to this so if something broke, check here first
+      @account = Account.find(params[:account][:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

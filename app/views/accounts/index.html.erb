@@ -24,7 +24,7 @@
         <td><%= account.name %></td>
         <td><%= account.email %></td>
         <td>
-          <button class="btn btn-danger" data-toggle="modal" data-target="#deleteForm-<%= account.username %>" id="delete-<%= account.username %>">Delete
+          <button class="btn btn-danger" data-toggle="modal" data-target="#deleteForm-<%= account.username %>" id="delete-<%= account.username %>">Archive
             User
           </button>
         </td>
@@ -40,7 +40,7 @@
                 </button>
               </div>
 
-              <form>
+              <!-- <form>
                 <div class="modal-body">
 
                   <h5>Delete user: <%= account.username %></h5>
@@ -51,11 +51,23 @@
                 </div>
 
                 <div class="modal-footer">
-                  <%= link_to account, method: :delete, :id => "confirmDeletion-" + account.username, :reason => :reason do %>
+                  <%= link_to account, method: :delete, :id => "confirmDeletion-" + account.username do %>
                     <button type="submit" class="btn btn-danger">Delete</button>
                   <% end %>
                 </div>
-              </form>
+              </form> -->
+			  
+			  <%= form_for account, url: {method: :destroy} do |f| %>
+			    <div class="modal-body">
+				  <h5>Archive user: <%= account.username %></h5>
+                  <p>Please enter the reason for deletion:</p>
+				  <%= f.text_area :reason, value: "", class: "form-control" %>
+				  <%= f.hidden_field :id, value: account.id%>
+				</div>
+				<div class="modal-footer">
+				  <%= f.submit "Archive", class: "btn btn-danger" %>  
+				</div>
+			  <% end %>
 
             </div>
           </div>
