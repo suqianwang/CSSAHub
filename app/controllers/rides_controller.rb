@@ -7,7 +7,7 @@ class RidesController < ApplicationController
     if session['login']=="admin"
       @rides = Ride.all.order('start_date DESC')
     else
-      @rides = Ride.where('end_date < ?', DateTime.now)
+      @rides = Ride.where('end_date < ?', Date.today)
 	end
   end
   
@@ -30,20 +30,28 @@ class RidesController < ApplicationController
   
   def show
     @ride = Ride.find(params[:id])
+	@ride_email = Account.where(:id => @ride.account_id)
   end
 
   def destroy
   	Ride.destroy(params[:id])
-  	respond_to do |format|
-        format.html { redirect_to request.referrer, notice: 'Ride was successfully destroyed.' }
+	if session['login']=="admin"
+  	  respond_to do |format|
+        format.html { redirect_to rides_path, notice: 'Ride was successfully destroyed.' }
         format.json { head :no_content }
-    end
+      end
+	 else
+	   respond_to do |format|
+        format.html { redirect_to profile_index_path, notice: 'Ride was successfully destroyed.' }
+        format.json { head :no_content }
+		end
+	 end
   end
 
   def edit
     # Check if user owns the ride. If not, throw 401 Unauthorized
      @ride = Ride.find(params[:id])
-     if not current_user.id == @ride.account_id
+     if not current_user.id == @ride.account_id or session['login'] == "admin"
        render '401', :status => 401
      end
   end

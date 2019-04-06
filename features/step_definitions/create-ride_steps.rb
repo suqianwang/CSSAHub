@@ -30,6 +30,13 @@ When("I fill in the form") do
   fill_in('ride_seats', with: @ride.seats)
 end
 
+When("I fill in the form wrongly") do
+  @ride = FactoryBot.build_stubbed(:ride)
+  fill_in('ride_departure', with: @ride.departure)
+  fill_in('ride_destination', with: @ride.destination)
+  fill_in('ride_seats', with: @ride.seats)
+end
+
 When("I press Submit") do
   click_button "Create Ride"
 end
@@ -39,5 +46,9 @@ Then("I should be on the rides home page") do
 end
 
 Then("I should see the newly created ride") do
-  expect(page.all('table#rides-table tr').count).to eq 2
+  expect(page.all('table#rides-table tr').count).to eq 1
+end
+
+Then("I should see error new rides home page") do
+     expect(page).to have_content("Invalid ride!")
 end
