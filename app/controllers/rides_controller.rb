@@ -1,7 +1,7 @@
 require 'pry'
 
 class RidesController < ApplicationController
-  before_action :login_required, :only => [:index, :new, :show, :create, :destroy, :update]
+  before_action :login_required, :only => [:index, :new, :show, :create, :destroy, :update, :edit]
   
   def index
     if session['login']=="admin"
