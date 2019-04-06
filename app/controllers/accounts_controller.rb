@@ -1,5 +1,5 @@
 class AccountsController < ApplicationController
-  before_action :login_required, :only => [:index, :show, :edit]
+  before_action :login_required, :only => [:index, :show, :edit, :destroy, :update]
   before_action :set_account, only: [:show, :edit, :update, :destroy]
 
   # GET /accounts
@@ -27,8 +27,8 @@ class AccountsController < ApplicationController
   end
 
   # GET /accounts/1/edit
-  def edit
-  end
+  #def edit
+  #end
 
   # POST /accounts
   # POST /accounts.json
