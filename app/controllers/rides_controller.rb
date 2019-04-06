@@ -7,7 +7,7 @@ class RidesController < ApplicationController
     if session['login']=="admin"
       @rides = Ride.all.order('start_date DESC')
     else
-      @rides = Ride.where('end_date < ?', Date.today)
+      @rides = Ride.where('end_date >= ?', Date.today)
 	end
   end
   
@@ -21,11 +21,20 @@ class RidesController < ApplicationController
   
   def create
     @ride = current_user.rides.new(ride_params)
-    if @ride.save
-      redirect_to rides_path, notice: 'Ride successfully created'
-    else
-      redirect_to new_ride_path, notice: 'Invalid ride!'
-    end
+	if not @ride.end_date.empty? and not @ride.start_date.empty?
+	  begin
+	    @ride.end_date = Date.strptime(@ride.end_date, '%m/%d/%Y')
+	    @ride.start_date = Date.strptime(@ride.start_date, '%m/%d/%Y')
+	  rescue ArgumentError
+	  end
+	    if @ride.save
+          redirect_to rides_path, notice: 'Ride successfully created'
+        else
+          redirect_to new_ride_path, notice: 'Invalid ride!'
+        end
+	else
+       redirect_to new_ride_path, notice: 'Invalid ride!'
+	end
   end
   
   def show

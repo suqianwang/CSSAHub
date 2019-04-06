@@ -23,5 +23,5 @@ Scenario: Admin not edit rides
     Given I am logged in
 	And a ride exists
 	When I am on the profile page
-    And I click on the delete link
+    When I click on the delete link
     Then the ride should be destroyed
