@@ -39,7 +39,7 @@ class RidesController < ApplicationController
   
   def show
     @ride = Ride.find(params[:id])
-	@ride_email = Account.where(:id => @ride.account_id)
+	@ride_email = Account.where(:id => @ride.account_id).first
   end
 
   def destroy
