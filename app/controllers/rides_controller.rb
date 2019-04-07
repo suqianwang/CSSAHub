@@ -8,23 +8,28 @@ class RidesController < ApplicationController
       @rides = Ride.all.order('start_date DESC')
     else
       @rides = Ride.where('end_date >= ?', Date.today)
-	end
+	  end
   end
   
   def new
     if session['login']=="admin"
-	  redirect_to admin_index_path
+	    redirect_to admin_index_path
   	else
-        @ride = Ride.new
+      @ride = Ride.new
   	end
   end
   
   def create
     @ride = current_user.rides.new(ride_params)
-    if @ride.save
-      redirect_to rides_path, notice: 'Ride successfully created'
-    else
-      redirect_to new_ride_path, notice: 'Invalid ride!'
+    
+    respond_to do |format|
+      if @ride.save
+        format.html { redirect_to rides_path, notice: 'Ride successfully created' }
+        format.json { render :show, status: :created, location: @ride }
+      else
+        format.html { render :new }
+        format.json { render json: @ride.errors, status: :unprocessable_entity }
+      end
     end
   end
   
@@ -35,17 +40,17 @@ class RidesController < ApplicationController
 
   def destroy
   	Ride.destroy(params[:id])
-	if session['login']=="admin"
+  	if session['login']=="admin"
   	  respond_to do |format|
         format.html { redirect_to rides_path, notice: 'Ride was successfully destroyed.' }
         format.json { head :no_content }
       end
-	 else
-	   respond_to do |format|
+	  else
+	    respond_to do |format|
         format.html { redirect_to profile_index_path, notice: 'Ride was successfully destroyed.' }
         format.json { head :no_content }
-		end
-	 end
+	    end
+	  end
   end
 
   def edit
@@ -57,13 +62,13 @@ class RidesController < ApplicationController
   end
   
   def update
-    binding.pry
     @ride = Ride.find(params[:id])
     if @ride.update_attributes(ride_params)
 	    @ride.save
       flash[:notice] = "Ride was successfully updated."
-      redirect_to profile_index_path
-	   end
+	  end
+	  
+	  redirect_to profile_index_path
   end
 
   private
@@ -71,5 +76,4 @@ class RidesController < ApplicationController
   def ride_params
     params.require(:ride).permit(:role, :departure, :destination, :start_date, :end_date, :start_time, :end_time, :seats)
   end
-
 end

@@ -20,19 +20,19 @@ When("I select my role as {string}") do |string|
 end
 
 When("I fill in the form") do
-  @ride = FactoryBot.build_stubbed(:ride)
-  fill_in('ride_departure', with: @ride.departure)
-  fill_in('ride_destination', with: @ride.destination)
-  fill_in('ride_start_date', with: @ride.start_date)
-  fill_in('ride_end_date', with: @ride.end_date)
-  fill_in('ride_start_time', with: @ride.start_time)
-  fill_in('ride_end_time', with: @ride.end_time)
-  fill_in('ride_seats', with: @ride.seats)
+  @ride_params = { departure: "Zachry", destination: "IAH", start_date: (Date.today).strftime("%m/%d/%Y"), end_date: (Date.today+1).strftime("%m/%d/%Y"), start_time: "8:00", end_time: "12:00", seats: 2 }
+  fill_in('ride_departure', with: @ride_params[:departure])
+  fill_in('ride_destination', with: @ride_params[:destination])
+  fill_in('ride_start_date', with: @ride_params[:start_date])
+  fill_in('ride_end_date', with: @ride_params[:end_date])
+  fill_in('ride_start_time', with: @ride_params[:start_time])
+  fill_in('ride_end_time', with: @ride_params[:end_time])
+  fill_in('ride_seats', with: @ride_params[:seats])
 end
 
 When("I fill in the form wrongly") do
   @ride = FactoryBot.build_stubbed(:ride)
-  @wrong_fields = 7
+  @wrong_fields = 10
   fill_in('ride_departure', with: nil)
   fill_in('ride_destination', with: nil)
   fill_in('ride_start_date', with: Date.today-1)
@@ -55,5 +55,5 @@ Then("I should see the newly created ride") do
 end
 
 Then("I should see errors for each wrong field") do
-  expect(page).to have_content("errors from #{@wrong_fields}")
+  expect(page).to have_content("#{@number_errors} errors")
 end

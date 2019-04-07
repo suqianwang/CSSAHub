@@ -71,7 +71,7 @@ RSpec.describe RidesController, :type => :controller do
 	      login(@account)
         r = post :create, :params => {:ride => @invalid_params}
         Ride.any_instance.stub(:save).and_return(false)
-        expect(r).to redirect_to(new_ride_path)
+        expect(response).to render_template :new
       end
     end
   end

@@ -10,6 +10,7 @@ Feature: Manage Rides
     Given I am logged in
 	And a ride exists
 	When I am on the edit page
+	And I fill in the form
 	And I press Update Rides
 	Then the ride should update
 

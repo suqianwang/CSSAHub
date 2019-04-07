@@ -21,8 +21,19 @@
   </script>
 <% end %>
 
+<% if ride.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(ride.errors.count, "error") %> prohibited this ride from being saved:</h2>
+    <ul>
+      <% ride.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <h1 class="center">Are you a Driver or Passenger?</h1>
-<%= form_with model: ride, html: {:autocomplete => 'off'} do |f| %>
+<%= form_with model: ride, local: true, html: {:autocomplete => 'off'} do |f| %>
   <div class="row">
     <div class="offset-2 col-8">
       <div class="p-2 center">
