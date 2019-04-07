@@ -13,7 +13,7 @@ class RidesController < ApplicationController
   def create
     @ride = current_user.rides.new(ride_params)
     if @ride.save
-      redirect_to rides_path, notice: 'Ride successfully created'
+      redirect_to controller: 'rides', action: 'show', id: @ride.id, notice: 'Ride creation successful!'
     else
       redirect_to new_ride_path, notice: 'Invalid ride!'
     end
@@ -21,6 +21,7 @@ class RidesController < ApplicationController
   
   def show
     @ride = Ride.find(params[:id])
+    @rides = Ride.match_ride(params[:id])
   end
 
   def destroy
@@ -39,10 +40,14 @@ class RidesController < ApplicationController
     # end
   end
 
+  def contact
+    @ride = Ride.find(params[:id])
+    @contact = @ride.account
+  end
+
   private
   
   def ride_params
     params.require(:ride).permit(:role, :departure, :destination, :start_date, :end_date, :start_time, :end_time, :seats)
   end
-
 end

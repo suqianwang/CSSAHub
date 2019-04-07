@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   match 'driver', to: 'driver#create', via: [:post]
 
   resources :rides
+  get 'rides/:ride_id' => 'rides#contact'
   delete 'rides/:ride_id' => 'rides#destroy'
   resources :services
   
