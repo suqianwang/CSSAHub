@@ -5,8 +5,8 @@ FactoryBot.define do
     role { ['driver', 'passenger'].sample }
     departure { ['Zachry', 'HEB', 'IAH', 'Walmart', 'DPS', 'Rec'].sample }
     destination { ['Zachry', 'HEB', 'IAH', 'Walmart', 'DPS', 'Rec'].sample }
-    start_date { Date.today+6 }
-    end_date { Date.today+7 }
+    start_date { (Date.today+6).strftime('%m/%d/%Y') }
+    end_date { (Date.today+7).strftime('%m/%d/%Y') }
     start_time { "11:00" }
     end_time { "12:00" }
     seats { Faker::Number.between(1, 8) }

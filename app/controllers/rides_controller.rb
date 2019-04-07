@@ -21,25 +21,30 @@ class RidesController < ApplicationController
   
   def create
     @ride = current_user.rides.new(ride_params)
-	if not @ride.end_date.empty? and not @ride.start_date.empty?
-	  begin
-	    @ride.end_date = Date.strptime(@ride.end_date, '%m/%d/%Y')
-	    @ride.start_date = Date.strptime(@ride.start_date, '%m/%d/%Y')
-	  rescue ArgumentError
-	  end
-	    if @ride.save
-          redirect_to rides_path, notice: 'Ride successfully created'
-        else
-          redirect_to new_ride_path, notice: 'Invalid ride!'
-        end
-	else
-       redirect_to new_ride_path, notice: 'Invalid ride!'
-	end
+    if @ride.save
+      redirect_to rides_path, notice: 'Ride successfully created'
+    else
+      redirect_to new_ride_path, notice: 'Invalid ride!'
+    end
+  # 	if not @ride.end_date.empty? and not @ride.start_date.empty?
+  # 	  begin
+  # 	    @ride.end_date = Date.strptime(@ride.end_date, '%m/%d/%Y')
+  # 	    @ride.start_date = Date.strptime(@ride.start_date, '%m/%d/%Y')
+  # 	  rescue ArgumentError
+  # 	  end
+	 #   if @ride.save
+  #         redirect_to rides_path, notice: 'Ride successfully created'
+  #       else
+  #         redirect_to new_ride_path, notice: 'Invalid ride!'
+  #       end
+	 #   else
+  #       redirect_to new_ride_path, notice: 'Invalid ride!'
+  # 	end
   end
   
   def show
     @ride = Ride.find(params[:id])
-	@ride_email = Account.where(:id => @ride.account_id).first
+	  @ride_email = Account.where(:id => @ride.account_id).first
   end
 
   def destroy
@@ -69,9 +74,9 @@ class RidesController < ApplicationController
     @ride = Ride.find(params[:id])
     if @ride.update_attributes(ride_params)
 	    @ride.save
-        flash[:notice] = "Ride was successfully updated."
-        redirect_to profile_index_path
-	end
+      flash[:notice] = "Ride was successfully updated."
+      redirect_to profile_index_path
+	   end
   end
 
   private

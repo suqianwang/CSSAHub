@@ -10,4 +10,14 @@ class Ride < ApplicationRecord
   validates :start_time, presence: true, :timeliness => { :type => :time }
   validates :end_time, presence: true, :timeliness => { :on_or_after => :start_time, :type => :time }
   validates :seats, presence: true, inclusion: { in: 1..8 }
+  
+  def start_date=(value)
+    value = Date.strptime(value, '%m/%d/%Y') rescue nil
+    super(value)
+  end
+  
+  def end_date=(value)
+    value = Date.strptime(value, "%m/%d/%Y") rescue nil
+    super(value)
+  end
 end
