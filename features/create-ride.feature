@@ -14,3 +14,24 @@ Feature: Create Ride
     | role |
     | Driver |
     | Passenger |
+	
+Scenario: Admin can not create a ride
+  Given I am an admin
+  When I am on the new ride page
+  Then I should be redirected to the admin page
+  
+  Scenario: Create a ride request with errors
+    Given I am logged in
+    And I am on the new ride page
+    When I select my role as "Driver"
+    And I fill in the form wrongly
+    And I press Submit
+    Then I should see error new rides home page
+	
+  Scenario: Create a ride request with errors
+    Given I am logged in
+    And I am on the new ride page
+    When I select my role as "Driver"
+    And I fill in the form wrongly with one wrong date
+    And I press Submit
+    Then I should see error new rides home page
