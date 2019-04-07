@@ -26,20 +26,6 @@ class RidesController < ApplicationController
     else
       redirect_to new_ride_path, notice: 'Invalid ride!'
     end
-  # 	if not @ride.end_date.empty? and not @ride.start_date.empty?
-  # 	  begin
-  # 	    @ride.end_date = Date.strptime(@ride.end_date, '%m/%d/%Y')
-  # 	    @ride.start_date = Date.strptime(@ride.start_date, '%m/%d/%Y')
-  # 	  rescue ArgumentError
-  # 	  end
-	 #   if @ride.save
-  #         redirect_to rides_path, notice: 'Ride successfully created'
-  #       else
-  #         redirect_to new_ride_path, notice: 'Invalid ride!'
-  #       end
-	 #   else
-  #       redirect_to new_ride_path, notice: 'Invalid ride!'
-  # 	end
   end
   
   def show
@@ -71,6 +57,7 @@ class RidesController < ApplicationController
   end
   
   def update
+    binding.pry
     @ride = Ride.find(params[:id])
     if @ride.update_attributes(ride_params)
 	    @ride.save
