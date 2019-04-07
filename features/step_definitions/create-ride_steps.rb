@@ -32,18 +32,14 @@ end
 
 When("I fill in the form wrongly") do
   @ride = FactoryBot.build_stubbed(:ride)
-  fill_in('ride_departure', with: @ride.departure)
-  fill_in('ride_destination', with: @ride.destination)
-  fill_in('ride_seats', with: @ride.seats)
-end
-
-When("I fill in the form wrongly with one wrong date") do
-  @ride = FactoryBot.build_stubbed(:ride)
-  fill_in('ride_start_date', with: @ride.start_date)
-  fill_in('ride_end_date', with: "06/04/2019")
-  fill_in('ride_departure', with: @ride.departure)
-  fill_in('ride_destination', with: @ride.destination)
-  fill_in('ride_seats', with: @ride.seats)
+  @wrong_fields = 7
+  fill_in('ride_departure', with: nil)
+  fill_in('ride_destination', with: nil)
+  fill_in('ride_start_date', with: Date.today-1)
+  fill_in('ride_end_date', with: "hello")
+  fill_in('ride_start_time', with: '01/01/00')
+  fill_in('ride_end_time', with: nil)
+  fill_in('ride_seats', with: -1)
 end
 
 When("I press Submit") do
@@ -58,6 +54,6 @@ Then("I should see the newly created ride") do
   expect(page.all('table#rides-table tr').count).to eq 2
 end
 
-Then("I should see error new rides home page") do
-     expect(page).to have_content("Invalid ride!")
+Then("I should see errors for each wrong field") do
+  expect(page).to have_content("errors from #{@wrong_fields}")
 end

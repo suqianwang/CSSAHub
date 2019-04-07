@@ -14,9 +14,9 @@ class RidesController < ApplicationController
   def new
     if session['login']=="admin"
 	  redirect_to admin_index_path
-	else
-      @ride = Ride.new
-	end
+  	else
+        @ride = Ride.new
+  	end
   end
   
   def create
