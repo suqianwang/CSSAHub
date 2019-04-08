@@ -12,6 +12,21 @@
   
   <div class="center">
     <h1>Rides</h1>
+
+  <%= form_tag rides_path, :method => :get, :id => 'ride_type_form' do%>
+    Ride Type:
+
+
+    <% Ride.all_types.each do |role| %>
+        <%= label_tag("role_#{role}", role) %>
+        <%= check_box_tag "type[#{role}]", 1, @selected_type.include?(role), :id=> "role_#{role}" %>
+    <% end %>
+
+
+
+    <%= submit_tag 'Refresh', :id => 'ride_type_submit', :class => 'btn btn-primary' %>
+  <% end %>
+
   </div>
   <table id="rides-table" class="table table-striped">
     <thead>

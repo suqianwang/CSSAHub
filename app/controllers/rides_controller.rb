@@ -2,8 +2,28 @@ require 'pry'
 
 class RidesController < ApplicationController
   before_action :login_required, :only => :index
+
+
   def index
     @rides = Ride.all
+
+    @all_types = Ride.all_types
+    permitted = params.permit(type: [:driver, :passenger])
+    @selected_type = permitted[:type] || session[:type] || {}
+
+
+    if @selected_type == {}
+      # @selected_type = @all_types
+      @selected_type = Hash[@all_types.map {|role| [role, 1]}]
+    end
+
+    if params[:type] != session[:type]
+      session[:type] = @selected_type
+      redirect_to :type => @selected_type and return
+    end
+
+    @rides = Ride.where(:role => @selected_type.keys)
+
   end
   
   def new
@@ -40,7 +60,7 @@ class RidesController < ApplicationController
   end
 
   private
-  
+
   def ride_params
     params.require(:ride).permit(:role, :departure, :destination, :start_date, :end_date, :start_time, :end_time, :seats)
   end

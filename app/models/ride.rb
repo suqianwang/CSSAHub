@@ -10,4 +10,8 @@ class Ride < ApplicationRecord
   validates :start_time, presence: true, :timeliness => { :type => :time }
   validates :end_time, presence: true, :timeliness => { :on_or_after => :start_time, :type => :time }
   validates :seats, presence: true, inclusion: { in: 1..8 }
+
+  def self.all_types
+    %w(driver passenger)
+  end
 end
