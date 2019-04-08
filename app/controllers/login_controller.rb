@@ -9,6 +9,7 @@ class LoginController < ApplicationController
   def create
     account = Account.find_by_username(params[:username])
     if account && account.authenticate(params[:password]) && account.archived == false
+      reset_session # protects against session fixation
       session[:account_id] = account.id
       session['login'] = account.username
       
