@@ -1,4 +1,4 @@
-<%= link_to 'back', rides_path %>
+<%= link_to 'Back', :back %>
 <br><br>
 <center>
   <table class="table">
@@ -28,8 +28,12 @@
       <td><%= @ride.start_time + " to " + @ride.end_time %></td>
     </tr>
     <tr>
-      <th>seats</th>
+      <th>Seats</th>
       <td><%= @ride.seats %></td>
+    </tr>
+	<tr>
+      <th>Contact</th>
+      <td><%= @ride_email.email %></td>
     </tr>
     </tbody>
   </table>

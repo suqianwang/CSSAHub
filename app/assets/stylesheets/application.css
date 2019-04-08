@@ -58,19 +58,27 @@ header {
 }
 
 #error_explanation {
-  color: red;
-  ul {
-    color: red;
-    margin: 0 0 0 0;
-  }
+  padding: 8px 35px 8px 14px;
+  margin-bottom: 20px;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  border: 1px solid #fbeed5;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 20px;
+  background-color: #f2dede;
+  border-color: #eed3d7;
+  color: #b94a48;
 }
 
 .field_with_errors {
-  .form-control {
     color: red;
-  }
 }
 
+.error {
+    color: red;
+}
 
 .sidebar {
   height: 100%; /* 100% Full-height */

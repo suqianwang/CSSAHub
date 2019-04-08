@@ -1,18 +1,17 @@
-<%= link_to 'Back', profile_index_path %>
- <script>
+<script>
     $(document).ready(function () {
-	    
-         $('input.form_type[type=radio]').change(function () {
+        $('input.form_type[type=radio]').change(function () {
             $('.driver_form, .passenger_form').addClass('d-none');
-             var fieldToShow = $(this).val();
-             $(".ride_form").removeClass('d-none');
+
+            var fieldToShow = $(this).val();
+
+            $(".ride_form").removeClass('d-none');
             $("." + fieldToShow + "_form").removeClass('d-none');
         });
-         $('.input-daterange').datepicker({
+
+        $('.input-daterange').datepicker({
             format: 'mm/dd/yyyy'
         });
-		
-		
     });
 </script>
 <% provide :head_tags do %>
@@ -21,40 +20,56 @@
     document.addEventListener("DOMContentLoaded", initMap);
   </script>
 <% end %>
- <%= form_with model: @ride, html: {:autocomplete => 'off'} do |f| %>
+
+<% if ride.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(ride.errors.count, "error") %> prohibited this ride from being saved:</h2>
+    <ul>
+      <% ride.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<h1 class="center">Are you a Driver or Passenger?</h1>
+<%= form_with model: ride, local: true, html: {:autocomplete => 'off'} do |f| %>
   <div class="row">
     <div class="offset-2 col-8">
+      <div class="p-2 center">
+        <div class="btn-group-toggle" data-toggle="buttons">
+          <%= f.label :role, "", :for => "Driver", :class => "btn btn-outline-primary" do %>
+            <%= f.radio_button :role, 'driver', class: 'form_type form-check-input', id: 'Driver', value: 'driver' %>
+            Driver
+          <% end %>
+          <%= f.label :role, "", :for => "Passenger", :class => "btn btn-outline-primary" do %>
+            <%= f.radio_button :role, 'passenger', class: 'form_type form-check-input', id: 'Passenger', value: 'passenger' %>
+            Passenger
+          <% end %>
+        </div>
+      </div>
       <div>
         <div>
-          <div class="ride_form">
-		    <% if @ride.role == "driver" %>
+          <div class="ride_form d-none">
             <div class="driver_form">
-              <h1 class="center">Edit Driver Form</h1>
+              <h1 class="center p-4">Driver Form</h1>
             </div>
-			<% elsif @ride.role == "passenger" %>
-             <div class="passenger_form">
-              <h1 class="center">Edit Passenger Form</h1>
-            </div>
-			<% end %>
-			<div class="row">
-	    <div class="column col-6">
-            <%= f.label :id, "Ride ID" %>
-            <%= f.text_field :id, class: 'form-control', id: 'id', :readonly => "readonly" %>
-		</div>
-		<div class="column col-6">
-            <%= f.label :role, "Role" %>
-            <%= f.text_field :role, class: 'form-control', id: 'role', :readonly => "readonly" %>
-			</div>
-		</div>
-		<br>
-             <div>
-              <input id="ride_departure" class="controls" type="text" name="ride[departure]" value="<%= @ride.departure %>">
 
-               <input id="ride_destination" class="controls" type="text" name="ride[destination]" value="<%= @ride.destination %>">
-             </div>
+            <div class="passenger_form">
+              <h1 class="center p-4">Passenger Form</h1>
+            </div>
+
+            <div class="d-none">
+              <input id="ride_departure" class="controls" type="text" name="ride[departure]"
+                  placeholder="Enter an origin location">
+              
+              <input id="ride_destination" class="controls" type="text" name="ride[destination]"
+                  placeholder="Enter a destination location">
+            </div>
                 
             <div id="map"></div>
-             <div class="input-daterange row">
+
+            <div class="input-daterange row">
               <div class="form-group col-6">
                 <%= f.label :start_date, "Departure Date (YYYY-MM-DD)" %>
                 <%= f.text_field :start_date, :class => "form-control" %>
@@ -64,7 +79,8 @@
                 <%= f.text_field :end_date, :class => "form-control" %>
               </div>
             </div>
-             <div class="row">
+
+            <div class="row">
               <div class="form-group col-6">
                 <%= f.label :start_time, "Departure Time (hh:mm)" %>
                 <%= f.text_field :start_time, :class => "form-control" %>
@@ -74,13 +90,11 @@
                 <%= f.text_field :end_time, :class => "form-control" %>
               </div>
             </div>
-             <div class="row">
+
+            <div class="row">
               <div class="form-group col-6">
-			    <% if @ride.role == "driver" %>
                 <%= f.label :seats, "How many seats are available?", class: 'driver_form' %>
-				<% elsif @ride.role == "passenger" %>
                 <%= f.label :seats, "How many seats do you need?", class: 'passenger_form' %>
-				<% end %>
                 <%= f.number_field :seats, :class => "form-control", :min => "1", :value => "1" %>
               </div>
             </div>
@@ -94,4 +108,5 @@
     </div>
   </div>
 <% end %>
- <br>
+
+<br>

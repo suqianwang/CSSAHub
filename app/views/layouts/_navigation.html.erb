@@ -8,17 +8,11 @@
 
   <div class="container">
     <div>
-      <% if session.has_key?('login') and session['login'] == "admin" %>
-        <%= link_to admin_index_path, class: 'navbar-brand' do %>
-          <%= image_tag "cssa.png", :width => "60", :height => "60", :id => "site-logo" %>
-          CSSA Hub!
-        <% end %>
-      <% else %>
+
         <%= link_to home_index_path, class: 'navbar-brand' do %>
           <%= image_tag "cssa.png", :width => "60", :height => "60", :id => "site-logo" %>
           CSSA Hub!
-        <% end %>
-      <% end %>
+		  <% end %>
     </div>
 
     <div class="dropdown">
