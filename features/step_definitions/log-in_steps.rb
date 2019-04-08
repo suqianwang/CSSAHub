@@ -4,6 +4,18 @@ Given("I am in the log in page") do
   visit login_index_path
 end
 
+Given("I am on the login page") do
+  visit login_index_path
+end
+
+Given("I am an admin user") do
+  @account = FactoryBot.create :account, :admin
+end
+
+Given("I am an archived user") do
+  @account = FactoryBot.create :account, :archived_user
+end
+
 When("I fill in my username, password and press Login button") do
   fill_in "Username", :with => @account.username
   fill_in "Password", :with => @account.password
@@ -35,14 +47,22 @@ When("press log out") do
   click_link 'Logout'
 end
 
-Then("I should be redirected to log in page") do
-  expect(page).to have_content("Login")
-end
-
 When("I visit the login page") do
   visit login_index_path
 end
 
 Then("I should be redirected to the service hub page") do
   expect(page).to have_current_path(services_path)
+end
+
+Then("I should be redirected to the admin page") do
+  expect(page).to have_current_path(admin_index_path)
+end
+
+Then("I should be redirected to log in page") do
+  expect(page).to have_current_path(login_index_path)
+end
+
+Then("I should see an archive notification") do
+  expect(page).to have_content("Your account has been disabled. Please contact an administrator for assistance.")
 end

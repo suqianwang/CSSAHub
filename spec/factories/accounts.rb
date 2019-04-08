@@ -5,6 +5,14 @@ FactoryBot.define do
   	  sequence(:email) { |n| "bob#{n}@tamu.edu" }
       name { Faker::Name.name }
       password { Faker::Internet.password }
+	  archived { false }
+    end
+	trait :archived_user do
+  	  username { Faker::Internet.username }
+  	  sequence(:email) { |n| "bob#{n}@tamu.edu" }
+      name { Faker::Name.name }
+      password { Faker::Internet.password }
+	  archived { true }
     end
     trait :admin do
     	username { "admin" }

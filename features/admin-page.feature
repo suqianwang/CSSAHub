@@ -14,16 +14,18 @@ Feature: Navigate between Admin option pages
     
   Examples:
     | option |
-    | Accounts |
+    | Active Accounts |
+	| Archived Accounts |
 	| Posts |
 	
   Scenario Outline: I'm selecting an option to manage
     Given I am an admin
     Given I want to go to the "<option>" page from the admin page
-    When I select the option on the admin page
+    When I select the "<option>" on the admin page
     Then the site should navigate to the "<corresponding>" page from the admin page
 		
   Examples:
     | option | corresponding |
-    | Accounts | accounts |
-	| Posts | rides |
+    | Active Accounts | Accounts |
+	| Archived Accounts | Archived |
+	| Posts | Rides |
