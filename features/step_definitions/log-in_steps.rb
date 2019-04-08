@@ -28,6 +28,7 @@ Then("I should see a welcome message") do
   within ('.dropdown button.dropdown-toggle') do
     expect(page).to have_content 'Welcome'
   end
+  expect(page).to have_content("Logged in!")
 end
 
 When("I fill in my username, wrong password and press Login button") do

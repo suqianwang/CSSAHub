@@ -18,3 +18,8 @@ Feature: Navigate services
   Examples:
     | service | corresponding |
     | Transportation | rides |
+	
+  Scenario: Admin should not see hub
+   Given I am an admin
+   When I view the hub page
+   Then I should be redirected to the admin page

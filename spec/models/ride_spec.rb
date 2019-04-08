@@ -37,20 +37,27 @@ RSpec.describe Ride, :type => :model do
   describe '#date_order' do
     context 'with valid attributes' do
       it 'validates end date is on or after begin date' do
-        @ride.start_date = Date.today+1
-        @ride.end_date = Date.today+2
+        @ride.start_date = (Date.today).strftime("%m/%d/%Y")
+        @ride.end_date = (Date.today).strftime("%m/%d/%Y")
+        expect(@ride).to be_valid
+      end
+      it 'validates that start_date is not before today' do
+        @ride.start_date = (Date.today+1).strftime("%m/%d/%Y")
+        @ride.end_date = (Date.today+2).strftime("%m/%d/%Y")
         expect(@ride).to be_valid
       end
     end
     context 'with invalid attributes' do
       it 'validates end date is on or after begin date' do
-        @ride.start_date = Date.today+2
-        @ride.end_date = Date.today+1
+        @ride.start_date = (Date.today+2).strftime("%m/%d/%Y")
+        @ride.end_date = (Date.today+1).strftime("%m/%d/%Y")
+        expect(@ride).to_not be_valid
       end
-    end
-    it 'validates that start_date is not today' do
-      @ride.start_date = Date.today
-      @ride.end_date = Date.today+1
+      it 'validates that start_date is not before today' do
+        @ride.start_date = (Date.today-1).strftime("%m/%d/%Y")
+        @ride.end_date = (Date.today).strftime("%m/%d/%Y")
+        expect(@ride).to_not be_valid
+      end
     end
   end
   
