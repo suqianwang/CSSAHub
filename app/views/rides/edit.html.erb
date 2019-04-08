@@ -57,11 +57,11 @@
              <div class="input-daterange row">
               <div class="form-group col-6">
                 <%= f.label :start_date, "Departure Date (YYYY-MM-DD)" %>
-                <%= f.text_field :start_date, :class => "form-control" %>
+                <%= f.text_field :start_date, :class => "form-control", :value => Date.parse(@ride.start_date).strftime('%m/%d/%Y') %>
               </div>
               <div class="form-group col-6">
                 <%= f.label :end_date, "to" %>
-                <%= f.text_field :end_date, :class => "form-control" %>
+                <%= f.text_field :end_date, :class => "form-control", :value => Date.parse(@ride.end_date).strftime('%m/%d/%Y') %>
               </div>
             </div>
              <div class="row">
@@ -81,7 +81,7 @@
 				<% elsif @ride.role == "passenger" %>
                 <%= f.label :seats, "How many seats do you need?", class: 'passenger_form' %>
 				<% end %>
-                <%= f.number_field :seats, :class => "form-control", :min => "1", :value => "1" %>
+                <%= f.number_field :seats, :class => "form-control", :min => "1" %>
               </div>
             </div>
             <div class="center">
