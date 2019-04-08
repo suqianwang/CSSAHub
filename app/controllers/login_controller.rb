@@ -17,7 +17,7 @@ class LoginController < ApplicationController
   	  else
         redirect_to services_path, notice: "Logged in!"
       end
-    elsif account.archived == true
+    elsif account && account.archived == true
 	  flash.now[:alert] = "Your account has been disabled. Please contact an administrator for assistance."
       render "index"
     else
