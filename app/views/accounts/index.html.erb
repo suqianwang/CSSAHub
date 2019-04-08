@@ -43,7 +43,7 @@
 			  <%= form_for account, url: {method: :destroy} do |f| %>
 			    <div class="modal-body">
 				  <h5>Archive user: <%= account.username %></h5>
-                  <p>Please enter the reason for suspention:</p>
+                  <p>Please enter the reason for suspension:</p>
 				  <%= f.text_area :reason, value: "", class: "form-control" %>
 				  <%= f.hidden_field :id, value: account.id%>
 				</div>
