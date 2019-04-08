@@ -20,11 +20,6 @@ class AccountsController < ApplicationController
     end
   end
 
-  # GET /accounts/1
-  # GET /accounts/1.json
-  def show
-  end
-
   # GET /accounts/new
   def new
     if current_user.blank?
@@ -44,8 +39,7 @@ class AccountsController < ApplicationController
     @account = Account.new(account_params)
     respond_to do |format|
       if @account.save
-        format.html { redirect_to @account, notice: 'Account was successfully created.' }
-        format.json { render :show, status: :created, location: @account }
+        format.html { redirect_to login_index_path, notice: 'Account was successfully created.' }
       else
         format.html { render :new }
         format.json { render json: @account.errors, status: :unprocessable_entity }
@@ -90,7 +84,11 @@ class AccountsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_account
 	  # I made changes to this so if something broke, check here first
-      @account = Account.find(params[:account][:id])
+	  if params[:id] != nil
+        @account = Account.find(params[:id])
+	  elsif params[:account] != nil
+	    @account = Account.find(params[:account][:id])
+	  end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
