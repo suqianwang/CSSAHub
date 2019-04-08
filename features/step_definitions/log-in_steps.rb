@@ -47,10 +47,6 @@ When("press log out") do
   click_link 'Logout'
 end
 
-Then("I should be redirected to log in page") do
-  expect(page).to have_content("Login")
-end
-
 When("I visit the login page") do
   visit login_index_path
 end
@@ -61,6 +57,10 @@ end
 
 Then("I should be redirected to the admin page") do
   expect(page).to have_current_path(admin_index_path)
+end
+
+Then("I should be redirected to log in page") do
+  expect(page).to have_current_path(login_index_path)
 end
 
 Then("I should see an archive notification") do

@@ -22,7 +22,7 @@ Feature: Log in
     When I visit the login page
     Then I should be redirected to the service hub page
 	
-  Scenario: I am an admin loggin in
+  Scenario: I am an admin logging in
     Given I am an admin user
 	And I am on the login page
 	When I fill in my username, password and press Login button
