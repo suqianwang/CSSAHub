@@ -5,9 +5,19 @@ class Ride < ApplicationRecord
   validates :role, presence: true, inclusion: { in: ['driver', 'passenger'] }
   validates :departure, presence: true
   validates :destination, presence: true
-  validates :start_date, presence: true, :timeliness => { :on_or_after => :today, :type => :date }
-  validates :end_date, presence: true, :timeliness => { :on_or_after => :start_date, :type => :date }
+  validates :start_date, presence: true, :timeliness => { :on_or_after => :today,  :type => :date }
+  validates :end_date, presence: true, :timeliness => { :on_or_after => :start_date,  :type => :date }
   validates :start_time, presence: true, :timeliness => { :type => :time }
   validates :end_time, presence: true, :timeliness => { :on_or_after => :start_time, :type => :time }
   validates :seats, presence: true, inclusion: { in: 1..8 }
+  
+  def start_date=(value)
+    value = Date.strptime(value, '%m/%d/%Y') rescue nil
+    super(value)
+  end
+  
+  def end_date=(value)
+    value = Date.strptime(value, "%m/%d/%Y") rescue nil
+    super(value)
+  end
 end

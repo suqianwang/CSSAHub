@@ -1,6 +1,8 @@
 RSpec.describe ServicesController, type: :controller do
 before do
     @account = FactoryBot.create :account, :user
+	@admin = FactoryBot.create :account, :admin
+
   end
 
   describe "GET #index" do
@@ -10,9 +12,11 @@ before do
       expect(response).to render_template :index
     end
     
-    # it "should assign all valid service types to @service_types" do
-    #   get :index
-    #   expect(assigns[:service_types]).to eq(Service.subclasses)
-    # end
+    it "should redirect admin to admin page" do
+	  login(@admin)
+      get :index
+      expect(response).to redirect_to(admin_index_path)
+    end
   end
+  
 end
