@@ -1,5 +1,5 @@
 <center>
-  <h1>Admin Page</h1>
+  <h1>Dashboard</h1>
   <!--<table class="center">
 	<tr>
 	  <td>
@@ -19,8 +19,20 @@
       <div class="card bg-light">
         <%= image_tag('users.png', :class => "card-img-top", :size => '100x200') %>
         <div class="card-body">
-          <h5 class="card-title">Accounts</h5>
-          <p class="card-text">Manage and remove user accounts.</p>
+          <h5 class="card-title">Active Accounts</h5>
+          <p class="card-text">Manage and remove active user accounts.</p>
+        </div>
+      </div>
+      <% end %>
+    </div>
+	
+	<div class="column center" style="width:25%;">
+      <%= link_to(archive_accounts_path, :class => "clickable-card") do %>
+      <div class="card bg-light">
+        <%= image_tag('car.png', :class => "card-img-top", :size => '100x200') %>
+        <div class="card-body">
+          <h5 class="card-title">Archived Accounts</h5>
+          <p class="card-text">View and restore archived user accounts.</p>
         </div>
       </div>
       <% end %>
@@ -37,6 +49,7 @@
       </div>
       <% end %>
     </div>
+	
   </div>
 
   </div>

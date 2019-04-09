@@ -67,4 +67,13 @@ end
     end
   end
 
+  
+    describe "login with archive account" do
+    it "should not login" do
+	  @archive_account = FactoryBot.create :account, :archived_user
+	  post :create,  params: { password: @archive_account.password, username: @archive_account.username }
+      expect(response).to render_template :index
+    end
+  end
+  
 end

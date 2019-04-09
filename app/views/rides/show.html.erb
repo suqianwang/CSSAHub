@@ -1,36 +1,89 @@
-<%= link_to 'back', rides_path %>
+<%= link_to 'Back', :back %>
 <br><br>
-<center>
-  <table class="table">
-    <tbody>
+
+<div class="center">
+  <h1>Auto-Matched Rides</h1>
+</div>
+
+<div class="trip-info text-secondary center p-2">
+  <div class="row center">
+    <h8 class="center">For your trip from <b><%= "#{@ride.departure}" %></b></h8>
+  </div>
+  <div class="row center">
+    <h8 class="center">To <b><%= "#{@ride.destination}" %></b></h8>
+  </div>
+  <div class="row center">
+    <h8 class="center">Starting at <b><%= "#{@ride.start_date}" %> </b><b><%= "#{@ride.start_time}" %> </b> to <b><%="#{@ride.end_date}" %></b> <b><%= "#{@ride.end_time}" %> </b> </h8>
+  </div>
+</div>
+
+<% if @rides.size == 0 %>
+  <div class="center p-4">
+    <%= image_tag('sorry.png', :class => "", :width => '100', :height => '100') %>
+    <h3> Sorry, we currently don't have any match </h3>
+    <h5 class="text-secondary"> Please check this ride on your profile later</h5>
+  </div>
+
+<% else %>
+<table id="rides-table" class="table table-striped">
+  <thead>
+  <tr>
+    <th>Creator Username</th>
+    <th>Type</th>
+    <th>Departure</th>
+    <th>Destination</th>
+    <th>Departure Date</th>
+    <th>Departure Time</th>
+    <th>Seats</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @rides.each do |r| %>
     <tr>
-      <th>ID</th>
-      <td><%= "Ride " + String(@ride.id) %></td>
-    </tr>
-    <tr>
-      <th>Role</th>
-      <td><%= @ride.role %></td>
-    </tr>
-    <tr>
-      <th>Departure Location</th>
-      <td><%= @ride.departure %></td>
-    </tr>
-    <tr>
-      <th>Destination</th>
-      <td><%= @ride.destination %></td>
-    </tr>
-    <tr>
-      <th>Departure Date</th>
-      <td><%= @ride.start_date + " to " + @ride.end_date %></td>
-    </tr>
-    <tr>
-      <th>Departure Time</th>
-      <td><%= @ride.start_time + " to " + @ride.end_time %></td>
-    </tr>
-    <tr>
-      <th>seats</th>
-      <td><%= @ride.seats %></td>
-    </tr>
-    </tbody>
-  </table>
-</center>
+      <td><%= r.account.username %></td>
+      <td><%= r.role %></td>
+      <td><%= r.departure %></td>
+      <td><%= r.destination %></td>
+      <td><%= String(r.start_date) + " to " + String(r.end_date) %></td>
+      <td><%= String(r.start_time) + " to " + String(r.end_time) %></td>
+      <td><%= r.seats %></td>
+      <td><%= button_tag "Contact #{r.role.capitalize}", {class: 'btn btn-primary', 'data-toggle' => 'modal', 'data-target' => "#exampleModal"}%>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"><%= "#{r.role.capitalize}"%> Information</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <table class="table table-bordered thead-light ">
+                  <tbody>
+                  <tr>
+                    <th><%= "#{r.role.capitalize}"%> Username</th>
+                    <td class="table-light"><%= "#{r.account.username}"%> </td>
+                  </tr>
+                  <tr>
+                    <th><%= "#{r.role.capitalize}"%> Email</th>
+                    <td class="table-light"><%= "#{r.account.email}"%> </td>
+                  </tr>
+                  </tbody>
+                </table>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <% if session.has_key?('login') and session['login'] == "admin" %>
+            <%= link_to "Delete", ride_path(r), method: :delete, data: { confirm: "Are you sure?" }, class: 'badge-pill badge-danger' %></td>
+        <% end %>
+        </tr>
+  <% end %>
+  <%end %>
+  </tbody>
+</table>
+<br>

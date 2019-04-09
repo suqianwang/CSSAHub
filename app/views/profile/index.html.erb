@@ -10,6 +10,7 @@
               <a href="#list-profile" id="list-profile-list" data-toggle="list" role="tab" class="list-group-item list-group-item-action active" aria-controls="profile">My Profile</a>
               <a href="#list-requests" id="list-requests-list" data-toggle="list" role="tab" class="list-group-item list-group-item-action" aria-controls="requests">My Requested Rides</a>
               <a href="#list-posts" id="list-posts-list" data-toggle="list" role="tab" class="list-group-item list-group-item-action" aria-controls="posts">My Posted Rides</a>
+			  <a href="#list-past" id="list-past-list" data-toggle="list" role="tab" class="list-group-item list-group-item-action" aria-controls="past">My Past Rides</a>
             </div> 
 		</div>
 		
@@ -28,31 +29,31 @@
                               <div class="form-group row">
                                 <label for="username" class="col-4 col-form-label">User Name</label> 
                                 <div class="col-8">
-								  <%= f.text_field :username, :id => "username", :name => "username", :class => "form-control here", :required => true, :placeholder => @profile.username %>
+								  <%= f.text_field :username, :id => "username", :name => "username", :class => "form-control here", :required => true, :placeholder => @profile.username, :readonly => "readonly" %>
                                 </div>
                               </div>
                               <div class="form-group row">
                                 <label for="name" class="col-4 col-form-label">Name</label> 
                                 <div class="col-8">
-									<%= f.text_field :name, :id => "name", :name => "name", :class => "form-control here", :required => true, :placeholder => @profile.name %>
+									<%= f.text_field :name, :id => "name", :name => "name", :class => "form-control here", :value => @profile.name %>
                                 </div>
                               </div>
                               <div class="form-group row">
                                 <label for="email" class="col-4 col-form-label">Email</label> 
                                 <div class="col-8">
-								  <%= f.text_field :email, :id => "email", :name => "email", :class => "form-control here", :required => true, :placeholder => @profile.email %>
+								  <%= f.text_field :email, :id => "email", :name => "email", :class => "form-control here", :required => true, :placeholder => @profile.email, :readonly => "readonly" %>
                                 </div>
                               </div>
                               <div class="form-group row">
                                 <label for="newpass" class="col-4 col-form-label">New Password</label> 
                                 <div class="col-8">
-                                  <input id="newpass" name="newpass" placeholder="New Password" class="form-control here" type="text">
+								  <%= f.password_field :password, :id => "newpass", :name => "newpass", :class => "form-control here", :placeholder => "New Password" %>
                                 </div>
                               </div> 
 							  <div class="form-group row">
                                 <label for="newpass" class="col-4 col-form-label">Confirm New Password</label> 
                                 <div class="col-8">
-                                  <input id="newpass" name="newpass" placeholder="Confirm New Password" class="form-control here" type="text">
+								  <%= f.password_field :password_confirmation, :id => "newpass", :name => "newpass", :class => "form-control here", :placeholder => "Confirm New Password" %>
                                 </div>
                               </div> 
                               <div class="form-group row">
@@ -95,10 +96,10 @@
 									  <td><%= r.role %></td>
 									  <td><%= r.departure %></td>
 									  <td><%= r.destination %></td>
-									  <td><%= String(r.start_date) + " to " + String(r.end_date) %></td>
+									  <td><%= String(Date.parse(r.start_date).strftime('%m/%d/%Y')) + " to " + String(Date.parse(r.end_date).strftime('%m/%d/%Y')) %></td>
 									  <td><%= String(r.start_time) + " to " + String(r.end_time) %></td>
 									  <td><%= r.seats %></td>
-									  <td><%= link_to "Show", r, class: 'badge-pill badge-info'%>									  
+									  <td><%= link_to "Match", r, class: 'badge-pill badge-info'%>
 									      <%= link_to "Edit", edit_ride_path(r), class: 'badge-pill badge-success'%>
 										  <%= link_to "Delete", ride_path(r), method: :delete, data: { confirm: "Are you sure?" }, class: 'badge-pill badge-danger' %></td>
 									</tr>
@@ -138,10 +139,10 @@
 									  <td><%= p.role %></td>
 									  <td><%= p.departure %></td>
 									  <td><%= p.destination %></td>
-									  <td><%= String(p.start_date) + " to " + String(p.end_date) %></td>
+									  <td><%= String(Date.parse(p.start_date).strftime('%m/%d/%Y')) + " to " + String(Date.parse(p.end_date).strftime('%m/%d/%Y')) %></td>
 									  <td><%= String(p.start_time) + " to " + String(p.end_time) %></td>
 									  <td><%= p.seats %></td>
-									  <td><%= link_to "Show", p, class: 'badge-pill badge-info'%>
+									  <td><%= link_to "Match", p, class: 'badge-pill badge-info'%>
 									  <%= link_to "Edit", edit_ride_path(p), class: 'badge-pill badge-success'%>
 										  <%= link_to "Delete", ride_path(p), method: :delete, data: { confirm: "Are you sure?" }, class: 'badge-pill badge-danger' %></td>
 									</tr>
@@ -153,6 +154,50 @@
 		        </div>
 		</div>
 
+		
+		<div class="card tab-pane" id="list-past" role="tabpanel" aria-labelledby="list-past-list">
+			<div class="card-body" >
+		            <div class="row">
+		                <div class="col-md-12">
+		                    <h4>My Past Rides</h4>
+		                </div>
+		            </div>
+		            <div class="row">
+		                <div class="col-md-12">
+						<table id="rides-table" class="table table-striped">
+								<thead>
+								  <tr>
+									<th>Ride ID</th>
+									<th>Type</th>
+									<th>Departure</th>
+									<th>Destination</th>
+									<th>Departure Date</th>
+									<th>Departure Time</th>
+									<th>Seats</th>
+									<th>Actions</th>
+								  </tr>
+								</thead>
+								<tbody>
+								  <% @past.each do |x| %>
+									<tr>
+									  <td><%= link_to "Ride " + String(x.id), x %></td>
+									  <td><%= x.role %></td>
+									  <td><%= x.departure %></td>
+									  <td><%= x.destination %></td>
+									  <td><%= String(Date.parse(x.start_date).strftime('%m/%d/%Y')) + " to " + String(Date.parse(x.end_date).strftime('%m/%d/%Y')) %></td>
+									  <td><%= String(x.start_time) + " to " + String(x.end_time) %></td>
+									  <td><%= x.seats %></td>
+									  <td><%= link_to "Show", x, class: 'badge-pill badge-info'%>									  
+									      </td>
+									</tr>
+								  <% end %>
+								</tbody>
+							  </table>
+		                </div>
+		            </div>
+		        </div>
+		</div>
+		
 
 		</div>
 	</div>

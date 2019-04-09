@@ -44,7 +44,7 @@ RSpec.describe AccountsController, :type => :controller do
         post :create,  params: { account: { email: 'bob@tamu.edu', name: 'bob', password: 'secret', password_confirmation: 'secret', username: 'bo' } }
       end
   
-      assert_redirected_to account_url(Account.last)
+      assert_redirected_to login_index_path
     end
   end
   
@@ -77,15 +77,34 @@ RSpec.describe AccountsController, :type => :controller do
      it "should destroy account" do
 	 new_account = FactoryBot.create :account, :user
 	  login(@admin)
-       #assert_difference('Account.count', -1) do
-         #delete :destroy, id: @account
-		 #delete account_url(@account.id)
-       #end
-       #assert_redirected_to accounts_url
-	   
-      expect {
-	   delete :destroy, params: {id: new_account.to_param}
-      }.to change(Account, :count).by(-1)
+	   patch :destroy, params: { account: { id: new_account.id } }
 	  end
- end
+  end
+  
+  describe "restore" do
+     it "should allow account to work again" do
+	 new_account = FactoryBot.create :account, :archived_user
+	  login(@admin)
+	   get :restore, params: { id: new_account.id }
+	  end
+  end
+  
+  describe "archive page" do
+     it "should show a list of archived accounts" do
+	   new_account = FactoryBot.create :account, :archived_user
+	   login(@admin)
+	   get :archive
+	   expect(assigns(:accounts).count).to eq(1)
+	end
+  end
+  
+  describe "archive page" do
+     it "should not allow a user to see archive list" do
+	   new_account = FactoryBot.create :account, :archived_user
+	   login(@account)
+	   get :archive
+       expect(response).to redirect_to services_path
+	end
+  end
+  
 end

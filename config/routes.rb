@@ -2,7 +2,15 @@ Rails.application.routes.draw do
   root 'home#index'
   get 'home/index'
   
-  resources :accounts
+  resources :accounts do
+    collection do
+	  get 'archive'
+	end
+	member do
+	  get :restore
+	end
+  end
+  patch 'accounts' => 'accounts#destroy'
   get 'accounts/new'
   
   resources :admin
@@ -24,6 +32,7 @@ Rails.application.routes.draw do
   match 'driver', to: 'driver#create', via: [:post]
 
   resources :rides
+  get 'rides/:ride_id' => 'rides#contact'
   delete 'rides/:ride_id' => 'rides#destroy'
   resources :services
   
