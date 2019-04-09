@@ -3,18 +3,32 @@
 <!--<div class='center'>-->
 
 
-  <div class="row justify-content-center">
-    <div class="col-4">
+<div class="card-deck">
+    <div class="card bg-light">
       <%= link_to(rides_path, :class => "clickable-card") do %>
-      <div class="card bg-light">
-        <%= image_tag('transport.jpg', :class => "card-img-top") %>
-        <div class="card-body">
-          <h5 class="card-title">Transportation Service</h5>
-          <p class="card-text">Create and view rides.</p>
-        </div>
+      <%= image_tag('transport.jpg', :class => "card-img-top") %>
+      <div class="card-body">
+        <h5 class="card-title">Transportation Service</h5>
+        <p class="card-text">Post or find rides</p>
       </div>
       <% end %>
     </div>
-  </div>
-
-<!--</div>-->
+    <div class="card bg-light">
+      <%= link_to("https://bbs.cssatamu.com/forum.php", :class => "clickable-card") do %>
+      <%= image_tag('forum.jpg', :class => "card-img-top") %>
+      <div class="card-body">
+        <h5 class="card-title">TAMU CSSA Forum</h5>
+        <p class="card-text">Make friends, find roommate & apartment, buy and sell goods...</p>
+      </div>
+      <% end %>
+    </div>
+    <div class="card bg-light">
+      <%= link_to("https://www.cssatamu.com/event", :class => "clickable-card") do %>
+      <%= image_tag('event.jpg', :class => "card-img-top") %>
+      <div class="card-body">
+        <h5 class="card-title">TAMU CSSA Event</h5>
+        <p class="card-text">Check out recent TAMU CSSA events</p>
+      </div>
+      <% end %>
+    </div>
+</div>
