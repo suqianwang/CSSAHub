@@ -2,21 +2,31 @@
 <%= link_to 'Back to Admin Page', admin_index_path %>
 <% elsif session.has_key?('login') %>
 <div>
-<div class="column">
 <%= link_to 'Back to Services Page', services_path %>
 </div>
-<div class="column" align="right">
-<%= link_to 'Create Ride', new_ride_url %>
-</div></div>
-<% end %>  
-  
-  <div class="center">
-    <h1>Rides</h1>
-  </div>
+<% end %>
+
+<div class="center">
+  <h1>All Rides Offers/Requests</h1>
+  <%= form_tag rides_path, :method => :get, :id => 'ride_type_form' do%>
+    Ride Type:
+
+    <% Ride.all_types.each do |role| %>
+        <%= label_tag("role_#{role}", role) %>
+        <%= check_box_tag "type[#{role}]", 1, @selected_type.include?(role), :id=> "role_#{role}" %>
+    <% end %>
+
+    <%= submit_tag 'Refresh', :id => 'ride_type_submit', :class => 'btn btn-primary' %>
+  <% end %>
+</div>
+
+<div class="center p-3">
+  <%= link_to 'Create Ride', new_ride_url, class: "btn btn-primary " %>
+</div>
   <table id="rides-table" class="table table-striped">
     <thead>
       <tr>
-        <th>Ride ID</th>
+        <th>Creator Username</th>
         <th>Type</th>
         <th>Departure</th>
         <th>Destination</th>
@@ -29,14 +39,43 @@
     <tbody>
       <% @rides.each do |r| %>
         <tr>
-          <td><%= link_to "Ride " + String(r.id), r %></td>
+          <td><%= r.account.username%></td>
           <td><%= r.role %></td>
           <td><%= r.departure %></td>
           <td><%= r.destination %></td>
           <td><%= String(Date.parse(r.start_date).strftime('%m/%d/%Y')) + " to " + String(Date.parse(r.end_date).strftime('%m/%d/%Y')) %></td>
           <td><%= String(r.start_time) + " to " + String(r.end_time) %></td>
           <td><%= r.seats %></td>
-          <td><%= link_to "Show", r, class: 'badge-pill badge-info'%>
+        <td><%= button_tag "Contact #{r.role.capitalize}", {class: 'btn btn-primary', 'data-toggle' => 'modal', 'data-target' => "#exampleModal"}%>
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel"><%= "#{r.role.capitalize}"%> Information</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <table class="table table-bordered thead-light ">
+                    <tbody>
+                    <tr>
+                      <th><%= "#{r.role.capitalize}"%> Username</th>
+                      <td class="table-light"><%= "#{r.account.username}"%> </td>
+                    </tr>
+                    <tr>
+                      <th><%= "#{r.role.capitalize}"%> Email</th>
+                      <td class="table-light"><%= "#{r.account.email}"%> </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
 		      <% if session.has_key?('login') and session['login'] == "admin" %>
               <%= link_to "Delete", ride_path(r), method: :delete, data: { confirm: "Are you sure?" }, class: 'badge-pill badge-danger' %></td>
 			  <% end %>

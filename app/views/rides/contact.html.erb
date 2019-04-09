@@ -1,0 +1,56 @@
+<%= link_to 'back to all rides', rides_path %>
+<br><br>
+
+<div class="center">
+  <h1>Contact Information</h1>
+</div>
+
+<table id="rides-table" class="table table-striped">
+  <thead>
+  <tr>
+    <th>Username</th>
+    <th>Email</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td><%= @contact.username %></td>
+    <td><%= @contact.email %></td>
+  </tr>
+  </tbody>
+</table>
+
+<div class="center">
+  <h1>Ride Information</h1>
+</div>
+<table id="rides-table" class="table table-striped">
+  <thead>
+  <tr>
+    <th>Creator Username</th>
+    <th>Type</th>
+    <th>Departure</th>
+    <th>Destination</th>
+    <th>Departure Date</th>
+    <th>Departure Time</th>
+    <th>Seats</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% r = @ride %>
+  <tr>
+    <td><%= link_to "Ride " + String(r.id), r %></td>
+    <td><%= r.role %></td>
+    <td><%= r.departure %></td>
+    <td><%= r.destination %></td>
+    <td><%= String(r.start_date) + " to " + String(r.end_date) %></td>
+    <td><%= String(r.start_time) + " to " + String(r.end_time) %></td>
+    <td><%= r.seats %></td>
+    <td><%= link_to "Show", r, class: 'badge-pill badge-info' %>
+      <% if session.has_key?('login') and session['login'] == "admin" %>
+        <%= link_to "Delete", ride_path(r), method: :delete, data: {confirm: "Are you sure?"}, class: 'badge-pill badge-danger' %></td>
+      <% end %>
+      </tr>
+  </tbody>
+</table>
+<br>

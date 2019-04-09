@@ -1,14 +1,34 @@
 require 'pry'
 
 class RidesController < ApplicationController
-  before_action :login_required, :only => [:index, :new, :show, :create, :destroy, :update, :edit]
-  
+  before_action :login_required, :only => :index
+
+
   def index
+
     if session['login']=="admin"
       @rides = Ride.all.order('start_date DESC')
     else
       @rides = Ride.where('end_date >= ?', Date.today)
-	  end
+    end
+
+    @all_types = Ride.all_types
+    permitted = params.permit(type: [:driver, :passenger])
+    @selected_type = permitted[:type] || session[:type] || {}
+
+
+    if @selected_type == {}
+      # @selected_type = @all_types
+      @selected_type = Hash[@all_types.map {|role| [role, 1]}]
+    end
+
+    if params[:type] != session[:type]
+      session[:type] = @selected_type
+      redirect_to :type => @selected_type and return
+    end
+
+    @rides = Ride.where(:role => @selected_type.keys)
+
   end
   
   def new
@@ -21,10 +41,13 @@ class RidesController < ApplicationController
   
   def create
     @ride = current_user.rides.new(ride_params)
-    
     respond_to do |format|
       if @ride.save
-        format.html { redirect_to rides_path, notice: 'Ride successfully created' }
+        format.html do
+          flash[:notice] = 'Ride successfully created'
+          redirect_to controller: 'rides', action: 'show', id: @ride.id
+        end
+
         format.json { render :show, status: :created, location: @ride }
       else
         format.html { render :new }
@@ -35,7 +58,7 @@ class RidesController < ApplicationController
   
   def show
     @ride = Ride.find(params[:id])
-	  @ride_email = Account.where(:id => @ride.account_id).first
+    @rides = Ride.match_ride(params[:id])
   end
 
   def destroy
@@ -71,8 +94,13 @@ class RidesController < ApplicationController
 	  redirect_to profile_index_path
   end
 
+  def contact
+    @ride = Ride.find(params[:id])
+    @contact = @ride.account
+  end
+
   private
-  
+
   def ride_params
     params.require(:ride).permit(:role, :departure, :destination, :start_date, :end_date, :start_time, :end_time, :seats)
   end
