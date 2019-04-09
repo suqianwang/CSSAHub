@@ -9,6 +9,8 @@
 <div class="center">
   <h1>All Rides Offers/Requests</h1>
   <%= form_tag rides_path, :method => :get, :id => 'ride_type_form' do%>
+    <%= hidden_field_tag "date_sort", true if @date_header%>
+    <%= hidden_field_tag "time_sort", true if @time_header%>
     Ride Type:
 
     <% Ride.all_types.each do |role| %>
@@ -30,7 +32,9 @@
         <th>Type</th>
         <th>Departure</th>
         <th>Destination</th>
-        <th>Departure Date</th>
+        <th class = "<%= @date_header %>">
+          <%= link_to "Departure Date", rides_path(:sort => 'asc', :type => @selected_type), :id => 'date_header'%>
+        </th>
         <th>Departure Time</th>
         <th>Seats</th>
         <th>Actions</th>
@@ -44,7 +48,7 @@
           <td><%= r.departure %></td>
           <td><%= r.destination %></td>
           <td><%= String(Date.parse(r.start_date).strftime('%m/%d/%Y'))%></td>
-          <td><%= String(r.start_time) + " to " + String(r.end_time) %></td>
+          <td><%= String(r.start_time) + " to " + String(r.end_time)%></td>
           <td><%= r.seats %></td>
         <td><%= button_tag "Contact #{r.role.capitalize}", {class: 'btn btn-primary', 'data-toggle' => 'modal', 'data-target' => "#exampleModal"}%>
           <!-- Modal -->

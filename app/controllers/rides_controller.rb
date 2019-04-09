@@ -16,18 +16,22 @@ class RidesController < ApplicationController
     permitted = params.permit(type: [:driver, :passenger])
     @selected_type = permitted[:type] || session[:type] || {}
 
+    sort = params[:sort] || session[:sort] || 'asc'
+    ordering,@date_header = {:start_datetime => sort}, 'hilite'
+
 
     if @selected_type == {}
       # @selected_type = @all_types
       @selected_type = Hash[@all_types.map {|role| [role, 1]}]
     end
 
-    if params[:type] != session[:type]
+    if params[:sort] != session[:sort] or params[:type] != session[:type]
+      session[:sort] = sort
       session[:type] = @selected_type
-      redirect_to :type => @selected_type and return
+      redirect_to :sort => sort, :type => @selected_type and return
     end
 
-    @rides = Ride.where(:role => @selected_type.keys)
+    @rides = Ride.where(:role => @selected_type.keys).order(ordering)
 
   end
   
