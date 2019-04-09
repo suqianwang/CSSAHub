@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_08_222022) do
+ActiveRecord::Schema.define(version: 2019_04_09_120121) do
 
   create_table "accounts", force: :cascade do |t|
     t.string "username"
@@ -42,6 +42,8 @@ ActiveRecord::Schema.define(version: 2019_04_08_222022) do
     t.float "departure_lon"
     t.float "destination_lat"
     t.float "destination_lon"
+    t.datetime "start_datetime"
+    t.datetime "end_datetime"
     t.index ["account_id"], name: "index_rides_on_account_id"
   end
 
