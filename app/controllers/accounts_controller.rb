@@ -39,7 +39,9 @@ class AccountsController < ApplicationController
     @account = Account.new(account_params)
     respond_to do |format|
       if @account.save
-        format.html { redirect_to login_index_path, notice: 'Account was successfully created.' }
+        session[:account_id] = @account.id
+        session['login'] = @account.username
+        format.html { redirect_to home_index_path, notice: 'Account was successfully created.' }
       else
         format.html { render :new }
         format.json { render json: @account.errors, status: :unprocessable_entity }
