@@ -35,6 +35,8 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'pry'
 
+gem 'geocoder'
+
 # gem 'validates_timeliness', '~> 5.0.0.alpha4'
 gem 'validates_timeliness', '~> 3.0'
 

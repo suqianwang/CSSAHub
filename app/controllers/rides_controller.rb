@@ -16,7 +16,6 @@ class RidesController < ApplicationController
     permitted = params.permit(type: [:driver, :passenger])
     @selected_type = permitted[:type] || session[:type] || {}
 
-
     if @selected_type == {}
       # @selected_type = @all_types
       @selected_type = Hash[@all_types.map {|role| [role, 1]}]
@@ -27,7 +26,7 @@ class RidesController < ApplicationController
       redirect_to :type => @selected_type and return
     end
 
-    @rides = Ride.where(:role => @selected_type.keys)
+    @rides = Ride.where(:role => @selected_type.keys).order(:start_datetime => 'asc')
 
   end
   
