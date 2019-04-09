@@ -32,15 +32,13 @@
         <th>Type</th>
         <th>Departure</th>
         <th>Destination</th>
-        <th class = "<%= @date_header %>">
-          <%= link_to "Departure Date", rides_path(:sort => 'asc', :type => @selected_type), :id => 'date_header'%>
-        </th>
+        <th>Departure Date</th>
         <th>Departure Time</th>
         <th>Seats</th>
         <th>Actions</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody>git
       <% @rides.each do |r| %>
         <tr>
           <td><%= r.account.username%></td>
