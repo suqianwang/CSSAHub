@@ -43,7 +43,11 @@ class RidesController < ApplicationController
     @ride = current_user.rides.new(ride_params)
     respond_to do |format|
       if @ride.save
-        format.html { redirect_to controller: 'rides', action: 'show', id: @ride.id, notice: 'Ride successfully created' }
+        format.html do
+          flash[:notice] = 'Ride successfully created'
+          redirect_to controller: 'rides', action: 'show', id: @ride.id
+        end
+
         format.json { render :show, status: :created, location: @ride }
       else
         format.html { render :new }

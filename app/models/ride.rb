@@ -28,6 +28,11 @@ class Ride < ApplicationRecord
     %w(driver passenger)
   end
 
+  def parse_datetime
+    self.start_datetime = Timeliness.parse("#{self.start_date} #{self.start_time}")
+    self.end_datetime = Timeliness.parse("#{self.end_date} #{self.end_time}")
+  end
+
   private
 
   def geocode_departure
@@ -45,6 +50,7 @@ class Ride < ApplicationRecord
     if self.end_date.nil?
       self.end_date = self.start_date
     end
+    self.parse_datetime
   end
 
 
