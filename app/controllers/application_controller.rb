@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
- helper_method :current_user
+  protect_from_forgery unless: -> { request.format.json? }
+  helper_method :current_user
  
   def current_user
     if session[:account_id] && Account.find_by_id(session[:account_id])

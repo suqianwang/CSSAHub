@@ -8,7 +8,8 @@ class LoginController < ApplicationController
   end
   def create
     account = Account.find_by_username(params[:username])
-    if account && account.authenticate(params[:password])
+    if account && account.authenticate(params[:password]) && account.archived == false
+      reset_session # protects against session fixation
       session[:account_id] = account.id
       session['login'] = account.username
       
@@ -17,7 +18,9 @@ class LoginController < ApplicationController
   	  else
         redirect_to services_path, notice: "Logged in!"
       end
-      
+    elsif account && account.archived == true
+	  flash.now[:alert] = "Your account has been disabled. Please contact an administrator for assistance."
+      render "index"
     else
       flash.now[:alert] = "Username or password is invalid"
       render "index"

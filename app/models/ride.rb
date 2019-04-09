@@ -14,6 +14,16 @@ class Ride < ApplicationRecord
   after_validation :geocode_departure, if: ->(obj){ obj.departure.present? and obj.departure_changed? }
   after_validation :geocode_destination, if: ->(obj){ obj.destination.present? and obj.destination_changed? }
 
+  def start_date=(value)
+    value = Date.strptime(value, '%m/%d/%Y') rescue value
+    super(value)
+  end
+
+  def end_date=(value)
+    value = Date.strptime(value, "%m/%d/%Y") rescue value
+    super(value)
+  end
+
   private
 
   def geocode_departure
@@ -75,4 +85,5 @@ class Ride < ApplicationRecord
     end
     return @matched_rides
   end
+
 end

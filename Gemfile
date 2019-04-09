@@ -13,8 +13,6 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 gem 'duktape'
-# HAML as templating engine
-gem 'haml'
 gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 # Use CoffeeScript for .coffee assets and views
@@ -53,10 +51,12 @@ group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'factory_bot_rails'
+  gem 'brakeman'
   gem 'guard'
   gem 'guard-rspec'
   gem 'guard-cucumber'
   gem 'geocoder'
+  gem 'guard-brakeman'
 end
 
 group :test do

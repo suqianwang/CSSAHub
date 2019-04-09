@@ -1,25 +1,34 @@
 require 'pry'
 
 class RidesController < ApplicationController
-  before_action :login_required, :only => :index
+  before_action :login_required, :only => [:index, :new, :show, :create, :destroy, :update, :edit]
+  
   def index
-    @rides = Ride.all
+    if session['login']=="admin"
+      @rides = Ride.all.order('start_date DESC')
+    else
+      @rides = Ride.where('end_date >= ?', Date.today)
+	  end
   end
   
   def new
-    @ride = Ride.new
+    if session['login']=="admin"
+	    redirect_to admin_index_path
+  	else
+      @ride = Ride.new
+  	end
   end
   
   def create
     @ride = current_user.rides.new(ride_params)
-    if @ride.save
-      redirect_to controller: 'rides', action: 'show', id: @ride.id, notice: 'Ride creation successful!'
-    else
-      if @ride.errors.any?
-        puts @ride.errors.messages
-        flash[:notice] = @ride.errors.messages
+    respond_to do |format|
+      if @ride.save
+        format.html { redirect_to controller: 'rides', action: 'show', id: @ride.id, notice: 'Ride successfully created' }
+        format.json { render :show, status: :created, location: @ride }
+      else
+        format.html { render :new }
+        format.json { render json: @ride.errors, status: :unprocessable_entity }
       end
-      redirect_to new_ride_path
     end
   end
   
@@ -30,18 +39,35 @@ class RidesController < ApplicationController
 
   def destroy
   	Ride.destroy(params[:id])
-  	respond_to do |format|
+  	if session['login']=="admin"
+  	  respond_to do |format|
         format.html { redirect_to rides_path, notice: 'Ride was successfully destroyed.' }
         format.json { head :no_content }
-    end
+      end
+	  else
+	    respond_to do |format|
+        format.html { redirect_to profile_index_path, notice: 'Ride was successfully destroyed.' }
+        format.json { head :no_content }
+	    end
+	  end
   end
 
   def edit
-    # # Check if user owns the ride. If not, throw 401 Unauthorized
-    # @ride = Ride.find(params[:id])
-    # if not current_user.id == @ride.id
-      # render '401', :status => 401
-    # end
+    # Check if user owns the ride. If not, throw 401 Unauthorized
+     @ride = Ride.find(params[:id])
+     if not current_user.id == @ride.account_id or session['login'] == "admin"
+       render '401', :status => 401
+     end
+  end
+  
+  def update
+    @ride = Ride.find(params[:id])
+    if @ride.update_attributes(ride_params)
+	    @ride.save
+      flash[:notice] = "Ride was successfully updated."
+	  end
+	  
+	  redirect_to profile_index_path
   end
 
   def contact
