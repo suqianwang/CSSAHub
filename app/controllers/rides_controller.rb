@@ -15,7 +15,11 @@ class RidesController < ApplicationController
     if @ride.save
       redirect_to controller: 'rides', action: 'show', id: @ride.id, notice: 'Ride creation successful!'
     else
-      redirect_to new_ride_path, notice: 'Invalid ride!'
+      if @ride.errors.any?
+        puts @ride.errors.messages
+        flash[:notice] = @ride.errors.messages
+      end
+      redirect_to new_ride_path
     end
   end
   

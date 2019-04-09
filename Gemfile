@@ -56,6 +56,7 @@ group :development do
   gem 'guard'
   gem 'guard-rspec'
   gem 'guard-cucumber'
+  gem 'geocoder'
 end
 
 group :test do

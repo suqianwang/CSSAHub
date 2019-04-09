@@ -19,8 +19,9 @@
 
 <% if @rides.size == 0 %>
   <div class="center p-4">
+    <%= image_tag('sorry.png', :class => "", :width => '100', :height => '100') %>
     <h3> Sorry, we currently don't have any match </h3>
-    <h5 class="text-secondary"> Please check your ride on your profile later</h5>
+    <h5 class="text-secondary"> Please check this ride on your profile later</h5>
   </div>
 
 <% else %>

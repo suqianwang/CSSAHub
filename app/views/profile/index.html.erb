@@ -98,7 +98,7 @@
 									  <td><%= String(r.start_date) + " to " + String(r.end_date) %></td>
 									  <td><%= String(r.start_time) + " to " + String(r.end_time) %></td>
 									  <td><%= r.seats %></td>
-									  <td><%= link_to "Show", r, class: 'badge-pill badge-info'%>									  
+									  <td><%= link_to "Match", r, class: 'badge-pill badge-info'%>
 									      <%= link_to "Edit", edit_ride_path(r), class: 'badge-pill badge-success'%>
 										  <%= link_to "Delete", ride_path(r), method: :delete, data: { confirm: "Are you sure?" }, class: 'badge-pill badge-danger' %></td>
 									</tr>
@@ -141,7 +141,7 @@
 									  <td><%= String(p.start_date) + " to " + String(p.end_date) %></td>
 									  <td><%= String(p.start_time) + " to " + String(p.end_time) %></td>
 									  <td><%= p.seats %></td>
-									  <td><%= link_to "Show", p, class: 'badge-pill badge-info'%>
+									  <td><%= link_to "Match", p, class: 'badge-pill badge-info'%>
 									  <%= link_to "Edit", edit_ride_path(p), class: 'badge-pill badge-success'%>
 										  <%= link_to "Delete", ride_path(p), method: :delete, data: { confirm: "Are you sure?" }, class: 'badge-pill badge-danger' %></td>
 									</tr>
