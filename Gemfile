@@ -35,6 +35,8 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'pry'
 
+gem 'geocoder'
+
 # gem 'validates_timeliness', '~> 5.0.0.alpha4'
 gem 'validates_timeliness', '~> 3.0'
 
@@ -55,7 +57,6 @@ group :development do
   gem 'guard'
   gem 'guard-rspec'
   gem 'guard-cucumber'
-  gem 'geocoder'
   gem 'guard-brakeman'
 end
 
