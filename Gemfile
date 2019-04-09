@@ -55,7 +55,6 @@ group :development do
   gem 'guard'
   gem 'guard-rspec'
   gem 'guard-cucumber'
-  gem 'geocoder'
   gem 'guard-brakeman'
 end
 
@@ -73,6 +72,7 @@ group :test do
   gem 'shoulda-matchers', require: false
   gem 'database_cleaner'
   gem 'faker'
+  gem 'fakeweb'
   gem 'simplecov', require: false
 end
 
@@ -82,3 +82,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 group :production do
   gem 'pg', '~> 1.1' # for Heroku deployment
 end
+
+gem 'geocoder'
+
