@@ -56,9 +56,6 @@ class AccountsController < ApplicationController
 	   if (params[:password] == params[:password_confirmation]) && @profile.update_attributes!(update_params)
 	       if @profile.save
              redirect_to profile_index_path, notice: "Account was successfully saved."
-		   else
-	         flash[:alert] = "Account failed to save. Passwords do not match."
-			 redirect_to profile_index_path
 		   end
        else
 	       flash[:alert] = "Account failed to save. Passwords do not match."
