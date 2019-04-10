@@ -14,6 +14,7 @@ RSpec.describe RidesController, :type => :controller do
     it "assigns @rides as all rides" do
       post :create, :params => { ride: @ride_params }
       login(@account)
+      byebug
       get :index
       expect(assigns(:rides).count).to eq(Ride.count)
     end

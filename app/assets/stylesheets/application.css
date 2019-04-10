@@ -13,6 +13,30 @@
  *= require_self
  *= require_tree .
  */
+
+
+
+.btn-primary{
+    background-color: #BC0813 !important;
+    border-color: #BC0813 !important;
+}
+
+a:not(.btn):not(.clickable-card) {
+    color: #BC0813;
+}
+
+
+.list-group-item.active {
+    background-color: #dddddd !important;
+    border-color: #dddddd !important;
+}
+
+.navbar{
+    background-color: #BC0813;
+}
+/*a.dropdown-item{*/
+    /*color: #BC0813;*/
+/*}*/
 .center {
     text-align: center;
     margin: auto;
