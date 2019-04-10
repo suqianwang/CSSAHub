@@ -25,3 +25,7 @@ end
 Then("the ride should be destroyed") do
     expect(page).to have_content('Ride was successfully destroyed.')
 end
+
+Then("I should get an error message for the ride") do
+  # expect(page).to have_content('Field is missing or invalid in the form.')
+end

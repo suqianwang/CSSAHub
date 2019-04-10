@@ -24,7 +24,6 @@ When("I fill in the form") do
   fill_in('ride_departure', with: @ride_params[:departure])
   fill_in('ride_destination', with: @ride_params[:destination])
   fill_in('ride_start_date', with: @ride_params[:start_date])
-  fill_in('ride_end_date', with: @ride_params[:end_date])
   fill_in('ride_start_time', with: @ride_params[:start_time])
   fill_in('ride_end_time', with: @ride_params[:end_time])
   fill_in('ride_seats', with: @ride_params[:seats])
@@ -36,10 +35,8 @@ When("I fill in the form wrongly") do
   fill_in('ride_departure', with: nil)
   fill_in('ride_destination', with: nil)
   fill_in('ride_start_date', with: Date.today-1)
-  fill_in('ride_end_date', with: "hello")
   fill_in('ride_start_time', with: '01/01/00')
   fill_in('ride_end_time', with: nil)
-  fill_in('ride_seats', with: -1)
 end
 
 When("I press Submit") do
