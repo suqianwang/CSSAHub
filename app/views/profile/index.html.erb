@@ -23,6 +23,7 @@
 		                    <hr>
 		                </div>
 		            </div>
+					
 		            <div class="row">
 		                <div class="col-md-12">
 		                    <%= form_for @profile do |f| %>
@@ -35,7 +36,7 @@
                               <div class="form-group row">
                                 <label for="name" class="col-4 col-form-label">Name</label> 
                                 <div class="col-8">
-									<%= f.text_field :name, :id => "name", :name => "name", :class => "form-control here", :value => @profile.name %>
+									<%= f.text_field :name, :id => "name", :name => "name", :class => "form-control here", :value => @profile.name, :maxlength => 50 %>
                                 </div>
                               </div>
                               <div class="form-group row">
@@ -45,15 +46,15 @@
                                 </div>
                               </div>
                               <div class="form-group row">
-                                <label for="newpass" class="col-4 col-form-label">New Password</label> 
+                                <label for="password" class="col-4 col-form-label">New Password</label> 
                                 <div class="col-8">
-								  <%= f.password_field :password, :id => "newpass", :name => "newpass", :class => "form-control here", :placeholder => "New Password" %>
+								  <%= f.password_field :password, :id => "password", :name => "password", :class => "form-control here", :placeholder => "New Password", :maxlength => 50, :minlength => 5, :size => 20 %>
                                 </div>
                               </div> 
 							  <div class="form-group row">
-                                <label for="newpass" class="col-4 col-form-label">Confirm New Password</label> 
+                                <label for="password" class="col-4 col-form-label">Confirm New Password</label> 
                                 <div class="col-8">
-								  <%= f.password_field :password_confirmation, :id => "newpass", :name => "newpass", :class => "form-control here", :placeholder => "Confirm New Password" %>
+								  <%= f.password_field :password_confirmation, :id => "password_confirmation", :name => "password_confirmation", :class => "form-control here", :placeholder => "Confirm New Password", :maxlength => 50, :minlength => 5, :size => 20 %>
                                 </div>
                               </div> 
                               <div class="form-group row">
@@ -96,7 +97,7 @@
 									  <td><%= r.role %></td>
 									  <td><%= r.departure %></td>
 									  <td><%= r.destination %></td>
-									  <td><%= String(Date.parse(r.start_date).strftime('%m/%d/%Y')) + " to " + String(Date.parse(r.end_date).strftime('%m/%d/%Y')) %></td>
+									  <td><%= String(Date.parse(r.start_date).strftime('%m/%d/%Y')) %></td>
 									  <td><%= String(r.start_time) + " to " + String(r.end_time) %></td>
 									  <td><%= r.seats %></td>
 									  <td><%= link_to "Match", r, class: 'badge-pill badge-info'%>
@@ -139,7 +140,7 @@
 									  <td><%= p.role %></td>
 									  <td><%= p.departure %></td>
 									  <td><%= p.destination %></td>
-									  <td><%= String(Date.parse(p.start_date).strftime('%m/%d/%Y')) + " to " + String(Date.parse(p.end_date).strftime('%m/%d/%Y')) %></td>
+									  <td><%= String(Date.parse(p.start_date).strftime('%m/%d/%Y')) %></td>
 									  <td><%= String(p.start_time) + " to " + String(p.end_time) %></td>
 									  <td><%= p.seats %></td>
 									  <td><%= link_to "Match", p, class: 'badge-pill badge-info'%>
@@ -174,7 +175,6 @@
 									<th>Departure Date</th>
 									<th>Departure Time</th>
 									<th>Seats</th>
-									<th>Actions</th>
 								  </tr>
 								</thead>
 								<tbody>
@@ -184,11 +184,9 @@
 									  <td><%= x.role %></td>
 									  <td><%= x.departure %></td>
 									  <td><%= x.destination %></td>
-									  <td><%= String(Date.parse(x.start_date).strftime('%m/%d/%Y')) + " to " + String(Date.parse(x.end_date).strftime('%m/%d/%Y')) %></td>
+									  <td><%= String(Date.parse(x.start_date).strftime('%m/%d/%Y')) %></td>
 									  <td><%= String(x.start_time) + " to " + String(x.end_time) %></td>
 									  <td><%= x.seats %></td>
-									  <td><%= link_to "Show", x, class: 'badge-pill badge-info'%>									  
-									      </td>
 									</tr>
 								  <% end %>
 								</tbody>

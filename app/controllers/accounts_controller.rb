@@ -22,7 +22,7 @@ class AccountsController < ApplicationController
 
   # GET /accounts/new
   def new
-    if current_user.blank?
+    if current_user.blank? and session['login'].blank?
       @account = Account.new
     else
       redirect_to services_path
@@ -53,11 +53,13 @@ class AccountsController < ApplicationController
   # PATCH/PUT /accounts/1.json
    def update
        @profile = Account.find(params[:id])
-       if @profile.update_attributes!(update_params)
-	     @profile.save
-         redirect_to profile_index_path, notice: "Account was successfully saved"
+	   if (params[:password] == params[:password_confirmation]) && @profile.update_attributes!(update_params)
+	       if @profile.save
+             redirect_to profile_index_path, notice: "Account was successfully saved."
+		   end
        else
-	     redirect_to profile_index_path
+	       flash[:alert] = "Account failed to save. Passwords do not match."
+		   redirect_to profile_index_path
        end
    end
   
