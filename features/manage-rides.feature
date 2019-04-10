@@ -13,6 +13,14 @@ Feature: Manage Rides
 	And I fill in the form
 	And I press Update Rides
 	Then the ride should update
+	
+  Scenario: I incorrectly edit my ride
+    Given I am logged in
+	And a ride exists
+	When I am on the edit page
+	And I fill in the form wrongly
+	And I press Update Rides
+	Then I should get an error message for the ride
 
 Scenario: Admin not edit rides
   Given I am an admin

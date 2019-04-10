@@ -13,9 +13,5 @@ before_action :login_required, :only => [:index, :edit, :update]
 	end
   end
 
-  def edit
-        # use this to populate a form in your view
-  end
-  
  
 end

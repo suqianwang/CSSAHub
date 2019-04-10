@@ -57,22 +57,6 @@ RSpec.describe AccountsController, :type => :controller do
     end
   end
 
-  # describe "get #show" do
-    # it "should show account" do
-      # get show_account_url(@account)
-      # expect(response).to have_http_status(:success)
-    # end
-  # end
-
-  # describe "get #edit" do
-    # it "shows edit page" do
-      # get edit_account(@account)
-      # expect(response).to render_template :edit
-    # end
-  # end
-
-  #
-
   describe "delete #destroy" do
      it "should destroy account" do
 	 new_account = FactoryBot.create :account, :user
@@ -106,5 +90,27 @@ RSpec.describe AccountsController, :type => :controller do
        expect(response).to redirect_to services_path
 	end
   end
+  
+  describe "PATCH/PUT update account" do
+  let(:attr) do
+      { :name => "newname" }
+    end
+     it "should update with correct info" do
+	   new_account = FactoryBot.create :account, :user
+	   login(@account)
+	   put :update, params: {:id => new_account.id, :new_account => attr}
+       expect(response).to redirect_to profile_index_path
+	end
+  end
+  
+  describe "PATCH/PUT update account" do
+     it "should fail when password change does not match" do
+	   new_account = FactoryBot.create :account, :user
+	   login(@account)
+       put :update, params: {:id => new_account.id, :password_confirmation => "helloworld"}
+       expect(response).to redirect_to profile_index_path
+	end
+  end
+  
   
 end

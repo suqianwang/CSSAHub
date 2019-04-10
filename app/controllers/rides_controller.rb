@@ -88,9 +88,14 @@ class RidesController < ApplicationController
     if @ride.update_attributes(ride_params)
 	    @ride.save
       flash[:notice] = "Ride was successfully updated."
-	  end
-	  
 	  redirect_to profile_index_path
+	else
+      flash[:alert] = "Field is missing or invalid in the form."
+	  respond_to do |format|
+	    format.html {}
+        format.js { render js: 'window.top.location.reload();$(document).scrollTop(0);' }
+      end
+	end
   end
 
   def contact

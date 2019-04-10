@@ -1,5 +1,5 @@
-When("I click on the show link") do
-  click_link "Show"
+When("I click on the match link") do
+  click_link "Match"
 end
 
 Then("the ride should be shown") do

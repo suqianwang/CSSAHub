@@ -8,3 +8,4 @@ class Account < ApplicationRecord
   validates :terms_and_conditions, acceptance: true, :on => :create
 
 end
+

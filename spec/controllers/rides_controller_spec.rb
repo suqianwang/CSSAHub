@@ -135,4 +135,22 @@ RSpec.describe RidesController, :type => :controller do
     it { expect(@ride.departure).to eq(attr[:departure]) }
     
   end
+  
+  
+  describe "PUT #update" do
+    let(:attr) do
+      { :start_time => "" }
+    end
+    
+    before(:each) do
+      login(@account)
+      @ride = Ride.create(@ride_params.merge(:account => @account))
+      put :update, params: {:id => @ride.id, :ride => attr}
+      @ride.reload
+    end
+    
+    it "should not allow invalid input" do
+      expect(response).to have_http_status(:no_content)
+	 end
+  end
 end
