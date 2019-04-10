@@ -5,5 +5,5 @@ Feature: Show rides
     Given I am logged in
     And a ride exists
 	When I am on the profile page
-    And I click on the show link
+    And I click on the match link
     Then the ride should be shown
