@@ -1,5 +1,8 @@
-<script>
+<%= link_to 'Back', rides_path %>
+
+<script>  
     $(document).ready(function () {
+
         $('input.form_type[type=radio]').change(function () {
             $('.driver_form, .passenger_form').addClass('d-none');
 
@@ -75,8 +78,12 @@
 
             <div class="input-daterange row">
               <div class="form-group col-6">
-                <%= f.label :start_date, "Departure Date (YYYY-MM-DD)" %>
-                <%= f.text_field :start_date, :class => "form-control" %>
+                <%= f.label :start_date, "Departure Date (MM/DD/YYYY)" %>
+				<% if !@ride.start_date.nil? %>
+                     <%= f.text_field :start_date, :class => "form-control", :value => Date.parse(@ride.start_date).strftime('%m/%d/%Y') %>
+			    <% else %>
+				     <%= f.text_field :start_date, :class => "form-control" %>
+				<% end %>
               </div>
             </div>
 
