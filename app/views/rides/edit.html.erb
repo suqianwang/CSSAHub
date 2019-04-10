@@ -59,10 +59,6 @@
                 <%= f.label :start_date, "Departure Date (MM/DD/YYYY)" %>
                 <%= f.text_field :start_date, :class => "form-control", :value => Date.parse(@ride.start_date).strftime('%m/%d/%Y') %>
               </div>
-              <div class="form-group col-6">
-                <%= f.label :end_date, "to" %>
-                <%= f.text_field :end_date, :class => "form-control", :value => Date.parse(@ride.end_date).strftime('%m/%d/%Y') %>
-              </div>
             </div>
              <div class="row">
               <div class="form-group col-6">

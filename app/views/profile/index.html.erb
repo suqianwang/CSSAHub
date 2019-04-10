@@ -97,7 +97,7 @@
 									  <td><%= r.role %></td>
 									  <td><%= r.departure %></td>
 									  <td><%= r.destination %></td>
-									  <td><%= String(Date.parse(r.start_date).strftime('%m/%d/%Y')) + " to " + String(Date.parse(r.end_date).strftime('%m/%d/%Y')) %></td>
+									  <td><%= String(Date.parse(r.start_date).strftime('%m/%d/%Y')) %></td>
 									  <td><%= String(r.start_time) + " to " + String(r.end_time) %></td>
 									  <td><%= r.seats %></td>
 									  <td><%= link_to "Match", r, class: 'badge-pill badge-info'%>
@@ -140,7 +140,7 @@
 									  <td><%= p.role %></td>
 									  <td><%= p.departure %></td>
 									  <td><%= p.destination %></td>
-									  <td><%= String(Date.parse(p.start_date).strftime('%m/%d/%Y')) + " to " + String(Date.parse(p.end_date).strftime('%m/%d/%Y')) %></td>
+									  <td><%= String(Date.parse(p.start_date).strftime('%m/%d/%Y')) %></td>
 									  <td><%= String(p.start_time) + " to " + String(p.end_time) %></td>
 									  <td><%= p.seats %></td>
 									  <td><%= link_to "Match", p, class: 'badge-pill badge-info'%>
@@ -175,7 +175,6 @@
 									<th>Departure Date</th>
 									<th>Departure Time</th>
 									<th>Seats</th>
-									<th>Actions</th>
 								  </tr>
 								</thead>
 								<tbody>
@@ -185,11 +184,9 @@
 									  <td><%= x.role %></td>
 									  <td><%= x.departure %></td>
 									  <td><%= x.destination %></td>
-									  <td><%= String(Date.parse(x.start_date).strftime('%m/%d/%Y')) + " to " + String(Date.parse(x.end_date).strftime('%m/%d/%Y')) %></td>
+									  <td><%= String(Date.parse(x.start_date).strftime('%m/%d/%Y')) %></td>
 									  <td><%= String(x.start_time) + " to " + String(x.end_time) %></td>
 									  <td><%= x.seats %></td>
-									  <td><%= link_to "Show", x, class: 'badge-pill badge-info'%>									  
-									      </td>
 									</tr>
 								  <% end %>
 								</tbody>

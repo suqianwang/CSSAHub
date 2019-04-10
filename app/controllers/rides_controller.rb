@@ -85,19 +85,15 @@ class RidesController < ApplicationController
   
   def update
     @ride = Ride.find(params[:id])
-	puts @ride.inspect
-	puts ride_params.inspect
     if @ride.update_attributes(ride_params)
 	    @ride.save
       flash[:notice] = "Ride was successfully updated."
-	  puts "hello"
 	  redirect_to profile_index_path
 	else
-	  puts ride_params.inspect
-	  puts "why this"
       flash[:alert] = "Field is missing or invalid in the form."
 	  respond_to do |format|
-      format.js { render js: 'window.top.location.reload();$(document).scrollTop(0);' }
+	    format.html {}
+        format.js { render js: 'window.top.location.reload();$(document).scrollTop(0);' }
       end
 	end
   end
