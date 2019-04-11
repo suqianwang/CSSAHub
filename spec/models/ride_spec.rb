@@ -4,7 +4,6 @@ RSpec.describe Ride, :type => :model do
   before do 
     @account = FactoryBot.build_stubbed(:account, :user)
     @ride = FactoryBot.build_stubbed(:ride, account: @account)
-    # @ride.account = @account
   end
   
   describe '#account' do
@@ -18,52 +17,67 @@ RSpec.describe Ride, :type => :model do
   end
   
   describe '#departure' do
-    it { is_expected.to validate_presence_of :departure }
-    # it { is_expected.to allow_value("Zachry").for(:departure) }
+    it do
+      should validate_presence_of(:departure).
+        with_message("Please select a valid departure location from Google map")
+    end
+    it { is_expected.to allow_value("Zachry Engineering Center, Spence Street, College Station, TX, USA").for(:departure) }
     # it { is_expected.to_not allow_value("invalid location").for(:departure) }
   end
   
   describe '#destination' do
-    it { is_expected.to validate_presence_of :destination }
-    # it { is_expected.to allow_value("Zachry").for(:destination) }
+    it do
+      should validate_presence_of(:destination).
+          with_message("Please select a valid destination location from Google map")
+    end
+    it { is_expected.to allow_value("Zachry Engineering Center, Spence Street, College Station, TX, USA").for(:destination) }
     # it { is_expected.to_not allow_value("invalid location").for(:destination) }
   end
   
   describe '#dates' do
-    it { is_expected.to validate_presence_of :start_date }
-    it { is_expected.to validate_presence_of :end_date }
-  end
-  
-  describe '#date_order' do
-    context 'with valid attributes' do
-      it 'validates end date is on or after begin date' do
-        @ride.start_date = (Date.today).strftime("%m/%d/%Y")
-        @ride.end_date = (Date.today).strftime("%m/%d/%Y")
-        expect(@ride).to be_valid
-      end
-      it 'validates that start_date is not before today' do
-        @ride.start_date = (Date.today+1).strftime("%m/%d/%Y")
-        @ride.end_date = (Date.today+2).strftime("%m/%d/%Y")
-        expect(@ride).to be_valid
-      end
-    end
-    context 'with invalid attributes' do
-      it 'validates end date is on or after begin date' do
-        @ride.start_date = (Date.today+2).strftime("%m/%d/%Y")
-        @ride.end_date = (Date.today+1).strftime("%m/%d/%Y")
-        expect(@ride).to_not be_valid
-      end
-      it 'validates that start_date is not before today' do
-        @ride.start_date = (Date.today-1).strftime("%m/%d/%Y")
-        @ride.end_date = (Date.today).strftime("%m/%d/%Y")
-        expect(@ride).to_not be_valid
-      end
+    it do
+      should validate_presence_of(:start_date).
+          with_message("Please select a valid departure date")
     end
   end
+
+  #will be added after end_date is implemented
+  # describe '#date_order' do
+  #   context 'with valid attributes' do
+  #     it 'validates end date is on or after begin date' do
+  #       @ride.start_date = (Date.today).strftime("%m/%d/%Y")
+  #       @ride.end_date = (Date.today).strftime("%m/%d/%Y")
+  #       expect(@ride).to be_valid
+  #     end
+  #     it 'validates that start_date is not before today' do
+  #       @ride.start_date = (Date.today+1).strftime("%m/%d/%Y")
+  #       @ride.end_date = (Date.today+2).strftime("%m/%d/%Y")
+  #       expect(@ride).to be_valid
+  #     end
+  #   end
+  #   context 'with invalid attributes' do
+  #     it 'validates end date is on or after begin date' do
+  #       @ride.start_date = (Date.today+2).strftime("%m/%d/%Y")
+  #       @ride.end_date = (Date.today+1).strftime("%m/%d/%Y")
+  #       expect(@ride).to_not be_valid
+  #     end
+  #     it 'validates that start_date is not before today' do
+  #       @ride.start_date = (Date.today-1).strftime("%m/%d/%Y")
+  #       @ride.end_date = (Date.today).strftime("%m/%d/%Y")
+  #       expect(@ride).to_not be_valid
+  #     end
+  #   end
+  # end
   
   describe '#time' do
-    it { is_expected.to validate_presence_of :start_time }
-    it { is_expected.to validate_presence_of :end_time }
+    it do
+      should validate_presence_of(:start_time).
+          with_message("Please enter departure start time in correct format, (i.e. 07:00)")
+    end
+    it do
+      should validate_presence_of(:end_time).
+          with_message("Please enter a valid departure time that is on or after departure start time in correct format(i.e. 07:00)")
+    end
   end
   
   describe '#time_order' do
