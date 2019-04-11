@@ -17,7 +17,8 @@ Feature: Navigate services
     
   Examples:
     | service | corresponding |
-    | Transportation | rides |
+    | Transportation Service| rides |
+
 	
   Scenario: Admin should not see hub
    Given I am an admin

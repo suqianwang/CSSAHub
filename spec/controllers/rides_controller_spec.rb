@@ -1,9 +1,11 @@
+require 'spec_helper'
+
 RSpec.describe RidesController, :type => :controller do
   before do
     @account = FactoryBot.create(:account, :user)
 	  @admin = FactoryBot.create :account, :admin
-    @ride_params = { role: 'driver', departure: 'Zachry', destination: 'HEB',
-                     start_date: (Date.today+1).strftime("%m/%d/%Y"), end_date: (Date.today+2).strftime("%m/%d/%Y"), start_time: '8:00', end_time:'12:00', seats: 5 }
+    @ride_params = { role: 'driver', departure: 'Zachry Engineering Center, Spence Street, College Station, TX, USA', destination: 'H-E-B, Texas Avenue South, College Station, TX, USA',
+                     start_date: (Date.today+1).strftime("%m/%d/%Y"), start_time: '08:00', end_time:'12:00', seats: 5 }
     @invalid_params = @ride_params.dup
     @invalid_params[:role] = 'invalid role'
 	  @invalid_params_no_date = @ride_params.dup
@@ -12,16 +14,22 @@ RSpec.describe RidesController, :type => :controller do
 
   describe "GET index" do
     it "assigns @rides as all rides" do
-      post :create, :params => { ride: @ride_params }
       login(@account)
+      post :create, :params => { ride: @ride_params }
       get :index
       expect(assigns(:rides).count).to eq(Ride.count)
     end
     it "assigns @rides as all rides for admin" do
-      post :create, :params => { ride: @ride_params }
       login(@admin)
+      post :create, :params => { ride: @ride_params }
       get :index
       expect(assigns(:rides).count).to eq(Ride.count)
+    end
+    it "redirect if params filter option and session filter option differ" do
+      login(@account)
+      get :index, :params => {type: {driver: 1}}
+      get :index
+      expect(response).to redirect_to rides_path(type: {driver: 1})
     end
   end
   
@@ -49,8 +57,8 @@ RSpec.describe RidesController, :type => :controller do
       end
       it "redirects to the index" do
   	    login(@account)
-        post :create, :params => {:ride => @ride_params}
-        expect(response).to redirect_to(rides_path)
+        post :create, :params => {ride: @ride_params}
+        expect(response).to redirect_to(ride_path(assigns(:ride).id))
       end
       it "assigns and saves created ride as @ride" do
 	      login(@account)
@@ -152,4 +160,30 @@ RSpec.describe RidesController, :type => :controller do
       expect(response).to have_http_status(:no_content)
 	 end
   end
+
+
+  describe '#match_ride' do
+    it 'match ride' do
+      login(@account)
+      @ride_1_params = { role: 'driver', departure: 'Zachry Engineering Center, Spence Street, College Station, TX, USA', destination: 'H-E-B, Texas Avenue South, College Station, TX, USA',
+                         start_date: (Date.today+1).strftime("%m/%d/%Y"), start_time: '08:00', end_time:'12:00', seats: 2 }
+
+      @ride_2_params = { role: 'passenger', departure: 'Zachry Engineering Center, Spence Street, College Station, TX, USA', destination: 'H-E-B, Texas Avenue South, College Station, TX, USA',
+                         start_date: (Date.today+1).strftime("%m/%d/%Y"), start_time: '08:00', end_time:'12:00', seats: 5 }
+      @ride_3_params = { role: 'passenger', departure: 'Zachry Engineering Center, Spence Street, College Station, TX, USA', destination: 'H-E-B, Texas Avenue South, College Station, TX, USA',
+                         start_date: (Date.today+1).strftime("%m/%d/%Y"), start_time: '08:00', end_time:'12:00', seats: 2 }
+      post :create, :params => {ride: @ride_1_params}
+      ride_1 = Ride.last
+      post :create, :params => {ride: @ride_2_params}
+      ride_2 = Ride.last
+      post :create, :params => {ride: @ride_3_params}
+      ride_3 = Ride.last
+      # it 'should not match if driver has lower capacity'
+      expect(Ride.match_ride(ride_1.id)) .not_to include(ride_2)
+      # it 'should not match if passenger has higher capacity'
+      expect(Ride.match_ride(ride_2.id)) .not_to include(ride_1)
+      expect(Ride.match_ride(ride_3.id)) .to include(ride_1)
+    end
+  end
+
 end
