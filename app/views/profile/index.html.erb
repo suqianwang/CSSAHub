@@ -80,6 +80,7 @@
 						<table id="rides-table" class="table table-striped">
 								<thead>
 								  <tr>
+									<th>Ride ID</th>
 									<th>Type</th>
 									<th>Departure</th>
 									<th>Destination</th>
@@ -92,6 +93,7 @@
 								<tbody>
 								  <% @requests.each do |r| %>
 									<tr>
+									  <td><%= link_to "Ride " + String(r.id), r %></td>
 									  <td><%= r.role %></td>
 									  <td><%= r.departure %></td>
 									  <td><%= r.destination %></td>
@@ -121,6 +123,7 @@
 							<table id="rides-table" class="table table-striped">
 								<thead>
 								  <tr>
+									<th>Ride ID</th>
 									<th>Type</th>
 									<th>Departure</th>
 									<th>Destination</th>
@@ -133,6 +136,7 @@
 								<tbody>
 								  <% @posts.each do |p| %>
 									<tr>
+									  <td><%= link_to "Ride " + String(p.id), p %></td>
 									  <td><%= p.role %></td>
 									  <td><%= p.departure %></td>
 									  <td><%= p.destination %></td>
@@ -164,6 +168,7 @@
 						<table id="rides-table" class="table table-striped">
 								<thead>
 								  <tr>
+									<th>Ride ID</th>
 									<th>Type</th>
 									<th>Departure</th>
 									<th>Destination</th>
@@ -175,6 +180,7 @@
 								<tbody>
 								  <% @past.each do |x| %>
 									<tr>
+									  <td><%= link_to "Ride " + String(x.id), x %></td>
 									  <td><%= x.role %></td>
 									  <td><%= x.departure %></td>
 									  <td><%= x.destination %></td>
