@@ -21,7 +21,7 @@
     border-color: #BC0813 !important;
 }
 
-a:not(.btn):not(.clickable-card) {
+a:not(.btn):not(.clickable-card):not(.badge-pill) {
     color: #BC0813;
 }
 
