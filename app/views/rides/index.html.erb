@@ -1,4 +1,4 @@
-<% if session.has_key?('login') and session['login'] == "admin" %>
+<% if session.has_key?('login') and current_user.isAdmin == true %>
 <%= link_to 'Back to Dashboard Page', admin_index_path %>
 <% elsif session.has_key?('login') %>
 <div>
@@ -78,7 +78,7 @@
               </div>
             </div>
           </div>
-		      <% if session.has_key?('login') and session['login'] == "admin" %>
+		      <% if session.has_key?('login') and current_user.isAdmin == true %>
               <%= link_to "Delete", ride_path(r), method: :delete, data: { confirm: "Are you sure?" }, class: 'badge-pill badge-danger' %></td>
 			  <% end %>
         </tr>

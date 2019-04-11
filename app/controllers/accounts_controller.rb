@@ -5,15 +5,15 @@ class AccountsController < ApplicationController
   # GET /accounts
   # GET /accounts.json
   def index
-    if (session['login'] == "admin")
-      @accounts = Account.where(:archived => false).where.not(username: "admin")
+    if (current_user.isAdmin == true)
+      @accounts = Account.where(:archived => false).where.not(isAdmin: false)
 	else
       redirect_to services_path, notice: "Logged in!"
     end
   end
   
   def archive
-    if (session['login'] == "admin")
+    if (current_user.isAdmin == true)
       @accounts = Account.where(:archived => true)
 	else
       redirect_to services_path, notice: "Logged in!"
