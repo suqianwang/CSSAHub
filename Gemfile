@@ -74,7 +74,7 @@ group :test do
   gem 'shoulda-matchers', require: false
   gem 'database_cleaner'
   gem 'faker'
-  gem 'fakeweb'
+  gem 'fakeweb',git: "https://github.com/chrisk/fakeweb", branch: "master"
   gem 'simplecov', require: false
 end
 

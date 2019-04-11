@@ -20,7 +20,7 @@ When("I select my role as {string}") do |string|
 end
 
 When("I fill in the form") do
-  @ride_params = { departure: "Zachry", destination: "IAH", start_date: (Date.today).strftime("%m/%d/%Y"), end_date: (Date.today+1).strftime("%m/%d/%Y"), start_time: "8:00", end_time: "12:00", seats: 2 }
+  @ride_params = { departure: "Zachry Engineering Center, Spence Street, College Station, TX, USA", destination: "George Bush Intercontinental Airport (IAH), North Terminal Road, Houston, TX, USA", start_date: (Date.today).strftime("%m/%d/%Y"), end_date: (Date.today+1).strftime("%m/%d/%Y"), start_time: "8:00", end_time: "12:00", seats: 2 }
   fill_in('ride_departure', with: @ride_params[:departure])
   fill_in('ride_destination', with: @ride_params[:destination])
   fill_in('ride_start_date', with: @ride_params[:start_date])
@@ -43,14 +43,22 @@ When("I press Submit") do
   click_button "Create Ride"
 end
 
-Then("I should be on the rides home page") do
-  expect(page).to have_current_path(rides_path)
+Then("I should be on the auto-matching page") do
+  expect(page).to have_content("match")
 end
 
-Then("I should see the newly created ride") do
-  expect(page.all('table#rides-table tr').count).to eq 2
+When ("I press follow the link View all rides") do
+  click_link("View all rides")
+end
+
+Then ("I should be on the rides page") do
+  expect(page).to have_content("All Rides Offers/Requests")
 end
 
 Then("I should see errors for each wrong field") do
   expect(page).to have_content("#{@number_errors} errors")
+end
+
+Then ("I should be redirected to the service hub page") do
+  expect(page).to have_current_path(services_path)
 end

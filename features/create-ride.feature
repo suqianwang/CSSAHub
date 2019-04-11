@@ -7,8 +7,10 @@ Feature: Create Ride
     When I select my role as "<role>"
     And I fill in the form
     And I press Submit
-    Then I should be on the rides home page
-    And I should see the newly created ride
+    Then I should be on the auto-matching page
+    When I press follow the link View all rides
+    Then I should be on the rides page
+
     
   Examples:
     | role |

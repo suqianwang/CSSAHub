@@ -97,11 +97,11 @@ class RidesController < ApplicationController
       end
 	end
   end
-
-  def contact
-    @ride = Ride.find(params[:id])
-    @contact = @ride.account
-  end
+  #
+  # def contact
+  #   @ride = Ride.find(params[:id])
+  #   @contact = @ride.account
+  # end
 
   private
 

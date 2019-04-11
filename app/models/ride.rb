@@ -36,7 +36,6 @@ class Ride < ApplicationRecord
   private
 
   def geocode_departure
-    puts self.departure
     g = Geocoder.search(self.departure)
     self.departure_lat, self.departure_lon = g.first.coordinates
   end
