@@ -6,7 +6,7 @@ module SpecTestHelper
 
   def login(user)
 	  account = Account.find_by_username(user.username)
-      session[:account_id] = account.id
+    session[:account_id] = account.id
 	  session['login']=account.username
 	  @current_user ||= Account.find(session[:account_id])
   end

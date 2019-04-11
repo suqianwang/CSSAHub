@@ -39,6 +39,7 @@ class RidesController < ApplicationController
   end
   
   def create
+    # byebug
     @ride = current_user.rides.new(ride_params)
     respond_to do |format|
       if @ride.save
@@ -97,11 +98,6 @@ class RidesController < ApplicationController
       end
 	end
   end
-  #
-  # def contact
-  #   @ride = Ride.find(params[:id])
-  #   @contact = @ride.account
-  # end
 
   private
 
