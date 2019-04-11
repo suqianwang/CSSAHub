@@ -162,7 +162,28 @@ RSpec.describe RidesController, :type => :controller do
   end
 
 
-  describe 'Auto matching' do
+  describe '#match_ride' do
+    it 'match ride' do
+      login(@account)
+      @ride_1_params = { role: 'driver', departure: 'Zachry Engineering Center, Spence Street, College Station, TX, USA', destination: 'H-E-B, Texas Avenue South, College Station, TX, USA',
+                         start_date: (Date.today+1).strftime("%m/%d/%Y"), start_time: '08:00', end_time:'12:00', seats: 2 }
 
+      @ride_2_params = { role: 'passenger', departure: 'Zachry Engineering Center, Spence Street, College Station, TX, USA', destination: 'H-E-B, Texas Avenue South, College Station, TX, USA',
+                         start_date: (Date.today+1).strftime("%m/%d/%Y"), start_time: '08:00', end_time:'12:00', seats: 5 }
+      @ride_3_params = { role: 'passenger', departure: 'Zachry Engineering Center, Spence Street, College Station, TX, USA', destination: 'H-E-B, Texas Avenue South, College Station, TX, USA',
+                         start_date: (Date.today+1).strftime("%m/%d/%Y"), start_time: '08:00', end_time:'12:00', seats: 2 }
+      post :create, :params => {ride: @ride_1_params}
+      ride_1 = Ride.last
+      post :create, :params => {ride: @ride_2_params}
+      ride_2 = Ride.last
+      post :create, :params => {ride: @ride_3_params}
+      ride_3 = Ride.last
+      # it 'should not match if driver has lower capacity'
+      expect(Ride.match_ride(ride_1.id)) .not_to include(ride_2)
+      # it 'should not match if passenger has higher capacity'
+      expect(Ride.match_ride(ride_2.id)) .not_to include(ride_1)
+      expect(Ride.match_ride(ride_3.id)) .to include(ride_1)
+    end
   end
+
 end

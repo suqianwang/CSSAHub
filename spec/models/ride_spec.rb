@@ -41,6 +41,22 @@ RSpec.describe Ride, :type => :model do
     end
   end
 
+  describe '#start_date=' do
+    it 'fix value' do
+      r = Ride.new
+      r.start_date = '08/16/2020'
+      expect(r.start_date).to eq("2020-08-16")
+    end
+  end
+
+  describe '#end_date=' do
+    it 'fix value' do
+      r = Ride.new
+      r.start_date = '08/16/2020'
+      expect(r.start_date).to eq("2020-08-16")
+    end
+  end
+
   #will be added after end_date is implemented
   # describe '#date_order' do
   #   context 'with valid attributes' do
@@ -100,6 +116,7 @@ RSpec.describe Ride, :type => :model do
     it { is_expected.to validate_presence_of(:seats) }
     it { is_expected.to validate_inclusion_of(:seats).in_range(1..8)}
   end
+
 
 
   describe 'In Range' do
