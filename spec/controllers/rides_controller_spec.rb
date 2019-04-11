@@ -25,6 +25,12 @@ RSpec.describe RidesController, :type => :controller do
       get :index
       expect(assigns(:rides).count).to eq(Ride.count)
     end
+    it "redirect if params filter option and session filter option differ" do
+      login(@account)
+      get :index, :params => {type: {driver: 1}}
+      get :index
+      expect(response).to redirect_to rides_path(type: {driver: 1})
+    end
   end
   
   describe "GET new" do
@@ -153,5 +159,10 @@ RSpec.describe RidesController, :type => :controller do
     it "should not allow invalid input" do
       expect(response).to have_http_status(:no_content)
 	 end
+  end
+
+
+  describe 'Auto matching' do
+
   end
 end

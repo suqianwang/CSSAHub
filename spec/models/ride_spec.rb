@@ -100,4 +100,39 @@ RSpec.describe Ride, :type => :model do
     it { is_expected.to validate_presence_of(:seats) }
     it { is_expected.to validate_inclusion_of(:seats).in_range(1..8)}
   end
+
+
+  describe 'In Range' do
+    location1 = Ride.new
+    location1.departure_lat = 0
+    location1.departure_lon = 0
+    location1.destination_lat = 0
+    location1.destination_lon = 0
+    location2 = Ride.new
+    location2.departure_lat = 0
+    location2.departure_lon = 5
+    location2.destination_lat = 0
+    location2.destination_lon = 5
+    location3 = Ride.new
+    location3.departure_lat = 0
+    location3.departure_lon = 6
+    location3.destination_lat = 0
+    location3.destination_lon = 6
+    location4 = Ride.new
+    location4.departure_lat = 0
+    location4.departure_lon = 4
+    location4.destination_lat = 0
+    location4.destination_lon = 4
+    it 'Test departure in range helper function' do
+      expect(Ride.departure_in_range(location1, location2, 300)).to be_falsey
+      expect(Ride.departure_in_range(location1, location3, 300)).to be_falsey
+      expect(Ride.departure_in_range(location1, location4, 300)).to be_truthy
+    end
+    it 'Test arrival in range helper function' do
+      expect(Ride.destination_in_range(location1, location2, 300)).to be_falsey
+      expect(Ride.destination_in_range(location1, location3, 300)).to be_falsey
+      expect(Ride.destination_in_range(location1, location4, 300)).to be_truthy
+    end
+  end
+
 end
