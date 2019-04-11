@@ -8,6 +8,11 @@
 
 <div class="center">
   <h1>All Rides Offers/Requests</h1>
+</div>
+<div class="center p-3">
+  <%= link_to 'Create Ride', new_ride_url, class: "btn btn-primary " %>
+</div>
+<div class = "float-right p-3">
   <%= form_tag rides_path, :method => :get, :id => 'ride_type_form' do%>
     <%= hidden_field_tag "date_sort", true if @date_header%>
     <%= hidden_field_tag "time_sort", true if @time_header%>
@@ -18,13 +23,11 @@
         <%= check_box_tag "type[#{role}]", 1, @selected_type.include?(role), :id=> "role_#{role}" %>
     <% end %>
 
-    <%= submit_tag 'Refresh', :id => 'ride_type_submit', :class => 'btn btn-primary' %>
+    <%= submit_tag 'Refresh', :id => 'ride_type_submit', :class => 'btn btn-outline-danger btn-sm' %>
   <% end %>
 </div>
 
-<div class="center p-3">
-  <%= link_to 'Create Ride', new_ride_url, class: "btn btn-primary " %>
-</div>
+
   <table id="rides-table" class="table table-striped">
     <thead>
       <tr>
