@@ -39,6 +39,7 @@ class RidesController < ApplicationController
   end
   
   def create
+    byebug
     @ride = current_user.rides.new(ride_params)
     respond_to do |format|
       if @ride.save

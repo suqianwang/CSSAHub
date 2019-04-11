@@ -1,9 +1,11 @@
+require 'spec_helper'
+
 RSpec.describe RidesController, :type => :controller do
   before do
     @account = FactoryBot.create(:account, :user)
 	  @admin = FactoryBot.create :account, :admin
-    @ride_params = { role: 'driver', departure: 'Zachry', destination: 'HEB',
-                     start_date: (Date.today+1).strftime("%m/%d/%Y"), end_date: (Date.today+2).strftime("%m/%d/%Y"), start_time: '8:00', end_time:'12:00', seats: 5 }
+    @ride_params = { role: 'driver', departure: 'Zachry Engineering Center, Spence Street, College Station, TX, USA', destination: 'H-E-B, Texas Avenue South, College Station, TX, USA',
+                     start_date: (Date.today+1).strftime("%m/%d/%Y"), start_time: '08:00', end_time:'12:00', seats: 5 }
     @invalid_params = @ride_params.dup
     @invalid_params[:role] = 'invalid role'
 	  @invalid_params_no_date = @ride_params.dup
@@ -12,9 +14,9 @@ RSpec.describe RidesController, :type => :controller do
 
   describe "GET index" do
     it "assigns @rides as all rides" do
-      post :create, :params => { ride: @ride_params }
       login(@account)
       byebug
+      post :create, :params => { ride: @ride_params }
       get :index
       expect(assigns(:rides).count).to eq(Ride.count)
     end
