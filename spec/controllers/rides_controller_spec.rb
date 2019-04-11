@@ -15,14 +15,13 @@ RSpec.describe RidesController, :type => :controller do
   describe "GET index" do
     it "assigns @rides as all rides" do
       login(@account)
-      byebug
       post :create, :params => { ride: @ride_params }
       get :index
       expect(assigns(:rides).count).to eq(Ride.count)
     end
     it "assigns @rides as all rides for admin" do
-      post :create, :params => { ride: @ride_params }
       login(@admin)
+      post :create, :params => { ride: @ride_params }
       get :index
       expect(assigns(:rides).count).to eq(Ride.count)
     end
@@ -52,8 +51,8 @@ RSpec.describe RidesController, :type => :controller do
       end
       it "redirects to the index" do
   	    login(@account)
-        post :create, :params => {:ride => @ride_params}
-        expect(response).to redirect_to(rides_path)
+        post :create, :params => {ride: @ride_params}
+        expect(response).to redirect_to(ride_path(assigns(:ride).id))
       end
       it "assigns and saves created ride as @ride" do
 	      login(@account)
