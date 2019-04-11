@@ -44,7 +44,7 @@ RSpec.describe AccountsController, :type => :controller do
         post :create,  params: { account: { email: 'bob@tamu.edu', name: 'bob', password: 'secret', password_confirmation: 'secret', username: 'bo' } }
       end
   
-      assert_redirected_to login_index_path
+      assert_redirected_to home_index_path
     end
   end
   

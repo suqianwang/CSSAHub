@@ -51,8 +51,9 @@ When("I visit the login page") do
   visit login_index_path
 end
 
-Then("I should be redirected to the service hub page") do
+Then("I should be redirected to the service hub page and see a message") do
   expect(page).to have_current_path(services_path)
+  expect(page).to have_content("Logged in!")
 end
 
 Then("I should be redirected to the admin page") do
