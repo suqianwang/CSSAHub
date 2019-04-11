@@ -3,8 +3,8 @@ FactoryBot.define do
     association :account, :user
 	account_id { 1 }
     role { ['driver', 'passenger'].sample }
-    departure { ['Zachry', 'HEB', 'IAH', 'Walmart', 'DPS', 'Rec'].sample }
-    destination { ['Zachry', 'HEB', 'IAH', 'Walmart', 'DPS', 'Rec'].sample }
+    departure { ['Zachry Engineering Center, Spence Street, College Station, TX, USA', 'George Bush Intercontinental Airport (IAH), North Terminal Road, Houston, TX, USA'].sample }
+    destination { ['Zachry Engineering Center, Spence Street, College Station, TX, USA', 'George Bush Intercontinental Airport (IAH), North Terminal Road, Houston, TX, USA'].sample }
     start_date { (Date.today+6).strftime('%m/%d/%Y') }
     end_date { (Date.today+7).strftime('%m/%d/%Y') }
     start_time { "11:00" }

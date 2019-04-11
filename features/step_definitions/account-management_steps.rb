@@ -46,7 +46,3 @@ Then("I should see details for each account") do
   expect(page).to have_content(@account.email)
   expect(page).to have_content(@account.created_at.strftime("%m/%d/%Y"))
 end
-
-Then("other users should still exist") do
-  expect(Account.count).to eq(@initial_num_accounts-1)
-end

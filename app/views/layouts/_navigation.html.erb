@@ -4,19 +4,19 @@
   }
 </style>
 
-<nav class="navbar navbar-light bg-light">
+<nav class="navbar navbar-light" style="background-color: #BC0813">
 
   <div class="container">
     <div>
 
         <%= link_to home_index_path, class: 'navbar-brand' do %>
           <%= image_tag "cssa.png", :width => "60", :height => "60", :id => "site-logo" %>
-          CSSA Hub!
+          <div style="color:white; display:inline">CSSA Hub!</div>
 		  <% end %>
     </div>
 
     <div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <button class="btn btn-light dropdown-toggle" style="color: #BC0813" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <% if session.has_key?('login') and session['login'] %>
           <%= "Welcome, #{session['login']}" %>
         <% else %>
@@ -27,12 +27,13 @@
       <div class="dropdown-menu my-2" aria-labelledby="dropdownMenuButton">
         <% if session.has_key?('login') and session['login'] %>
 		<% if session['login'] == "admin" %>
-            <%= link_to "Dashboard", admin_index_path, :class => "dropdown-item" %>
+            <%= link_to "Dashboard", admin_index_path, :class => "dropdown-item"%>
 		<% end %>
           <% if session['login'] != "admin" %>
             <%= link_to "Profile", profile_index_path, :class => "dropdown-item" %>
 		    <%= link_to "Services", services_path, :class => "dropdown-item" %>
           <% end %>
+          <div class="dropdown-divider"></div>
           <%= link_to "Logout", logout_path, :class => "dropdown-item" %>
         <% else %>
           <%= link_to "Login", login_index_path, :class => "dropdown-item" %>

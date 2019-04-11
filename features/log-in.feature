@@ -5,6 +5,7 @@ Feature: Log in
     Given I am in the log in page
     When I fill in my username, password and press Login button
     Then I should see a welcome message
+    And I should be redirected to the service hub page and see a message
 
   Scenario: I'm logging in with wrong information
     Given I am in the log in page
@@ -16,11 +17,6 @@ Feature: Log in
     When I fill in my username, password and press Login button
     And press log out
     Then I should be redirected to log in page
-    
-  Scenario: I am already logged in
-    Given I am logged in
-    When I visit the login page
-    Then I should be redirected to the service hub page
 	
   Scenario: I am an admin logging in
     Given I am an admin user
@@ -33,3 +29,9 @@ Feature: Log in
 	And I am on the login page
 	When I fill in my username, password and press Login button
 	Then I should see an archive notification
+
+  Scenario: I'm logging in
+    Given I am in the log in page
+    When I fill in my username, password and press Login button
+    Then I should see a welcome message
+    And I should be redirected to the service hub page and see a message
