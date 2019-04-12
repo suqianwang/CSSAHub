@@ -21,6 +21,7 @@ FactoryBot.define do
     	sequence(:email) { |n| "sam#{n}@tamu.edu" }
     	name { Faker::Name.name }
     	password { Faker::Internet.password }
+		archived { false }
 		isAdmin { true }
     end
   end

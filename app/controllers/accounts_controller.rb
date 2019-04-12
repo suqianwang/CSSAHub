@@ -6,7 +6,7 @@ class AccountsController < ApplicationController
   # GET /accounts.json
   def index
     if (current_user.isAdmin == true)
-      @accounts = Account.where(:archived => false).where.not(isAdmin: false)
+      @accounts = Account.where(:archived => false).where(isAdmin: false)
 	else
       redirect_to services_path, notice: "Logged in!"
     end
