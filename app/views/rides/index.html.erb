@@ -9,7 +9,7 @@
   <h1>All Rides Offers/Requests</h1>
 </div>
 
-<% current_user.isAdmin == false %>
+<% if current_user.isAdmin == false %>
   <div class="center p-3">
     <%= link_to 'Create Ride', new_ride_url, class: "btn btn-primary " %>
   </div>
