@@ -31,6 +31,24 @@ function AutocompleteDirectionsHandler(map) {
   this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(originInput);
   this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(
       destinationInput);
+      
+  google.maps.event.addDomListener(originInput, 'blur', function() {
+    if ($('.pac-item:hover').length === 0) {
+      google.maps.event.trigger(this, 'focus', {});
+      google.maps.event.trigger(this, 'keydown', {
+        keyCode: 13
+      });
+    }
+  });
+  
+  google.maps.event.addDomListener(destinationInput, 'blur', function() {
+    if ($('.pac-item:hover').length === 0) {
+      google.maps.event.trigger(this, 'focus', {});
+      google.maps.event.trigger(this, 'keydown', {
+        keyCode: 13
+      });
+    }
+  });
 }
 
 AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(
