@@ -47,7 +47,7 @@
     <td><%= String(r.start_time) + " to " + String(r.end_time) %></td>
     <td><%= r.seats %></td>
     <td><%= link_to "Show", r, class: 'badge-pill badge-info' %>
-      <% if session.has_key?('login') and session['login'] == "admin" %>
+      <% if session.has_key?('login') and current_user.isAdmin == true %>
         <%= link_to "Delete", ride_path(r), method: :delete, data: {confirm: "Are you sure?"}, class: 'badge-pill badge-danger' %></td>
       <% end %>
       </tr>

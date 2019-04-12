@@ -5,7 +5,6 @@ class RidesController < ApplicationController
 
 
   def index
-
     @all_types = Ride.all_types
     permitted = params.permit(type: [:driver, :passenger])
     @selected_type = permitted[:type] || session[:type] || {}
@@ -21,7 +20,7 @@ class RidesController < ApplicationController
     end
 
     #@rides = Ride.where(:role => @selected_type.keys).order(:start_datetime => 'asc')
-   if session['login']=="admin"
+   if current_user.isAdmin == true
       @rides = Ride.all.order('start_date DESC').where(:role => @selected_type.keys).order(:start_datetime => 'asc')
     else
       @rides = Ride.joins(:account).where('end_date >= ?', Date.today).where(:role => @selected_type.keys).order(:start_datetime => 'asc').where('accounts.archived != ?', true)
@@ -29,7 +28,7 @@ class RidesController < ApplicationController
   end
   
   def new
-    if session['login']=="admin"
+    if current_user.isAdmin == true
 	    redirect_to admin_index_path
   	else
       @ride = Ride.new
@@ -61,7 +60,7 @@ class RidesController < ApplicationController
 
   def destroy
   	Ride.destroy(params[:id])
-  	if session['login']=="admin"
+  	if current_user.isAdmin == true
   	  respond_to do |format|
         format.html { redirect_to rides_path, notice: 'Ride was successfully destroyed.' }
         format.json { head :no_content }
@@ -77,7 +76,7 @@ class RidesController < ApplicationController
   def edit
     # Check if user owns the ride. If not, throw 401 Unauthorized
      @ride = Ride.find(params[:id])
-     if not current_user.id == @ride.account_id or session['login'] == "admin"
+     if not current_user.id == @ride.account_id or current_user.isAdmin == true
        render '401', :status => 401
      end
   end

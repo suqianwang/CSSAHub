@@ -1,4 +1,4 @@
-<% if session.has_key?('login') and session['login'] == "admin" %>
+<% if session.has_key?('login') and current_user.isAdmin == true %>
 <%= link_to 'Back to Dashboard', admin_index_path %>
 <% end %>
 
