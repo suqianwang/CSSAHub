@@ -4,5 +4,6 @@ FactoryBot.define do
 	email { "admin" }
 	name { "admin" }
 	password { "admin" }
+	isAdmin { true }
   end
 end

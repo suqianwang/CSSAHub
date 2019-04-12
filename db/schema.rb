@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_09_120121) do
+ActiveRecord::Schema.define(version: 2019_04_11_135810) do
 
   create_table "accounts", force: :cascade do |t|
     t.string "username"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2019_04_09_120121) do
     t.datetime "updated_at", null: false
     t.boolean "archived", default: false
     t.string "reason"
+    t.boolean "isAdmin", default: false
     t.index ["email"], name: "index_accounts_on_email", unique: true
     t.index ["username"], name: "index_accounts_on_username", unique: true
   end
@@ -29,7 +30,6 @@ ActiveRecord::Schema.define(version: 2019_04_09_120121) do
     t.string "role"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "depart_from"
     t.integer "account_id"
     t.string "departure"
     t.string "destination"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 2019_04_09_120121) do
     t.string "start_time"
     t.string "end_time"
     t.integer "seats"
+    t.string "depart_from"
     t.float "departure_lat"
     t.float "departure_lon"
     t.float "destination_lat"

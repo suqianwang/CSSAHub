@@ -3,7 +3,7 @@ before_action :login_required, :only => [:index, :edit, :update]
 
 
   def index
-    if session['login']=="admin"
+    if current_user.isAdmin == true
 	  redirect_to admin_index_path
 	else
     @profile = Account.find_by_username(session[:login])
