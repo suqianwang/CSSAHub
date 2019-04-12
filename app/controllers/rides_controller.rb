@@ -5,13 +5,6 @@ class RidesController < ApplicationController
 
 
   def index
-
-    if current_user.isAdmin == true
-      @rides = Ride.all.order('start_date DESC')
-    else
-      @rides = Ride.where('end_date >= ?', Date.today)
-    end
-
     @all_types = Ride.all_types
     permitted = params.permit(type: [:driver, :passenger])
     @selected_type = permitted[:type] || session[:type] || {}
@@ -26,8 +19,12 @@ class RidesController < ApplicationController
       redirect_to :type => @selected_type and return
     end
 
-    @rides = Ride.where(:role => @selected_type.keys).order(:start_datetime => 'asc')
-
+    #@rides = Ride.where(:role => @selected_type.keys).order(:start_datetime => 'asc')
+   if current_user.isAdmin == true
+      @rides = Ride.all.order('start_date DESC').where(:role => @selected_type.keys).order(:start_datetime => 'asc')
+    else
+      @rides = Ride.joins(:account).where('end_date >= ?', Date.today).where(:role => @selected_type.keys).order(:start_datetime => 'asc').where('accounts.archived != ?', true)
+    end
   end
   
   def new
