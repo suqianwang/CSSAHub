@@ -12,44 +12,38 @@
 	  </td>
   </tr>
   </table>-->
-  
-    <div class="row">
-    <div class="column center" style="width:25%;">
+
+  <div class="card-deck">
+    <div class="card bg-light">
       <%= link_to(accounts_path, :class => "clickable-card") do %>
-      <div class="card bg-light">
         <%= image_tag('group.jpg', :class => "card-img-top", :size => '100x200') %>
         <div class="card-body">
           <h5 class="card-title">Active Accounts</h5>
           <p class="card-text">Manage and remove active user accounts.</p>
         </div>
-      </div>
       <% end %>
     </div>
-	
-	<div class="column center" style="width:25%;">
+
+    <div class="card bg-light">
       <%= link_to(archive_accounts_path, :class => "clickable-card") do %>
-      <div class="card bg-light">
         <%= image_tag('shelf.jpg', :class => "card-img-top", :size => '100x200') %>
         <div class="card-body">
           <h5 class="card-title">Archived Accounts</h5>
           <p class="card-text">View and restore archived user accounts.</p>
         </div>
-      </div>
       <% end %>
     </div>
-  
-    <div class="column center" style="width:25%;">
+
+    <div class="card bg-light">
       <%= link_to(rides_path, :class => "clickable-card") do %>
-      <div class="card bg-light">
         <%= image_tag('transport.jpg', :class => "card-img-top", :size => '100x200') %>
         <div class="card-body">
           <h5 class="card-title">Posts</h5>
           <p class="card-text">Manage and remove user rides and posts.</p>
         </div>
-      </div>
       <% end %>
     </div>
-	
+
   </div>
 
   </div>
