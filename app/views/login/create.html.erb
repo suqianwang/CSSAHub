@@ -3,14 +3,14 @@
 <% if session.has_key?('login') and session['login'] %>
   <p class="body-center">
     <%= "Welcome, #{session['login']}" %>
-    <div class="center">
+  <div class="center">
     <%= link_to "Services", services_path %>
     </br>
-    </div>
-    <div class="center">
+  </div>
+  <div class="center">
     <%= link_to "Logout", logout_path %>
-    </div>
+  </div>
   </p>
-  <% else %>
-    <%= link_to "Login", login_index_path %>
+<% else %>
+  <%= link_to "Login", login_index_path %>
 <% end %>
