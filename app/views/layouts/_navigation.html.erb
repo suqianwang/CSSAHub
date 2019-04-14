@@ -36,10 +36,9 @@
           <div class="dropdown-divider"></div>
           <%= link_to "Logout", logout_path, :class => "dropdown-item" %>
         <% else %>
-          <%= link_to "Login", login_index_path, :class => "dropdown-item" %>
+          <%= link_to "Login", login_path, :class => "dropdown-item logout-link" %>
         <% end %>
       </div>
     </div>
   </div>
-
 </nav>

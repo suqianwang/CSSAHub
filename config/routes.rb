@@ -11,12 +11,9 @@ Rails.application.routes.draw do
   	end
   end
   patch 'accounts' => 'accounts#destroy'
-  # get 'accounts/new'
   
   resources :admin
   get 'admin', to: 'admin#index'
-  
-  resources :home
   
   # get 'signup', to: 'accounts#new', as: 'signup'
   get 'login', to: redirect('/auth/google_oauth2')

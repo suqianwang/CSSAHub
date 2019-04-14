@@ -1,8 +1,15 @@
 Account.create!({
-  :username => "bob",
+  :username => "David Ratliff",
+  :email => "ratlidav@tamu.edu",
+  :name => "David Ratliff",
+  :archived => false,
+  :isAdmin => false
+})
+
+Account.create!({
+  :username => "Bob123",
   :email => "bob@tamu.edu",
   :name => "Bob",
-  :password => "test",
   :archived => false,
-  :isAdmin => true
+  :isAdmin => false
 })
