@@ -20,17 +20,16 @@ class RidesController < ApplicationController
       redirect_to :type => @selected_type and return
     end
 
-    if session['login'] == "admin"
+    if current_user.isAdmin == true
       @rides = Ride.where(:role => @selected_type.keys).order(:start_datetime => 'asc')
     else
       @rides = Ride.where(:role => @selected_type.keys).order(:start_datetime => 'asc').where('start_date >= ?', Date.today)
     end
 
-
   end
 
   def new
-    if session['login'] == "admin"
+    if current_user.isAdmin == true
       redirect_to admin_index_path
     else
       @ride = Ride.new
@@ -62,14 +61,9 @@ class RidesController < ApplicationController
 
   def destroy
     Ride.destroy(params[:id])
-    if session['login'] == "admin"
+    if current_user.isAdmin == true
       respond_to do |format|
         format.html {redirect_to rides_path, notice: 'Ride was successfully destroyed.'}
-        format.json {head :no_content}
-      end
-    else
-      respond_to do |format|
-        format.html {redirect_to profile_index_path, notice: 'Ride was successfully destroyed.'}
         format.json {head :no_content}
       end
     end
@@ -78,7 +72,7 @@ class RidesController < ApplicationController
   def edit
     # Check if user owns the ride. If not, throw 401 Unauthorized
     @ride = Ride.find(params[:id])
-    if not current_user.id == @ride.account_id or session['login'] == "admin"
+    if not current_user.id == @ride.account_id or current_user.isAdmin == true
       render '401', :status => 401
     end
   end

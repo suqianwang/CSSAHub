@@ -1,4 +1,4 @@
-<% if session.has_key?('login') and session['login'] == "admin" %>
+<% if session.has_key?('login') and current_user.isAdmin == true %>
   <%= link_to 'Back to Dashboard Page', admin_index_path %>
 <% elsif session.has_key?('login') %>
   <div>
@@ -9,7 +9,7 @@
   <h1>All Rides Offers/Requests</h1>
 </div>
 
-<% if session[:login] != "admin" %>
+<% if current_user.isAdmin == false %>
   <div class="center p-3">
     <%= link_to 'Create Ride', new_ride_url, class: "btn btn-primary " %>
   </div>
@@ -93,7 +93,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <% if session.has_key?('login') and session['login'] == "admin" %>
+          <% if session.has_key?('login') and current_user.isAdmin == true %>
             <%= link_to "Delete", ride_path(r), method: :delete, data: {confirm: "Are you sure?"}, class: 'btn btn-danger' %>
           <% end %>
         </div>
