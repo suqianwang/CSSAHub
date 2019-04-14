@@ -2,13 +2,21 @@ require 'pry'
 
 class Ride < ApplicationRecord
   belongs_to :account
-  validates :role, presence: true, inclusion: { in: ['driver', 'passenger'] }
-  validates :departure, presence: { message: "Please select a valid departure location from Google map"}
-  validates :destination, presence: { message: "Please select a valid destination location from Google map"}
-  validates :start_date, presence: { message: "Please select a valid departure date"}, :timeliness => { :on_or_after => :today, :type => :date }
-  validates :start_time, presence:{ message: "Please enter departure start time in correct format, (i.e. 07:00)"}, :timeliness => { :type => :time }
-  validates :end_time, presence: { message: "Please enter a valid departure time that is on or after departure start time in correct format(i.e. 07:00)"}, :timeliness => { :on_or_after => :start_time, :type => :time }
-  validates :seats, presence: true, inclusion: { in: 1..8 }
+  validates :role, presence: true, inclusion: { in: %w[driver passenger] }
+  validates :departure, presence: { message: "Please select a valid departure location from Google Maps"}
+  validates :destination, presence: { message: "Please select a valid destination location from Google Maps"}
+
+  validates :start_date, presence: { message: "Please select a departure date"},
+                         timeliness: { :on_or_after => :today, :type => :date, :message => "Please select a departure date in the future" }
+
+  validates :start_time, presence: { message: "Please enter a starting departure time"},
+                         timeliness: { :type => :time, message: "Please enter starting departure time in correct format(i.e. 07:00)" }
+
+  validates :end_time, presence: { message: "Please enter a ending departure time"},
+                       timeliness: { :on_or_after => :start_time, :type => :time, :message => "Please enter ending departure time in correct format(i.e. 07:00), after the starting time" }
+
+  validates :seats, presence: { message: "Please enter a seat number"},
+                    inclusion: { in: 1..8, message: "Please enter a seat number that is between 1-8" }
 
   before_save :override_field
   after_validation :geocode_departure, if: ->(obj){ obj.departure.present? and obj.departure_changed? }
@@ -37,11 +45,19 @@ class Ride < ApplicationRecord
 
   def geocode_departure
     g = Geocoder.search(self.departure)
-    self.departure_lat, self.departure_lon = g.first.coordinates
+    self.departure_lat, self.departure_lon = g.first.coordinates rescue [nil, nil]
+    if self.departure_lat.blank? || self.departure_lon.blank?
+      errors.add(:departure, "Please select a valid departure location from Google Maps.")
+      # raise ActiveRecord::RecordInvalid.new(self)
+    end
   end
 
   def geocode_destination
-    self.destination_lat, self.destination_lon = Geocoder.search(self.destination).first.coordinates
+    self.destination_lat, self.destination_lon = Geocoder.search(self.destination).first.coordinates rescue [nil, nil]
+    if self.destination_lat.blank? || self.destination_lon.blank?
+      errors.add(:destination, "Please select a valid destination location from Google Maps.")
+      # raise ActiveRecord::RecordInvalid.new(self)
+    end
   end
 
 
