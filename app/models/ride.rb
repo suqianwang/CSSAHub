@@ -100,7 +100,8 @@ class Ride < ApplicationRecord
           :departure => Ride.departure_in_range(potential_match, @ride, 1),
           :destination => Ride.destination_in_range(potential_match, @ride, 1),
           :date => @ride.start_date == potential_match.start_date,
-          :time => @ride.start_time <= potential_match.end_time && potential_match.start_time <= @ride.end_time
+          :time => @ride.start_time <= potential_match.end_time && potential_match.start_time <= @ride.end_time,
+          :not_match_own_rides => @ride.account != potential_match.account
       }
 
 
