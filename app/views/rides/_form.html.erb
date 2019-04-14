@@ -41,11 +41,11 @@
     <div class="offset-2 col-8">
       <div class="p-2 center">
         <div class="btn-group-toggle" data-toggle="buttons">
-          <%= f.label :role, "", :for => "Driver", :class => "btn btn-outline-primary" do %>
+          <%= f.label :role, "", :for => "Driver", :class => "btn btn-outline-danger" do %>
             <%= f.radio_button :role, 'driver', class: 'form_type form-check-input', id: 'Driver', value: 'driver' %>
             Driver
           <% end %>
-          <%= f.label :role, "", :for => "Passenger", :class => "btn btn-outline-primary" do %>
+          <%= f.label :role, "", :for => "Passenger", :class => "btn btn-outline-danger" do %>
             <%= f.radio_button :role, 'passenger', class: 'form_type form-check-input', id: 'Passenger', value: 'passenger' %>
             Passenger
           <% end %>
@@ -63,7 +63,7 @@
             </div>
 
             <div class="center">
-              <h5 class="text-primary"> Type and Select Departure and Destination Location in Google Map</h5>
+              <h5 class="text-secondary"> Type and Select Departure and Destination Location in Google Map</h5>
             </div>
 
             <div class="d-none">
@@ -89,11 +89,11 @@
 
             <div class="row">
               <div class="form-group col-6">
-                <%= f.label :start_time, "Departure Time (hh:mm)" %>
+                <%= f.label :start_time, "Departure Time (hh:mm) from" %>
                 <%= f.text_field :start_time, :class => "form-control" %>
               </div>
               <div class="form-group col-6">
-                <%= f.label :end_date, "to" %>
+                <%= f.label :end_date, "Departure Time (hh:mm) to" %>
                 <%= f.text_field :end_time, :class => "form-control" %>
               </div>
             </div>
