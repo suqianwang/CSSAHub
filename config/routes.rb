@@ -1,29 +1,29 @@
 Rails.application.routes.draw do
   root 'home#index'
   get 'home/index'
-  
+
   resources :accounts do
     collection do
-	  get 'archive'
-	end
-	member do
-	  get :restore
-	end
+  	  get 'archive'
+  	end
+  	member do
+  	  get :restore
+  	end
   end
   patch 'accounts' => 'accounts#destroy'
-  get 'accounts/new'
+  # get 'accounts/new'
   
   resources :admin
   get 'admin', to: 'admin#index'
   
   resources :home
-  resources :login
   
-  get 'signup', to: 'accounts#new', as: 'signup'
-  get 'login', to: 'login#new'
+  # get 'signup', to: 'accounts#new', as: 'signup'
+  get 'login', to: redirect('/auth/google_oauth2')
   get 'logout', to: 'login#destroy', as: 'logout'
-
-  get 'logout', to: 'login#logout'
+  # Routes for Google authentication
+  get 'auth/google_oauth2/callback', to: 'login#create'
+  get 'auth/failure', to: redirect('/')
 
   get 'passenger', to: 'passenger#index'
   get 'driver', to: 'driver#index'

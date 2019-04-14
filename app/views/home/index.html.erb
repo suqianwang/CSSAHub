@@ -20,10 +20,7 @@
         </div>
       <% else %>
         <div class="col-4 p-3">
-          <%= button_to "Register", signup_path, method: :get, :class => "btn btn-outline-danger" %>
-        </div>
-        <div class="col-4 p-3">
-          <%= button_to "Sign-in", login_index_path, method: :get, :class => "btn btn-outline-danger" %>
+          <%= button_to "Sign-in/Register", 'login', method: :get, :class => "btn btn-outline-danger" %>
         </div>
       <% end %>
     </div>
