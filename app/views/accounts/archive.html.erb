@@ -1,17 +1,17 @@
 <% if session.has_key?('login') and session['login'] == "admin" %>
-<%= link_to 'Back to Dashboard', admin_index_path %>
+  <%= link_to 'Back to Dashboard', admin_index_path %>
 <% end %>
 
 <div class="center">
   <h1>Archived Accounts</h1>
 
-  <table class="table table-striped">
+  <table class="table table-striped table-responsive">
     <thead>
     <tr>
       <th>Username</th>
       <th>Name</th>
       <th>Email</th>
-	  <th>Reason for Deletion</th>
+      <th>Reason for Deletion</th>
       <th colspan="3">Actions</th>
     </tr>
     </thead>
@@ -22,7 +22,7 @@
         <td style="width:auto"><%= account.username %></td>
         <td><%= account.name %></td>
         <td><%= account.email %></td>
-		<td><%= account.reason %></td>
+        <td><%= account.reason %></td>
         <td>
           <button class="btn btn-primary" data-toggle="modal" data-target="#restoreForm-<%= account.username %>" id="restore-<%= account.username %>">Restore
             User
