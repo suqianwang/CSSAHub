@@ -26,10 +26,10 @@
 
       <div class="dropdown-menu my-2" aria-labelledby="dropdownMenuButton">
         <% if session.has_key?('login') and session['login'] %>
-		<% if session['login'] == "admin" %>
+		<% if current_user.isAdmin %>
             <%= link_to "Dashboard", admin_index_path, :class => "dropdown-item"%>
 		<% end %>
-          <% if session['login'] != "admin" %>
+          <% if not current_user.isAdmin %>
             <%= link_to "Profile", profile_index_path, :class => "dropdown-item" %>
 		    <%= link_to "Services", services_path, :class => "dropdown-item" %>
           <% end %>
