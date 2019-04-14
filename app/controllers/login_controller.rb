@@ -1,3 +1,5 @@
+require 'pry'
+
 class LoginController < ApplicationController
   def index
     if not current_user.blank?

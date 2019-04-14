@@ -1,13 +1,8 @@
 require 'pry'
 
 Given("I am logged in") do
-  @account = FactoryBot.create(:account, :user)
-  visit login_index_path
-  fill_in "Username", :with => @account.username
-  fill_in "Password", :with => @account.password
-  within '#login-form' do
-    click_button "Login"
-  end
+  @account = Account.create(username: "bob", email: "bob@tamu.edu")
+  visit login_url
 end
 
 Given("A matching ride exists") do
