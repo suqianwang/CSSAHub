@@ -6,12 +6,6 @@ class RidesController < ApplicationController
 
   def index
 
-    if session['login']=="admin"
-      @rides = Ride.all.order('start_date DESC')
-    else
-      @rides = Ride.where('end_date >= ?', Date.today)
-    end
-
     @all_types = Ride.all_types
     permitted = params.permit(type: [:driver, :passenger])
     @selected_type = permitted[:type] || session[:type] || {}
@@ -26,18 +20,23 @@ class RidesController < ApplicationController
       redirect_to :type => @selected_type and return
     end
 
-    @rides = Ride.where(:role => @selected_type.keys).order(:start_datetime => 'asc')
+    if session['login'] == "admin"
+      @rides = Ride.where(:role => @selected_type.keys).order(:start_datetime => 'asc')
+    else
+      @rides = Ride.where(:role => @selected_type.keys).order(:start_datetime => 'asc').where('start_date >= ?', Date.today)
+    end
+
 
   end
-  
+
   def new
-    if session['login']=="admin"
-	    redirect_to admin_index_path
-  	else
+    if session['login'] == "admin"
+      redirect_to admin_index_path
+    else
       @ride = Ride.new
-  	end
+    end
   end
-  
+
   def create
     # byebug
     @ride = current_user.rides.new(ride_params)
@@ -48,55 +47,55 @@ class RidesController < ApplicationController
           redirect_to controller: 'rides', action: 'show', id: @ride.id
         end
 
-        format.json { render :show, status: :created, location: @ride }
+        format.json {render :show, status: :created, location: @ride}
       else
-        format.html { render :new }
-        format.json { render json: @ride.errors, status: :unprocessable_entity }
+        format.html {render :new}
+        format.json {render json: @ride.errors, status: :unprocessable_entity}
       end
     end
   end
-  
+
   def show
     @ride = Ride.find(params[:id])
     @rides = Ride.match_ride(params[:id])
   end
 
   def destroy
-  	Ride.destroy(params[:id])
-  	if session['login']=="admin"
-  	  respond_to do |format|
-        format.html { redirect_to rides_path, notice: 'Ride was successfully destroyed.' }
-        format.json { head :no_content }
+    Ride.destroy(params[:id])
+    if session['login'] == "admin"
+      respond_to do |format|
+        format.html {redirect_to rides_path, notice: 'Ride was successfully destroyed.'}
+        format.json {head :no_content}
       end
-	  else
-	    respond_to do |format|
-        format.html { redirect_to profile_index_path, notice: 'Ride was successfully destroyed.' }
-        format.json { head :no_content }
-	    end
-	  end
+    else
+      respond_to do |format|
+        format.html {redirect_to profile_index_path, notice: 'Ride was successfully destroyed.'}
+        format.json {head :no_content}
+      end
+    end
   end
 
   def edit
     # Check if user owns the ride. If not, throw 401 Unauthorized
-     @ride = Ride.find(params[:id])
-     if not current_user.id == @ride.account_id or session['login'] == "admin"
-       render '401', :status => 401
-     end
+    @ride = Ride.find(params[:id])
+    if not current_user.id == @ride.account_id or session['login'] == "admin"
+      render '401', :status => 401
+    end
   end
-  
+
   def update
     @ride = Ride.find(params[:id])
     if @ride.update_attributes(ride_params)
-	    @ride.save
+      @ride.save
       flash[:notice] = "Ride was successfully updated."
-	  redirect_to profile_index_path
-	else
+      redirect_to profile_index_path
+    else
       flash[:alert] = "Field is missing or invalid in the form."
-	  respond_to do |format|
-	    format.html {}
-        format.js { render js: 'window.top.location.reload();$(document).scrollTop(0);' }
+      respond_to do |format|
+        format.html {}
+        format.js {render js: 'window.top.location.reload();$(document).scrollTop(0);'}
       end
-	end
+    end
   end
 
   private
