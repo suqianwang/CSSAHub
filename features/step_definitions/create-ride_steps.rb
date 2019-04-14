@@ -33,7 +33,7 @@ When("I select my role as {string}") do |string|
 end
 
 When("I fill in the form") do
-  @ride_params = { departure: "Zachry Engineering Center, Spence Street, College Station, TX, USA", destination: "George Bush Intercontinental Airport (IAH), North Terminal Road, Houston, TX, USA", start_date: (Date.today).strftime("%m/%d/%Y"), start_time: "08:00", end_time: "12:00", seats: 2 }
+  @ride_params = { departure: "Zachry Engineering Center, Spence Street, College Station, TX, USA", destination: "George Bush Intercontinental Airport (IAH), North Terminal Road, Houston, TX, USA", start_date: (Date.today+1).strftime("%m/%d/%Y"), start_time: "08:00", end_time: "12:00", seats: 2 }
   fill_in('ride_departure', with: @ride_params[:departure])
   fill_in('ride_destination', with: @ride_params[:destination])
   fill_in('ride_start_date', with: @ride_params[:start_date])
