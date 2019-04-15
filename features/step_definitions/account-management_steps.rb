@@ -46,3 +46,8 @@ Then("I should see details for each account") do
   expect(page).to have_content(@account.email)
   expect(page).to have_content(@account.created_at.strftime("%m/%d/%Y"))
 end
+
+Then("I should be redirected to the service hub page and see a message") do
+  expect(page).to have_current_path(services_path)
+  expect(page).to have_content("Logged in!")
+end

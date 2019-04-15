@@ -20,10 +20,7 @@
         </div>
       <% else %>
         <div class="col-4 p-3">
-          <%= button_to "Register", signup_path, method: :get, :class => "btn btn-outline-danger" %>
-        </div>
-        <div class="col-4 p-3">
-          <%= button_to "Sign-in", login_index_path, method: :get, :class => "btn btn-outline-danger" %>
+          <%= button_to "Sign-in/Register", login_path, method: :get, :class => "btn btn-outline-danger" %>
         </div>
       <% end %>
     </div>
@@ -32,7 +29,7 @@
 <hr class="my-2">
 <div class="row">
   <div class="col">
-    <%= link_to("Latest Updates", "https://www.cssatamu.com/", method: :get, :class => "cssa_link h5") %>
+    <%= link_to("Latest Updates", "https://www.cssatamu.com/", :class => "cssa_link h5") %>
     <hr class="my-1">
     <div class="members">
       <li>Scrum Master: Alyssa Schaeffer</li>

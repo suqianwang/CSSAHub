@@ -1,3 +1,5 @@
+require 'pry'
+
 class ProfileController < ApplicationController
 before_action :login_required, :only => [:index, :edit, :update]
 

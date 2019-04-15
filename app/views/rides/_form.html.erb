@@ -1,6 +1,6 @@
 <%= link_to 'Back', rides_path %>
 
-<script>  
+<script>
     $(document).ready(function () {
 
         $('input.form_type[type=radio]').change(function () {
@@ -20,16 +20,16 @@
 <% provide :head_tags do %>
   <meta name='turbolinks-visit-control' content='reload'>
   <script>
-    document.addEventListener("DOMContentLoaded", initMap);
+      document.addEventListener("DOMContentLoaded", initMap);
   </script>
 <% end %>
 
 <% if ride.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(ride.errors.count, "error") %> prohibited this ride from being saved:</h2>
+  <div id="error_explanation" class="p-10">
+    <h2> The following errors prohibited this ride from being saved:</h2>
     <ul>
-      <% ride.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+      <% ride.errors.messages.each do |message| %>
+        <li><%=  "#{message[0]}".first.upcase + "#{message[0][1..-1]}".sub("_", " ") + ": " + "#{message[1][0]}".first.upcase + "#{message[1][0][1..-1]}".sub("_", " ") %></li>
       <% end %>
     </ul>
   </div>
@@ -41,11 +41,11 @@
     <div class="offset-2 col-8">
       <div class="p-2 center">
         <div class="btn-group-toggle" data-toggle="buttons">
-          <%= f.label :role, "", :for => "Driver", :class => "btn btn-outline-primary" do %>
+          <%= f.label :role, "", :for => "Driver", :class => "btn btn-outline-danger" do %>
             <%= f.radio_button :role, 'driver', class: 'form_type form-check-input', id: 'Driver', value: 'driver' %>
             Driver
           <% end %>
-          <%= f.label :role, "", :for => "Passenger", :class => "btn btn-outline-primary" do %>
+          <%= f.label :role, "", :for => "Passenger", :class => "btn btn-outline-danger" do %>
             <%= f.radio_button :role, 'passenger', class: 'form_type form-check-input', id: 'Passenger', value: 'passenger' %>
             Passenger
           <% end %>
@@ -63,37 +63,37 @@
             </div>
 
             <div class="center">
-              <h5 class="text-primary"> Type and Select Departure and Destination Location in Google Map</h5>
+              <h5 class="text-secondary"> Type and Select Departure and Destination Location in Google Map</h5>
             </div>
 
             <div class="d-none">
               <input id="ride_departure" class="controls" type="text" name="ride[departure]"
-                  placeholder="Enter an origin location">
-              
+                     placeholder="Enter an origin location">
+
               <input id="ride_destination" class="controls" type="text" name="ride[destination]"
-                  placeholder="Enter a destination location">
+                     placeholder="Enter a destination location">
             </div>
-                
+
             <div id="map"></div>
 
             <div class="input-daterange row">
               <div class="form-group col-6">
                 <%= f.label :start_date, "Departure Date (MM/DD/YYYY)" %>
-				<% if !@ride.start_date.nil? %>
-                     <%= f.text_field :start_date, :class => "form-control", :value => Date.parse(@ride.start_date).strftime('%m/%d/%Y') %>
-			    <% else %>
-				     <%= f.text_field :start_date, :class => "form-control" %>
-				<% end %>
+                <% if !@ride.start_date.blank? %>
+                  <%= f.text_field :start_date, :class => "form-control", :value => Date.parse(@ride.start_date).strftime('%m/%d/%Y') %>
+                <% else %>
+                  <%= f.text_field :start_date, :class => "form-control" %>
+                <% end %>
               </div>
             </div>
 
             <div class="row">
               <div class="form-group col-6">
-                <%= f.label :start_time, "Departure Time (hh:mm)" %>
+                <%= f.label :start_time, "Departure Time (hh:mm) from" %>
                 <%= f.text_field :start_time, :class => "form-control" %>
               </div>
               <div class="form-group col-6">
-                <%= f.label :end_date, "to" %>
+                <%= f.label :end_date, "Departure Time (hh:mm) to" %>
                 <%= f.text_field :end_time, :class => "form-control" %>
               </div>
             </div>
@@ -102,7 +102,7 @@
               <div class="form-group col-6">
                 <%= f.label :seats, "How many seats are available?", class: 'driver_form' %>
                 <%= f.label :seats, "How many seats do you need?", class: 'passenger_form' %>
-                <%= f.number_field :seats, :class => "form-control", :min => "1", :value => "1" %>
+                <%= f.number_field :seats, :class => "form-control", :min => "1",:max => "8", :value => "1" %>
               </div>
             </div>
             <div class="center">

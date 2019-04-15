@@ -1,12 +1,8 @@
+require 'pry'
+
 Given("I am an admin") do
-  require 'factory_bot_rails'
-  @account = FactoryBot.create :account, :admin
-  visit login_index_path
-  fill_in "Username", :with => @account.username
-  fill_in "Password", :with => @account.password
-  within '#login-form' do
-    click_button 'Login'
-  end
+  @account = Account.create(username: "bob", email: "bob@tamu.edu", isAdmin: true)
+  visit login_url
 end
 
 Given("{string} exists on the admin page") do |string|
@@ -35,14 +31,8 @@ Then("the site should navigate to the {string} page from the admin page") do |st
 end
 
 Given("I am not an admin") do
-  require 'factory_bot_rails'
-  @account = FactoryBot.create :account, :user
-  visit login_index_path
-  fill_in "Username", :with => @account.username
-  fill_in "Password", :with => @account.password
-  within '#login-form' do
-    click_button 'Login'
-  end
+  @account = Account.create(username: "bob", email: "bob@tamu.edu", isAdmin: false)
+  visit login_url
 end
 
 When("I visit admin page") do

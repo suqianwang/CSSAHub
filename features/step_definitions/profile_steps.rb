@@ -1,3 +1,5 @@
+require 'pry'
+
 When("I am on the profile page") do
   visit profile_index_path
 end

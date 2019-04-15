@@ -2,7 +2,7 @@ require 'pry'
 
 RSpec.describe Ride, :type => :model do
   before do 
-    @account = FactoryBot.build_stubbed(:account, :user)
+    @account = FactoryBot.create(:account, :user)
     @ride = FactoryBot.build_stubbed(:ride, account: @account)
   end
   
@@ -19,7 +19,7 @@ RSpec.describe Ride, :type => :model do
   describe '#departure' do
     it do
       should validate_presence_of(:departure).
-        with_message("Please select a valid departure location from Google map")
+        with_message("Please select a valid departure location from Google Maps")
     end
     it { is_expected.to allow_value("Zachry Engineering Center, Spence Street, College Station, TX, USA").for(:departure) }
     # it { is_expected.to_not allow_value("invalid location").for(:departure) }
@@ -28,7 +28,7 @@ RSpec.describe Ride, :type => :model do
   describe '#destination' do
     it do
       should validate_presence_of(:destination).
-          with_message("Please select a valid destination location from Google map")
+          with_message("Please select a valid destination location from Google Maps")
     end
     it { is_expected.to allow_value("Zachry Engineering Center, Spence Street, College Station, TX, USA").for(:destination) }
     # it { is_expected.to_not allow_value("invalid location").for(:destination) }
@@ -37,7 +37,7 @@ RSpec.describe Ride, :type => :model do
   describe '#dates' do
     it do
       should validate_presence_of(:start_date).
-          with_message("Please select a valid departure date")
+          with_message("Please select a departure date")
     end
   end
 
@@ -88,11 +88,11 @@ RSpec.describe Ride, :type => :model do
   describe '#time' do
     it do
       should validate_presence_of(:start_time).
-          with_message("Please enter departure start time in correct format, (i.e. 07:00)")
+          with_message("Please enter a starting departure time")
     end
     it do
       should validate_presence_of(:end_time).
-          with_message("Please enter a valid departure time that is on or after departure start time in correct format(i.e. 07:00)")
+          with_message("Please enter a ending departure time")
     end
   end
   
@@ -113,8 +113,11 @@ RSpec.describe Ride, :type => :model do
   end
   
   describe '#seats' do
-    it { is_expected.to validate_presence_of(:seats) }
-    it { is_expected.to validate_inclusion_of(:seats).in_range(1..8)}
+    it { is_expected.to validate_presence_of(:seats).
+        with_message("Please enter a seat number") }
+    it { is_expected.to validate_inclusion_of(:seats).in_range(1..8).
+        with_message("Please enter a seat number that is between 1-8")
+    }
   end
 
 

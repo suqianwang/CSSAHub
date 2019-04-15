@@ -1,6 +1,6 @@
 Given("a ride exists") do
   require 'factory_bot_rails'
-  @ride = FactoryBot.create(:ride)
+  @ride = FactoryBot.create(:ride, account: @account)
 end
 
 When("I view the Rides page") do

@@ -1,7 +1,6 @@
 FactoryBot.define do
   factory :ride do
     association :account, :user
-	account_id { 1 }
     role { ['driver', 'passenger'].sample }
     departure { ['Zachry Engineering Center, Spence Street, College Station, TX, USA', 'George Bush Intercontinental Airport (IAH), North Terminal Road, Houston, TX, USA'].sample }
     destination { ['Zachry Engineering Center, Spence Street, College Station, TX, USA', 'George Bush Intercontinental Airport (IAH), North Terminal Road, Houston, TX, USA'].sample }
