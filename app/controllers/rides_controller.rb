@@ -61,11 +61,9 @@ class RidesController < ApplicationController
 
   def destroy
     Ride.destroy(params[:id])
-    if current_user.isAdmin == true
-      respond_to do |format|
-        format.html {redirect_to rides_path, notice: 'Ride was successfully destroyed.'}
-        format.json {head :no_content}
-      end
+    respond_to do |format|
+      format.html {redirect_to rides_path, notice: 'Ride was successfully destroyed.'}
+      format.json {head :no_content}
     end
   end
 

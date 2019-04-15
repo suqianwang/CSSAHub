@@ -1,9 +1,8 @@
 FactoryBot.define do
   factory :admin do
 	username { "admin" }
-	email { "admin" }
+	email { "admin@tamu.edu" }
 	name { "admin" }
-	password { "admin" }
 	isAdmin { true }
   end
 end

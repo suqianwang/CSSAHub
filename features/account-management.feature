@@ -26,5 +26,3 @@ Feature: Manage user accounts
     Given I am logged in
     When I am on the Active Accounts page
     Then I should be redirected to the service hub page and see a message
-    And I am on the Archived Accounts page
-    Then I should be redirected to the service hub page and see a message

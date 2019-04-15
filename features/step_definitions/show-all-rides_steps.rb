@@ -1,3 +1,5 @@
+require 'pry'
+
 Then ("I am on the rides page") do
   visit rides_path
   expect(page).to have_content("All Rides Offers/Requests")

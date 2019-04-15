@@ -20,48 +20,19 @@ class AccountsController < ApplicationController
     end
   end
 
-  # GET /accounts/new
-  def new
-    if current_user.blank? and session['login'].blank?
-      @account = Account.new
-    else
-      redirect_to services_path
-    end
-  end
-
-  # GET /accounts/1/edit
-  #def edit
-  #end
-
-  # POST /accounts
-  # POST /accounts.json
-  def create
-    @account = Account.new(account_params)
-    respond_to do |format|
-      if @account.save
-        session[:account_id] = @account.id
-        session['login'] = @account.username
-        format.html { redirect_to home_index_path, notice: 'Account was successfully created.' }
-      else
-        format.html { render :new }
-        format.json { render json: @account.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
   # PATCH/PUT /accounts/1
   # PATCH/PUT /accounts/1.json
-   def update
-       @profile = Account.find(params[:id])
-	   if (params[:password] == params[:password_confirmation]) && @profile.update_attributes!(update_params)
-	       if @profile.save
-             redirect_to profile_index_path, notice: "Account was successfully saved."
-		   end
-       else
-	       flash[:alert] = "Account failed to save. Passwords do not match."
-		   redirect_to profile_index_path
-       end
-   end
+  def update
+    @profile = Account.find(params[:id])
+	  if @profile.update_attributes!(update_params)
+	    if @profile.save
+        redirect_to profile_index_path, notice: "Account was successfully saved."
+      end
+    else
+      flash[:alert] = "Account failed to save"
+      redirect_to profile_index_path
+    end
+  end
   
 
   # DELETE /accounts/1
@@ -97,10 +68,10 @@ class AccountsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def account_params
-      params.require(:account).permit(:username, :email, :name, :password, :password_confirmation, :terms_and_conditions)
+      params.require(:account).permit(:username, :email, :name)
     end
 	
 	def update_params
-      params.permit(:name, :password, :password_confirmation)
+      params.permit(:name)
     end
 end
