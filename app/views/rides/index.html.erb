@@ -55,7 +55,7 @@
       <td><%= String(Date.parse(r.start_date).strftime('%m/%d/%Y')) %></td>
       <td><%= String(r.start_time) + " to " + String(r.end_time) %></td>
       <td><%= r.seats %></td>
-      <% if session.has_key?('login') and session['login'] == "admin" %>
+      <% if session.has_key?('login') and current_user.isAdmin == true %>
         <td><%= button_tag "delete", {class: 'btn btn-primary', 'data-toggle' => 'modal', 'data-target' => "#delete-ride-#{r.id}"} %></td>
       <% elsif session.has_key?('login') %>
         <td><%= button_tag "Contact #{r.role.capitalize}", {class: 'btn btn-primary', 'data-toggle' => 'modal', 'data-target' => "#delete-ride-#{r.id}"} %></td>
