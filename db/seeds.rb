@@ -18,8 +18,8 @@ Account.create!({
 })
 
 Account.create!({
-  :username => "megan.grahman",
-  :email => "megan.grahman@tamu.edu",
+  :username => "megan.grahmann",
+  :email => "megan.grahmann@tamu.edu",
   :name => "Megan",
   :archived => false,
   :isAdmin => true
