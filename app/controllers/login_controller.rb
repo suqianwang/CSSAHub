@@ -16,12 +16,11 @@ class LoginController < ApplicationController
     auth = request.env["omniauth.auth"]
     valid_email = !!(auth.info.email =~ /\A\S+@tamu.edu\z/)
     if valid_email
-      account = Account.from_omniauth(auth)
+        account = Account.from_omniauth(auth)
       
       if (account.archived == true)
         flash[:alert] = "Your account has been disabled. Please contact an administrator for assistance."
-        redirect_to home_index_path
-        return
+        redirect_to home_index_path and return
       end
       
       reset_session # protects against session fixation

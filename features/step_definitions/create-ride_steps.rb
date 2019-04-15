@@ -38,7 +38,7 @@ When("I fill in the form") do
 end
 
 When("I fill in the form with a matching ride") do
-  # @ride_params = { departure: "Zachry Engineering Center, Spence Street, College Station, TX, USA", destination: "George Bush Intercontinental Airport (IAH), North Terminal Road, Houston, TX, USA", start_date: (Date.today).strftime("%m/%d/%Y"), start_time: "08:00", end_time: "12:00", seats: 2 }
+  @ride_params = { departure: "Zachry Engineering Center, Spence Street, College Station, TX, USA", destination: "George Bush Intercontinental Airport (IAH), North Terminal Road, Houston, TX, USA", start_date: (Date.today).strftime("%m/%d/%Y"), start_time: "08:00", end_time: "12:00", seats: 2 }
   fill_in('ride_departure', with: @matching_ride.departure)
   fill_in('ride_destination', with: @matching_ride.destination)
   fill_in('ride_start_date', with: @matching_ride.start_date)
@@ -50,13 +50,35 @@ end
 
 When("I fill in the form wrongly") do
   @ride = FactoryBot.build_stubbed(:ride)
-  @wrong_fields = 10
   fill_in('ride_departure', with: nil)
   fill_in('ride_destination', with: nil)
   fill_in('ride_start_date', with: Date.today-1)
   fill_in('ride_start_time', with: '01/01/00')
   fill_in('ride_end_time', with: nil)
 end
+
+
+When("I fill a location that cannot be found") do
+  @ride_params = {start_date: (Date.today+1).strftime("%m/%d/%Y"), start_time: "08:00", end_time: "12:00", seats: 2 }
+  fill_in('ride_departure', with: "12345")
+  fill_in('ride_destination', with: "12345")
+  fill_in('ride_start_date', with: @ride_params[:start_date])
+  fill_in('ride_start_time', with: @ride_params[:start_time])
+  fill_in('ride_end_time', with: @ride_params[:end_time])
+  fill_in('ride_seats', with: @ride_params[:seats])
+end
+
+When("A driver ride exists from account 2") do
+  FactoryBot.create(:account, :user)
+  FactoryBot.create(:ride,
+                    :departure => "Zachry Engineering Center, Spence Street, College Station, TX, USA",
+                    :destination => "George Bush Intercontinental Airport (IAH), North Terminal Road, Houston, TX, USA", :role => "driver",
+                    :account_id => 2,
+                    :start_date => (Date.today+1).strftime("%m/%d/%Y"),
+                    :start_time => "08:00",
+                    :end_time => "12:00")
+end
+
 
 When("I press Submit") do
   click_button "Create Ride"
@@ -78,6 +100,10 @@ Then ("I should be on the rides page") do
   expect(page).to have_content("All Rides Offers/Requests")
 end
 
-Then("I should see errors for each wrong field") do
-  expect(page).to have_content("#{@number_errors} errors")
+Then("I should see errors") do
+  expect(page).to have_content("errors")
+end
+
+Then("I should see matches") do
+  expect(page).to have_selector("table#rides-table")
 end
