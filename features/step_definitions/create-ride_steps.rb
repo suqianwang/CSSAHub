@@ -107,7 +107,3 @@ end
 Then("I should see matches") do
   expect(page).to have_selector("table#rides-table")
 end
-
-Then ("I should be redirected to the service hub page") do
-  expect(page).to have_current_path(services_path)
-end

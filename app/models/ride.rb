@@ -18,9 +18,9 @@ class Ride < ApplicationRecord
   validates :seats, presence: { message: "Please enter a seat number"},
                     inclusion: { in: 1..8, message: "Please enter a seat number that is between 1-8" }
 
-  validates :departure_lat, presence: { message: "Please select a valid departure location from Google Maps."}
+  validates :departure_lat, presence: { message: "Location coordinates cannot be found."}
   # validates :departure_lon, presence: { message: "Please select a valid departure location from Google Maps."}
-  validates :destination_lat, presence: { message: "Please select a valid destination location from Google Maps."}
+  validates :destination_lat, presence: { message: "Location coordinates cannot be found."}
   # validates :destination_lon, presence: { message: "Please select a valid destination location from Google Maps."}
 
   before_save :override_field
