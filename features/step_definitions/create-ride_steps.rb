@@ -2,7 +2,7 @@ require 'pry'
 
 Given("I am logged in") do
   @account = Account.create(username: "bob", email: "bob@tamu.edu")
-  visit login_url
+  visit login_path
 end
 
 Given("A matching ride exists") do

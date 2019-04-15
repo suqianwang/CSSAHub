@@ -2,7 +2,9 @@ require 'pry'
 
 class LoginController < ApplicationController
   def index
-    if not current_user.blank?
+    if current_user.blank?
+      redirect_to '/auth/google_oauth2'
+    else
       redirect_to services_path
     end
   end

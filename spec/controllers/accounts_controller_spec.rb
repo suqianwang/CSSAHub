@@ -20,43 +20,6 @@ RSpec.describe AccountsController, :type => :controller do
     end
   end
 
-  describe "GET #new" do
-    context "user is not logged in" do
-      it "should render the new account form" do
-        session[:account_id] = nil
-        get :new
-        expect(response).to render_template :new
-      end
-    end
-    context "user is logged in" do
-      it "should redirect to the service hub page" do
-        session[:account_id] = @account.id
-        session['login'] = @account.username
-        get :new
-        expect(response).to redirect_to(services_path)
-      end
-    end
-  end
-
-  describe "POST #create" do
-    it "saves new account" do
-      assert_difference 'Account.count' do
-        post :create,  params: { account: { email: 'bob@tamu.edu', name: 'bob', password: 'secret', password_confirmation: 'secret', username: 'bo' } }
-      end
-  
-      assert_redirected_to home_index_path
-    end
-  end
-  
-  describe "POST #create fail" do
-    it "create new account returns error" do
-        post :create,  params: { account: { email: nil, name: 'bob', password: 'secret', password_confirmation: 'secret', username: 'bo' } }
-      #end
-	  get :new
-	  expect(response).to render_template('new')
-    end
-  end
-
   describe "delete #destroy" do
      it "should destroy account" do
 	 new_account = FactoryBot.create :account, :user

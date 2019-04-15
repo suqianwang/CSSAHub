@@ -15,8 +15,7 @@ Rails.application.routes.draw do
   resources :admin
   get 'admin', to: 'admin#index'
   
-  # get 'signup', to: 'accounts#new', as: 'signup'
-  get 'login', to: redirect('/auth/google_oauth2')
+  get 'login', to: 'login#index', as: 'login'
   get 'logout', to: 'login#destroy', as: 'logout'
   # Routes for Google authentication
   get 'auth/google_oauth2/callback', to: 'login#create'
