@@ -1,9 +1,11 @@
+Account.destroy_all
+
 Account.create!({
   :username => "David Ratliff",
   :email => "ratlidav@tamu.edu",
   :name => "David Ratliff",
   :archived => false,
-  :isAdmin => false
+  :isAdmin => true
 })
 
 Account.create!({
