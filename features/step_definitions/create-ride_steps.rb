@@ -81,7 +81,3 @@ end
 Then("I should see errors for each wrong field") do
   expect(page).to have_content("#{@number_errors} errors")
 end
-
-Then ("I should be redirected to the service hub page") do
-  expect(page).to have_current_path(services_path)
-end
