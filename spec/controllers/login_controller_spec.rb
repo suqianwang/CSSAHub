@@ -1,7 +1,7 @@
 RSpec.describe LoginController, :type => :controller do
-  before do
-    @account = FactoryBot.create :account, :user
-	  @admin = FactoryBot.create :account, :admin
+  before(:each) do
+    @account = Account.create(username: "bob", email: "bob@tamu.edu")
+    Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:google_oauth2]
   end
   
   describe "GET #index" do
@@ -13,43 +13,54 @@ RSpec.describe LoginController, :type => :controller do
         expect(response).to redirect_to(services_path)
       end
     end
+    context "user is not logged in" do
+      it "should redirect to google auth page" do
+        session[:account_id] = nil
+        session['login'] = nil
+        get :index
+        expect(response).to redirect_to('/auth/google_oauth2')
+      end
+    end
   end
   
-#   describe "login with correct information" do
-#     it "should login" do
-# 	  post :create,  params: { password: @account.password, username: @account.username  }
-# 	  expect(controller.session[:account_id]).to eq(@account.id)
-# 	  expect(controller.session['login']).to eq(@account.username)
-# 	  expect(response).to redirect_to(services_path)
-#     end
-#   end
-  
-#     describe "login with admin information" do
-#     it "should login" do
-# 	  post :create,  params: { password: @admin.password, username: @admin.username  }
-# 	  expect(controller.session[:account_id]).to eq(@admin.id)
-# 	  expect(controller.session['login']).to eq(@admin.username)
-# 	  expect(response).to redirect_to(admin_index_path)
-#     end
-#   end
-  
-#   describe "login with incorrect password" do
-#     it "should not login and return errors" do
-# 	  post :create,  params: { password: @account.password + "aaa", username: @account.username }
-#     expect(controller.session[:account_id]).to be_nil
-# 	  expect(response).to render_template :index
-#     end
-#   end
-
-# describe "login with incorrect username" do
-#   it "should not login and return errors" do
-#     post :create,  params: { password: @account.password, username: @account.username + "aaa" }
-#     expect(controller.session[:account_id]).to be_nil
-#     expect(response).to render_template :index
-#   end
-# end
-
-
+  describe "POST #create" do
+    it "assigns to account from auth" do
+      post :create
+      expect(assigns(:account)).to eq(@account)
+    end
+    
+    it "redirects logins to archived accounts to home page" do
+      @account.archived = true
+      @account.save
+      post :create
+      expect(response).to redirect_to(home_index_path)
+    end
+    
+    it "sets session variables for account" do
+      post :create
+      expect(session[:account_id]).to eq(@account.id)
+      expect(session['login']).to eq(@account.username)
+    end
+    
+    it "redirects to admin page for admin accounts" do
+      @account.isAdmin = true
+      @account.save
+      post :create
+      expect(response).to redirect_to(admin_index_path)
+    end
+    
+    it "redirects to services page for regular accounts" do
+      post :create
+      expect(response).to redirect_to(services_path)
+    end
+    
+    it "redirects to home page for non-TAMU emails" do
+      Rails.application.env_config["omniauth.auth"].info.email = "bob@gmail.com"
+      post :create
+      expect(assigns(:valid_email)).to eq(false)
+      Rails.application.env_config["omniauth.auth"].info.email = "bob@tamu.edu"
+    end
+  end
   
   describe "logout" do
     it "#DESTROY session" do

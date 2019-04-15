@@ -83,3 +83,17 @@ Shoulda::Matchers.configure do |config|
     with.library :rails
   end
 end
+
+OmniAuth.config.test_mode = true
+
+OmniAuth.config.add_mock(:google_oauth2, {
+  uid: "12345678910",
+  info: {
+    email: "bob@tamu.edu",
+    name: "bob"
+  },
+  credentials: {
+    token: "abcdefg12345",
+    refresh_token: "12345abcdefg"
+  }
+})
