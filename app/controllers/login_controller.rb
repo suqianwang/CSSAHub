@@ -20,7 +20,7 @@ class LoginController < ApplicationController
       
       if (account.archived == true)
         flash[:alert] = "Your account has been disabled. Please contact an administrator for assistance."
-        redirect_to home_index_path
+        redirect_to home_index_path and return
       end
       
       reset_session # protects against session fixation
