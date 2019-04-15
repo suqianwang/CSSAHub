@@ -12,6 +12,9 @@ class AccountsController < ApplicationController
     end
   end
   
+  def show
+  end
+  
   def archive
     if (current_user.isAdmin == true)
       @accounts = Account.where(:archived => true)
@@ -64,6 +67,8 @@ class AccountsController < ApplicationController
 	  elsif params[:account] != nil
 	    @account = Account.find(params[:account][:id])
 	  end
+	  rescue ActiveRecord::RecordNotFound
+        redirect_to "/home/index"
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
