@@ -57,6 +57,8 @@ class RidesController < ApplicationController
   def show
     @ride = Ride.find(params[:id])
     @rides = Ride.match_ride(params[:id])
+	rescue ActiveRecord::RecordNotFound
+        redirect_to "/home/index"
   end
 
   def destroy

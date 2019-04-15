@@ -33,4 +33,5 @@ Rails.application.routes.draw do
   resources :services
   
   resources :profile
+  get '*path' => redirect('/home/index')
 end
