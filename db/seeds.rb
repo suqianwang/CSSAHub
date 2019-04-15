@@ -1,4 +1,5 @@
 Account.destroy_all
+Ride.destroy_all
 
 Account.create!({
   :username => "ratlidav",
