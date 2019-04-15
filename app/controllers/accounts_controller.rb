@@ -15,6 +15,9 @@ class AccountsController < ApplicationController
   def show
   end
   
+  def edit
+  end
+  
   def archive
     if (current_user.isAdmin == true)
       @accounts = Account.where(:archived => true)
