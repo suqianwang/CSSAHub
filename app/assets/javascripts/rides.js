@@ -8,10 +8,10 @@ function initMap() {
   new AutocompleteDirectionsHandler(map);
 }
 
+var originMarker;
+var destMarker;
 function AutocompleteDirectionsHandler(map) {
   this.map = map;
-  this.originPlaceId = null;
-  this.destinationPlaceId = null;
 
   var originInput = document.getElementById('ride_departure');
   var destinationInput = document.getElementById('ride_destination');
@@ -20,76 +20,100 @@ function AutocompleteDirectionsHandler(map) {
   // Specify just the place data fields that you need.
   originAutocomplete.setFields(['place_id', 'geometry', 'name']);
 
-  var destinationAutocomplete =
-      new google.maps.places.Autocomplete(destinationInput);
+  var destinationAutocomplete = new google.maps.places.Autocomplete(destinationInput);
   // Specify just the place data fields that you need.
   destinationAutocomplete.setFields(['place_id', 'geometry', 'name']);
-
-  this.setupPlaceChangedListener(originAutocomplete, 'ORIG', map);
-  this.setupPlaceChangedListener(destinationAutocomplete, 'DEST', map);
+  
+  var placesService = new google.maps.places.PlacesService(map);
+  if (originInput.value != "") {
+    initMarker("ORIG", originInput.value, map, placesService);
+  }
+  if (destinationInput.value != "") {
+    initMarker("DEST", destinationInput.value, map, placesService);
+  }
+  
+  this.setupPlaceChangedListener("ORIG", originInput, originAutocomplete, map);
+  this.setupPlaceChangedListener("DEST", destinationInput, destinationAutocomplete, map);
 
   this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(originInput);
-  this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(
-      destinationInput);
+  this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(destinationInput);
+      
+  google.maps.event.addDomListener(originInput, 'blur', function() {
+    if ($('.pac-item:hover').length === 0) {
+      google.maps.event.trigger(this, 'focus', {});
+      google.maps.event.trigger(this, 'keydown', {
+        keyCode: 13
+      });
+    }
+  });
+  
+  google.maps.event.addDomListener(destinationInput, 'blur', function() {
+    if ($('.pac-item:hover').length === 0) {
+      google.maps.event.trigger(this, 'focus', {});
+      google.maps.event.trigger(this, 'keydown', {
+        keyCode: 13
+      });
+    }
+  });
 }
 
-AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(
-    autocomplete, mode, map) {
-  var me = this;
+AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(mode, input, autocomplete, map) {
   autocomplete.bindTo('bounds', map);
-
-  var originMarker;
-  var destMarker;
+  
   autocomplete.addListener('place_changed', function() {
     var place = autocomplete.getPlace();
 
     if (!place.place_id) {
+      input.value = null;
       window.alert('Please select an option from the dropdown list.');
       return;
     }
     
-    if (mode === 'ORIG') {
-      me.originPlaceId = place.place_id;
-      
-      if (typeof originMarker != "undefined") {
-        originMarker.setMap(null);
-      }
-      if (place.geometry) {
-        originMarker = new google.maps.Marker({
-          map: map,
-          title: place.name,
-          position: place.geometry.location
-        });
-        
-        // var bounds = map.getBounds();
-        // if(place.geometry.viewport) {
-        //   bounds.union(place.geometry.viewport)
-        // } else {
-        //   bounds.extend(place.geometry.location)
-        // }
-        // map.fitBounds(bounds);
-      }
-    } else {
-      me.destinationPlaceId = place.place_id;
-      
-      if (typeof destMarker != "undefined") {
-        destMarker.setMap(null);
-      }
-      if (place.geometry) {
-        destMarker = new google.maps.Marker({
-          map: map,
-          title: place.name,
-          position: place.geometry.location
-        });
-        
-        // var bounds = map.getBounds();
-        // if(place.geometry.viewport) {
-        //   bounds.union(place.geometry.viewport)
-        // } else {
-        //   bounds.extend(place.geometry.location)
-        // }
-        // map.fitBounds(bounds);
-      }
+    if (place.geometry) {
+      placeMarker(mode, place.geometry.location, map)
     }
   });
 };
+
+function initMarker(mode, query, map, placesService) {
+  var request = { query: query, fields: ['geometry'] };
+  placesService.findPlaceFromQuery(request, function(results, status) {
+    if (status === google.maps.places.PlacesServiceStatus.OK) {
+      placeMarker(mode, results[0].geometry.location, map);
+    }
+  });
+}
+
+function placeMarker(mode, latLng, map) {
+  var bounds = new google.maps.LatLngBounds();
+  if (mode == "ORIG") {
+    if (typeof originMarker != "undefined") {
+      originMarker.setMap(null);
+    }
+    originMarker = new google.maps.Marker({
+      position: latLng,
+      map: map
+    });
+    
+    if(typeof destMarker != "undefined") {
+      bounds.extend(destMarker.getPosition());
+    }
+  }
+  else {
+    if (typeof destMarker != "undefined") {
+      destMarker.setMap(null);
+    }
+    destMarker = new google.maps.Marker({
+      position: latLng,
+      map: map
+    });
+    
+    if(typeof originMarker != "undefined") {
+      bounds.extend(originMarker.getPosition());
+    }
+  }
+  
+  bounds.extend(latLng);
+  map.fitBounds(bounds);
+  map.panToBounds(bounds);
+}
