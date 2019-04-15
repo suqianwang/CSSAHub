@@ -1,3 +1,5 @@
+require 'pry'
+
 class Account < ApplicationRecord
   has_many :rides
   
@@ -8,7 +10,8 @@ class Account < ApplicationRecord
     if account = Account.find_by_email(auth.info.email)
       account
     else
-      account = Account.create(username: auth.info.name, email: auth.info.email)
+      netid = auth.info.email[ /\A.+?(?=@)/ ]  
+      account = Account.create(username: netid, email: auth.info.email)
       account.save
       account
     end
