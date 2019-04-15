@@ -18,9 +18,14 @@ class Ride < ApplicationRecord
   validates :seats, presence: { message: "Please enter a seat number"},
                     inclusion: { in: 1..8, message: "Please enter a seat number that is between 1-8" }
 
+  validates :departure_lat, presence: { message: "Please select a valid departure location from Google Maps."}
+  # validates :departure_lon, presence: { message: "Please select a valid departure location from Google Maps."}
+  validates :destination_lat, presence: { message: "Please select a valid destination location from Google Maps."}
+  # validates :destination_lon, presence: { message: "Please select a valid destination location from Google Maps."}
+
   before_save :override_field
-  after_validation :geocode_departure, if: ->(obj){ obj.departure.present? and obj.departure_changed? }
-  after_validation :geocode_destination, if: ->(obj){ obj.destination.present? and obj.destination_changed? }
+  before_validation :geocode_departure, if: ->(obj){ obj.departure.present? and obj.departure_changed? }
+  before_validation :geocode_destination, if: ->(obj){ obj.destination.present? and obj.destination_changed? }
 
   def start_date=(value)
     value = Date.strptime(value, '%m/%d/%Y') rescue value
@@ -46,18 +51,11 @@ class Ride < ApplicationRecord
   def geocode_departure
     g = Geocoder.search(self.departure)
     self.departure_lat, self.departure_lon = g.first.coordinates rescue [nil, nil]
-    if self.departure_lat.blank? || self.departure_lon.blank?
-      errors.add(:departure, "Please select a valid departure location from Google Maps.")
-      # raise ActiveRecord::RecordInvalid.new(self)
-    end
   end
 
   def geocode_destination
-    self.destination_lat, self.destination_lon = Geocoder.search(self.destination).first.coordinates rescue [nil, nil]
-    if self.destination_lat.blank? || self.destination_lon.blank?
-      errors.add(:destination, "Please select a valid destination location from Google Maps.")
-      # raise ActiveRecord::RecordInvalid.new(self)
-    end
+    g = Geocoder.search(self.destination)
+    self.destination_lat, self.destination_lon = g.first.coordinates rescue [nil, nil]
   end
 
 

@@ -1,43 +1,45 @@
 require 'pry'
 
 RSpec.describe Ride, :type => :model do
-  before do 
+  before do
     @account = FactoryBot.build_stubbed(:account, :user)
     @ride = FactoryBot.build_stubbed(:ride, account: @account)
   end
-  
+
   describe '#account' do
-    it { is_expected.to belong_to :account }
+    it {is_expected.to belong_to :account}
   end
-  
+
   describe '#role' do
-    it { is_expected.to validate_presence_of(:role) }
-    it { is_expected.to allow_value("passenger").for(:role) }
-    it { is_expected.to_not allow_value("invalid role").for(:role) }
+    it {is_expected.to validate_presence_of(:role)}
+    it {is_expected.to allow_value("passenger").for(:role)}
+    it {is_expected.to_not allow_value("invalid role").for(:role)}
   end
-  
+
   describe '#departure' do
     it do
       should validate_presence_of(:departure).
-        with_message("Please select a valid departure location from Google map")
+          with_message("Please select a valid departure location from Google Maps")
     end
-    it { is_expected.to allow_value("Zachry Engineering Center, Spence Street, College Station, TX, USA").for(:departure) }
+    it {is_expected.to allow_value("Zachry Engineering Center, Spence Street, College Station, TX, USA").for(:departure)}
     # it { is_expected.to_not allow_value("invalid location").for(:departure) }
   end
-  
+
   describe '#destination' do
     it do
       should validate_presence_of(:destination).
-          with_message("Please select a valid destination location from Google map")
+          with_message("Please select a valid destination location from Google Maps")
     end
-    it { is_expected.to allow_value("Zachry Engineering Center, Spence Street, College Station, TX, USA").for(:destination) }
+    it {is_expected.to allow_value("Zachry Engineering Center, Spence Street, College Station, TX, USA").for(:destination)}
     # it { is_expected.to_not allow_value("invalid location").for(:destination) }
   end
-  
+
   describe '#dates' do
     it do
       should validate_presence_of(:start_date).
-          with_message("Please select a valid departure date")
+          with_message("Please select a departure date")
+      should_not allow_value(1.day.ago).
+          for(:start_date)
     end
   end
 
@@ -84,39 +86,38 @@ RSpec.describe Ride, :type => :model do
   #     end
   #   end
   # end
-  
+
   describe '#time' do
     it do
       should validate_presence_of(:start_time).
-          with_message("Please enter departure start time in correct format, (i.e. 07:00)")
+          with_message("Please enter a starting departure time")
     end
     it do
       should validate_presence_of(:end_time).
-          with_message("Please enter a valid departure time that is on or after departure start time in correct format(i.e. 07:00)")
+          with_message("Please enter a ending departure time")
     end
   end
-  
+
   describe '#time_order' do
     context 'with valid attributes' do
       it 'validates end time is after begin time' do
         @ride.start_time = Time.current
-        @ride.end_time = Time.current+2
+        @ride.end_time = Time.current + 2
         expect(@ride).to be_valid
       end
     end
     context 'with invalid attributes' do
       it 'validates end time is after begin time' do
-        @ride.start_time = Time.current+2
-        @ride.end_time = Time.current+1
+        @ride.start_time = Time.current + 2
+        @ride.end_time = Time.current + 1
       end
     end
   end
-  
-  describe '#seats' do
-    it { is_expected.to validate_presence_of(:seats) }
-    it { is_expected.to validate_inclusion_of(:seats).in_range(1..8)}
-  end
 
+  describe '#seats' do
+    it {is_expected.to validate_presence_of(:seats).with_message(/enter a seat number/)}
+    it {is_expected.to validate_inclusion_of(:seats).in_range(1..8).with_message(/between 1-8/)}
+  end
 
 
   describe 'In Range' do
