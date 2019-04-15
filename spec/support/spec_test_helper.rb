@@ -11,7 +11,13 @@ module SpecTestHelper
 	  @current_user ||= Account.find(session[:account_id])
   end
 
+  def logout
+    session['login'] = nil
+    session[:account_id] = nil
+    @current_user = nil
+  end
+
   def current_user
-    Account.find_by_username(session[:username])
+    Account.find(session[:account_id]) rescue nil
   end
 end

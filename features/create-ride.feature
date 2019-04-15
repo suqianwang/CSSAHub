@@ -1,6 +1,6 @@
 Feature: Create Ride
   Create a ride with given specifications
-    
+
   Scenario Outline: Create a ride request
     Given I am logged in
     And A matching ride exists
@@ -39,6 +39,16 @@ Feature: Create Ride
     And I press Submit
     Then I should be on the auto-matching page
     Then I should see no match
+
+  Scenario: Rides match
+    Given I am logged in
+    And A driver ride exists from account 2
+    And I am on the new ride page
+    When I select my role as "Passenger"
+    And I fill in the form
+    And I press Submit
+    Then I should be on the auto-matching page
+    And I should see matches
 	
   Scenario: Admin can not create a ride
     Given I am an admin
@@ -50,4 +60,11 @@ Feature: Create Ride
     And I am on the new ride page
     When I fill in the form wrongly
     And I press Submit
-    Then I should see errors for each wrong field
+    Then I should see errors
+
+  Scenario: Create a ride request with errors
+    Given I am logged in
+    And I am on the new ride page
+    When I fill a location that cannot be found
+    And I press Submit
+    Then I should see errors

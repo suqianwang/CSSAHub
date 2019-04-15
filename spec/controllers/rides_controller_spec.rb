@@ -2,7 +2,9 @@ require 'spec_helper'
 
 RSpec.describe RidesController, :type => :controller do
   before do
-    @account = FactoryBot.create(:account, :user)
+    @accounts = FactoryBot.create_list(:account,2, :user)
+    @account = @accounts.first
+    @other_account = @accounts.second
 	  @admin = FactoryBot.create :account, :admin
     @ride_params = { role: 'driver', departure: 'Zachry Engineering Center, Spence Street, College Station, TX, USA', destination: 'H-E-B, Texas Avenue South, College Station, TX, USA',
                      start_date: (Date.today+1).strftime("%m/%d/%Y"), start_time: '08:00', end_time:'12:00', seats: 5 }
@@ -165,6 +167,7 @@ RSpec.describe RidesController, :type => :controller do
   describe '#match_ride' do
     it 'match ride' do
       login(@account)
+      #ride_1 and ride_3 will match, ride_2 will exceed capacity
       @ride_1_params = { role: 'driver', departure: 'Zachry Engineering Center, Spence Street, College Station, TX, USA', destination: 'H-E-B, Texas Avenue South, College Station, TX, USA',
                          start_date: (Date.today+1).strftime("%m/%d/%Y"), start_time: '08:00', end_time:'12:00', seats: 2 }
 
@@ -174,6 +177,8 @@ RSpec.describe RidesController, :type => :controller do
                          start_date: (Date.today+1).strftime("%m/%d/%Y"), start_time: '08:00', end_time:'12:00', seats: 2 }
       post :create, :params => {ride: @ride_1_params}
       ride_1 = Ride.last
+      logout
+      login(@other_account)
       post :create, :params => {ride: @ride_2_params}
       ride_2 = Ride.last
       post :create, :params => {ride: @ride_3_params}
@@ -183,6 +188,7 @@ RSpec.describe RidesController, :type => :controller do
       # it 'should not match if passenger has higher capacity'
       expect(Ride.match_ride(ride_2.id)) .not_to include(ride_1)
       expect(Ride.match_ride(ride_3.id)) .to include(ride_1)
+
     end
   end
 
