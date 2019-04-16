@@ -7,13 +7,13 @@ class Ride < ApplicationRecord
   validates :destination, presence: { message: "Please select a valid destination location from Google Maps"}
 
   validates :start_date, presence: { message: "Please select a departure date"},
-                         timeliness: { :on_or_after => :today, :type => :date, :message => "Please select a departure date in the future" }
+                         timeliness: { :type => :date, :message => "Please select a departure date in the future" }
 
   validates :start_time, presence: { message: "Please enter a starting departure time"},
-                         timeliness: { :type => :time, message: "Please enter starting departure time in correct format(i.e. 07:00)" }
+                         timeliness: { :type => :time, message: "Please enter starting departure time in correct format(i.e. 07:00), after current time" }
 
   validates :end_time, presence: { message: "Please enter a ending departure time"},
-                       timeliness: { :on_or_after => :start_time, :type => :time, :message => "Please enter ending departure time in correct format(i.e. 07:00), after the starting time" }
+                       timeliness: { :type => :time, :message => "Please enter ending departure time in correct format(i.e. 07:00), after the starting time" }
 
   validates :seats, presence: { message: "Please enter a seat number"},
                     inclusion: { in: 1..8, message: "Please enter a seat number that is between 1-8" }
@@ -23,9 +23,12 @@ class Ride < ApplicationRecord
   validates :destination_lat, presence: { message: "Location coordinates cannot be found."}
   # validates :destination_lon, presence: { message: "Please select a valid destination location from Google Maps."}
 
-  before_save :override_field
+  validates :start_datetime, timeliness: { :on_or_after => :now }
+  validates :end_datetime, timeliness: { :on_or_after => :start_datetime }
+
   before_validation :geocode_departure, if: ->(obj){ obj.departure.present? and obj.departure_changed? }
   before_validation :geocode_destination, if: ->(obj){ obj.destination.present? and obj.destination_changed? }
+  before_validation :parse_datetime
 
   def start_date=(value)
     value = Date.strptime(value, '%m/%d/%Y') rescue value
@@ -42,8 +45,17 @@ class Ride < ApplicationRecord
   end
 
   def parse_datetime
-    self.start_datetime = Timeliness.parse("#{self.start_date} #{self.start_time}")
-    self.end_datetime = Timeliness.parse("#{self.end_date} #{self.end_time}")
+    self.start_time = self.start_time.strip rescue nil
+    self.end_time = self.end_time.strip rescue nil
+    if self.end_date.nil?
+      self.end_date = self.start_date
+    end
+
+    self.start_time = Timeliness.parse(self.start_time).strftime('%H:%M') rescue self.start_time
+    self.end_time = Timeliness.parse(self.end_time).strftime('%H:%M') rescue self.end_time
+
+    self.start_datetime = Timeliness.parse("#{self.start_date} #{self.start_time}") rescue nil
+    self.end_datetime = Timeliness.parse("#{self.end_date} #{self.end_time}") rescue nil
   end
 
   private
@@ -58,13 +70,6 @@ class Ride < ApplicationRecord
     self.destination_lat, self.destination_lon = g.first.coordinates rescue [nil, nil]
   end
 
-
-  def override_field
-    if self.end_date.nil?
-      self.end_date = self.start_date
-    end
-    self.parse_datetime
-  end
 
 
   def self.departure_in_range(location_1, location_2, range) #check if location_2 is location_1's circle with a custom radius
