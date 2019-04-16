@@ -75,6 +75,8 @@ class RidesController < ApplicationController
     if not current_user.id == @ride.account_id or current_user.isAdmin == true
       render '401', :status => 401
     end
+	rescue ActiveRecord::RecordNotFound
+        redirect_to "/home/index"
   end
 
   def update
