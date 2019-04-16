@@ -1,5 +1,6 @@
 class AccountsController < ApplicationController
-  before_action :login_required, :only => [:index, :show, :edit, :destroy, :update]
+  before_action :login_required, :only => [:index, :show, :edit, :destroy, :update, :archive, :restore]
+  before_action :check_not_archived, :only => [:index, :show, :edit, :destroy, :update, :archive, :restore]
   before_action :set_account, only: [:show, :edit, :update, :destroy]
 
   # GET /accounts

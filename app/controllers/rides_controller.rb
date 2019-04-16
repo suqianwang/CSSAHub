@@ -1,7 +1,8 @@
 require 'pry'
 
 class RidesController < ApplicationController
-  before_action :login_required, :only => :index
+  before_action :login_required, :only => [:index, :new, :create, :show, :destroy, :edit, :update]
+  before_action :check_not_archived, :only => [:index, :new, :create, :show, :destroy, :edit, :update]
 
 
   def index
