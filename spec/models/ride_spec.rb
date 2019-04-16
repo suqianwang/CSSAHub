@@ -39,7 +39,7 @@ RSpec.describe Ride, :type => :model do
       should validate_presence_of(:start_date).
           with_message("Please select a departure date")
       should_not allow_value(1.day.ago).
-          for(:start_date)
+          for(:start_datetime)
     end
   end
 

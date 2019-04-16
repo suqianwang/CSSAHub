@@ -45,8 +45,8 @@ class Ride < ApplicationRecord
   end
 
   def parse_datetime
-    self.start_time = self.start_time.strip
-    self.end_time = self.end_time.strip
+    self.start_time = self.start_time.strip rescue nil
+    self.end_time = self.end_time.strip rescue nil
     if self.end_date.nil?
       self.end_date = self.start_date
     end
