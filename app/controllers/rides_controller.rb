@@ -23,7 +23,7 @@ class RidesController < ApplicationController
     if current_user.isAdmin == true
       @rides = Ride.where(:role => @selected_type.keys).order(:start_datetime => 'asc')
     else
-      @rides = Ride.where(:role => @selected_type.keys).order(:start_datetime => 'asc').where('start_date >= ?', Date.today)
+      @rides = Ride.joins.where(:role => @selected_type.keys).order(:start_datetime => 'asc').where('start_date >= ?', Date.today).where('accounts.archived != ?', true)
     end
 
   end
