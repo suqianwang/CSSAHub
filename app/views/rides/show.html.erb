@@ -13,8 +13,8 @@
     <span class="center">To <b><%= "#{@ride.destination}" %></b></span>
   </div>
   <div class="row center">
-    <span class="center">Starting at <b><%= "#{@ride.start_date}" %> </b><b><%= "#{@ride.start_time}" %> </b> to
-      <b><%= "#{@ride.end_date}" %></b> <b><%= "#{@ride.end_time}" %> </b></span>
+    <span class="center">Starting at <b><%= "#{Date.parse(@ride.start_date).strftime('%m/%d/%Y')}" %> </b><b><%= "#{@ride.start_time}" %> </b> to
+      <b><%= "#{Date.parse(@ride.end_date).strftime('%m/%d/%Y')}" %></b> <b><%= "#{@ride.end_time}" %> </b></span>
   </div>
 </div>
 
