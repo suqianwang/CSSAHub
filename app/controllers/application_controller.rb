@@ -18,4 +18,12 @@ class ApplicationController < ActionController::Base
     end
   end
   
+  def check_archived
+    if current_user.archived?
+	  redirect_to home_index_path
+	else
+	  return false
+    end
+  end
+  
 end
