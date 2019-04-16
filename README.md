@@ -7,7 +7,7 @@ Team Members:
   - David Ratliff
   - Suqian Wang
   
-Heroku Link: http://afternoon-castle-48959.herokuapp.com  
+Heroku Link: https://cssahub.herokuapp.com/
   
 Ruby Version: 2.5.3  
 Rails Version: 5.2.2  
