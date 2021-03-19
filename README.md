@@ -3,7 +3,7 @@
 * Designed a web service that allows the user to provide/request rides. Rides that match passenger’s requirements will be automatically suggested to them.
 * Users can view all posted rides or filter rides depending on their choice. Users can also update their profiles or modify their posted rides. Admin can achieve or restore users and manage posts to maintain a healthy user environment.
 
-# Watch our project demo: https://youtu.be/HuHHqQZgk4A
+## Watch our project demo: https://youtu.be/HuHHqQZgk4A
 Heroku Link: https://cssahub.herokuapp.com/
 
 
