@@ -6,6 +6,17 @@
 ## Watch our project demo: https://youtu.be/HuHHqQZgk4A
 Heroku Link: https://cssahub.herokuapp.com/
 
+## Installation
+* Install Ruby
+  * Install rbenv following [this guide](https://github.com/rbenv/rbenv#installing-ruby-versions). Make sure `export PATH="$HOME/.rbenv/bin:$PATH"` and `eval "$(rbenv init - zsh)"` is added to your shell profile. Source your shell profile and restart terminal.
+  * Install ruby-build following [this guide](https://github.com/rbenv/ruby-build)
+  * Install Ruby 2.5.3 `rbenv install 2.5.3`
+  * Set local Ruby environment `rbenv local 2.5.3`
+* Install Ruby gems
+  * `gem install bundler`
+  * `bundle update`
+* Setup `./bin/setup`
+* Running on local `./bin/rails server`
 
 ### We are the Super Scrum Bros!
   - Yumei Li (Product Owner)
