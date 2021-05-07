@@ -25,9 +25,14 @@ Heroku Link: https://cssahub.herokuapp.com/
   - David Ratliff (Developer)
   - Suqian Wang (Developer)
 
+### API Used
+Google Authentication for Login/Signup: [OmniAuth Google OAuth 2.0](https://github.com/zquestz/omniauth-google-oauth2)
+Google Maps APIs: [Geocoding API, Places API, Maps JavaScript API](https://console.cloud.google.com/apis/library?filter=category:maps&project=silent-space-313003&authuser=2&folder&organizationId&supportedpurview=project)
+
 ### Environment
 Ruby Version: 2.5.3  
 Rails Version: 5.2.2  
-Cucumber Version: 3.1.2    
-RSpec Version: 3.8.0  
-Capybara Version: 3.13.2  
+Automated Testing:
+* Cucumber    
+* RSpec  
+* Capybara  
